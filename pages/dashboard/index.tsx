@@ -321,7 +321,7 @@ const Cost = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--simple-blue);
   font-size: 16px;
 `;
 export const SendButton = styled.button`
