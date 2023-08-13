@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import Head from "next/head";
  
 import Body from "../components/home/Body";
 import NavigationBar from "../components/home/NavigationBar";
@@ -8,6 +9,9 @@ const HomeScreen = () => {
   
   return (
     <>
+      <Head>
+      <meta name="google" content="notranslate" />
+      </Head>
       <Mainframe>
         <NavigationBar />
         <Body />
