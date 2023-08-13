@@ -12,6 +12,7 @@ const requests: endpointRequest = {
 
   calculateCost: "service/calculate-cost/",
   sendSingleSMS: "service/send-single-sms/",
+  bulkSingleSMS: "service/send-bulk-sms/",
   fundWallet: "account/fund-wallet/",
 };
 

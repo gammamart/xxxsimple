@@ -37,13 +37,16 @@ const SendScreen = () => {
     headers: { Authorization: `Bearer ${user?.token}` },
   };
 
-  console.log(user);
-
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
       const user: string | null = localStorage.getItem("user");
       user && setUser(JSON.parse(user));
     }
+    toast.success("New Users now have free funds in their accounts to test the SMS service. Send a single test SMS to proceed.");
+
+    const inputElement = document.getElementById('multiline-input') as HTMLTextAreaElement;
+    inputElement.placeholder = "Paste you leads here without +1 and seperated by line\n\n2335671894\n5194573298\n4195674390\n5672234589\n2335671894\n7782335635\n5672234589\n2335671894\n7782335674\n5672234589\n2335671894\n7782335718\n";
+
   }, []);
 
   useEffect(() => {
@@ -87,12 +90,14 @@ const SendScreen = () => {
 
   const sendHandler = () => {
     const notification = toast.loading("Sending your job...");
-    instance
+
+    if (tab === "single") {
+      instance
       .post(requests.sendSingleSMS, { phone_number: singlePhoneNumber, sender_name: senderName.current?.value, message: message.current?.value }, headerConfig)
       .then((response) => {
         if (response.data) {
           toast.success("Job sent successfully.", { id: notification });
-          dispatch(userActions.switchSent())
+          dispatch(userActions.switchSent());
         } else {
           toast.error("Invalid Phone number ", { id: notification });
         }
@@ -103,6 +108,26 @@ const SendScreen = () => {
           toast.error("Insufficient Balance, fund your account!", { id: notification });
         }
       });
+    }
+
+    if (tab === "bulk") {
+      instance
+      .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value }, headerConfig)
+      .then((response) => {
+        if (response.data) {
+          toast.success("Job sent successfully.", { id: notification });
+          dispatch(userActions.switchSent());
+        } else {
+          toast.error("Invalid Phone number ", { id: notification });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 402) {
+          toast.error("Insufficient Balance, fund your account!", { id: notification });
+        }
+      });
+    }
   };
 
   return (
@@ -121,6 +146,7 @@ const SendScreen = () => {
               Single SMS
             </SingleButton>
           </NavigationBar>
+          <InformationBox>{tab === "single" ? <p>Single SMS send single sms to the phone number you entered with custom SENDER NAME. It cost $0.5 per SMS</p> : <p>Bulk SMS sends sms to all the phone number lead. It cost $0.02 per SMS</p>}</InformationBox>
           <Body>
             {tab === "single" ? (
               <div>
@@ -129,9 +155,8 @@ const SendScreen = () => {
               </div>
             ) : (
               <textarea
+                id="multiline-input"
                 onChange={(e) => setPhoneNumberList(e.target.value)}
-                placeholder="Contacts here seperated by comma... 
-+12989883832, +12778843748, +18392392393"
               ></textarea>
             )}
             <textarea ref={message} placeholder="Message..."></textarea>
@@ -156,7 +181,7 @@ const SendScreen = () => {
         toastOptions={{
           // Define default options
           className: "",
-          duration: 5000,
+          duration: 8000,
           style: {
             background: "#2F2E41",
             color: "#fff",
@@ -314,6 +339,10 @@ export const SendButton = styled.button`
   & p {
     font-size: 16px;
   }
+`;
+const InformationBox = styled.div`
+  background-color: var(--simple-blue);
+  padding: 0.5rem 2rem 0.5rem 2rem;
 `;
 
 export default SendScreen;

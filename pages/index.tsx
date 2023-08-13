@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+ 
 import Body from "../components/home/Body";
 import NavigationBar from "../components/home/NavigationBar";
 
 const HomeScreen = () => {
+  
   return (
     <>
       <Mainframe>

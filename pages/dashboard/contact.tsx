@@ -16,18 +16,13 @@ const ContactScreen = () => {
 
         <Frame>
           <Up>
-            <h6>Contact us here and we get on it in minutes.</h6>
+            <h6>Contact us on our telegram for responsive chat.</h6>
           </Up>
           <Bottom>
-            <textarea ref={message} placeholder="Message..."></textarea>
-            <h6>Or our telegram for responsive chat.</h6>
-            <div>
+            <a href="https://t.me/xxxxsimple" target="_blank">
               <IoMdSend size={25} /> <span>Telegram</span>
-            </div>
+            </a>
           </Bottom>
-          <SendButton>
-            Send <IoMdSend />
-          </SendButton>
         </Frame>
       </Mainframe>
     </>
@@ -77,12 +72,13 @@ const Bottom = styled.div`
   padding-right: 30px;
   padding-bottom: 30px;
 
-  & div {
+  & a {
     color: var(--simple-blue);
     display: flex;
     align-items: center;
     gap: 0.4em;
     cursor: pointer;
+    text-decoration: none;
 
     & span {
       color: #fff;
