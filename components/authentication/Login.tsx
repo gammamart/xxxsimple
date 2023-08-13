@@ -126,7 +126,7 @@ const BackButton = styled(Link)`
 const Loader = styled.div`
   height: 4px;
   width: 80px;
-  background-color: #000000;
+  background-color: var(--simple-blue);
   animation-duration: 1s;
   animation-name: slidein;
   animation-iteration-count: infinite;
