@@ -75,7 +75,7 @@ const Navbar = () => {
           <ProfileAvatar />
         </div>
         <div>
-          {/* {username && <p>{username}</p>} */}
+          {username && <p style={{fontSize: "16px", color: "var(--simple-blue)", fontWeight: 600}}>{username}</p>}
           <p>${profile?.wallet_balance.toFixed(2)}</p>
         </div>
       </Up>
