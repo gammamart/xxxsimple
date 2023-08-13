@@ -146,7 +146,7 @@ const SendScreen = () => {
               Single SMS
             </SingleButton>
           </NavigationBar>
-          <InformationBox>{tab === "single" ? <p>Single SMS, send single sms to the phone number you entered with custom SENDER NAME. Note that some countries donot accept it. It cost $0.5 per SMS</p> : <p>Bulk SMS sends sms to all the phone number lead. It cost $0.02 per SMS</p>}</InformationBox>
+          <InformationBox>{tab === "single" ? <p>Single SMS, send single sms to the phone number you entered with custom SENDER NAME. Note that some countries donot accept it. It cost $0.399 per SMS</p> : <p>Bulk SMS sends sms to the bulk phone number lead loaded. It cost $0.02 per SMS</p>}</InformationBox>
           <InformationBox style={{backgroundColor: "#ca8107"}}>New users with free balance can only test with <strong>Single SMS</strong></InformationBox>
           {/* <InformationBox style={{backgroundColor: "#ca8107"}}>We&apos;re currently performing essential system maintenance to enhance your experience. During this time, there might be a slight delay in processing pending sends. We apologize for any inconvenience this may cause and appreciate your patience.</InformationBox> */}
           <Body>
