@@ -1,25 +1,42 @@
 import React from "react";
 import styled from "styled-components";
+import moment from 'moment';
+import { fail } from "assert";
 
-const HistoryCard = () => {
-  const status: number = 0;
+
+const HistoryCard = ({id, status, job_type, date}) => {
+
+  interface STATUS_COLOR {
+    FAILED: string,
+    COMPLETED: string,
+    IN_PROGRESS: string,
+  }
+  // const status: number = 0;
+  const originalDate = date;
+  const timeAgo = moment(originalDate).fromNow();
+
+  const status_color: STATUS_COLOR ={ 
+    FAILED: "#ff0101",
+    COMPLETED: "#1AA14E",
+    IN_PROGRESS: "#FFA201",
+  }
 
   return (
     <Mainframe>
       <Up>
-        <p>
-          <b>ID</b> 892D92HFC9FH98WYW8F8{" "}
+        <p style={{fontSize: "14px"}}>
+          <b>ID</b> {id}{" "}
         </p>
-        <p>
-          <b>Amount of contacts:</b> 3000{" "}
+        <p style={{fontSize: "14px", color: "#009DD2"}}>
+          <b>TYPE:</b> {job_type}{" "}
         </p>
       </Up>
       <Bottom>
-        <p>
-          <b>Date:</b> Today{" "}
+        <p style={{fontSize: "14px"}}>
+          <b>Date:</b> {timeAgo}{" "}
         </p>
-        <p>
-          <b>Status:</b> <Status status={status}>Ongoing</Status>
+        <p style={{fontSize: "14px"}}>
+          <b>Status:</b> <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
         </p>
       </Bottom>
     </Mainframe>
@@ -33,7 +50,7 @@ type StatusProps = {
 const Mainframe = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.5);
   height: 120px;
-  width: 500px !important;
+  width: 580px !important;
   padding: 0.5em 1em 0.5em 1em;
   display: flex;
   flex-direction: column;
@@ -54,7 +71,7 @@ const Bottom = styled.div`
   justify-content: space-between;
 `;
 const Status = styled.span<StatusProps>`
-  color: ${({ status }) => (status ? "#1AA14E" : "#FFA201")};
+  color: ${({ status }) => (status)};
 `;
 
 export default HistoryCard;

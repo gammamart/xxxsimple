@@ -1,12 +1,58 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import styled from "styled-components";
 import HistoryCard from "@/components/dashboard/HistoryCard";
 import Navbar from "@/components/global/Navbar";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import Head from "next/head";
+import { useState, useEffect } from "react";
+
+import instance from "@/axios";
+import requests from "@/requests";
 
 const HistoryScreen = () => {
+  interface User {
+    refresh: string;
+    access: string;
+    token: string;
+    username: string;
+    email: string;
+  }
+  interface History {
+    id: number;
+    status: string;
+    job_type: string;
+    createed_at: string;
+  }
   const authenticate = useAuthentication();
+
+  const [user, setUser] = useState<User>();
+  const [history, setHistory] = useState<[]>();
+
+  const headerConfig = {
+    headers: { Authorization: `Bearer ${user?.token}` },
+  };
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const user: string | null = localStorage.getItem("user");
+      user && setUser(JSON.parse(user));
+    }
+  }, []);
+
+  useEffect(() => {
+    instance
+      .get(requests.history, headerConfig)
+      .then((response) => {
+        setHistory(response.data);
+      })
+      .catch((err) => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
+  console.log(history)
+
+
   return (
     <>
       <Head>
@@ -19,22 +65,9 @@ const HistoryScreen = () => {
             <h6>Ongoing and past messages.</h6>
           </Up>
           <Bottom>
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
+            {history?.map((job: History) => (
+              <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} date={job.createed_at} />
+            ))}
           </Bottom>
         </Frame>
       </Mainframe>

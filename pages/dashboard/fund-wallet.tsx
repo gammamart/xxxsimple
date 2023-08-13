@@ -36,7 +36,7 @@ const FundWallet = () => {
 
   const fundWalletHandler = (): void => {
     instance.post(requests.fundWallet, { amount: amount.current?.value }, headerConfig).then((response) => {
-      router.replace(response.data.url)
+      router.replace(response.data.url);
     });
   };
 
@@ -54,10 +54,9 @@ const FundWallet = () => {
               <p>$</p>
               <input ref={amount} type="number" placeholder="Amount" />
             </AmountFrame>
-          </Up>
-          <Bottom>
             <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton>
-          </Bottom>
+          </Up>
+          <Bottom>{/* <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton> */}</Bottom>
         </Frame>
       </Mainframe>
     </>

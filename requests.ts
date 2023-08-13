@@ -14,6 +14,7 @@ const requests: endpointRequest = {
   sendSingleSMS: "service/send-single-sms/",
   bulkSingleSMS: "service/send-bulk-sms/",
   fundWallet: "account/fund-wallet/",
+  history: "service/history/",
 };
 
 export default requests;
