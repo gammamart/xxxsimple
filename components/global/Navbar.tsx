@@ -76,7 +76,7 @@ const Navbar = () => {
         </div>
         <div>
           {/* {username && <p>{username}</p>} */}
-          <p>${profile?.wallet_balance}</p>
+          <p>${profile?.wallet_balance.toFixed(2)}</p>
         </div>
       </Up>
       <Middle>
