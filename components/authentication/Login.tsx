@@ -14,7 +14,7 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const authenticate = useAuthentication()
+  const authenticate = useAuthentication();
 
   const enteredEmail = useRef<HTMLInputElement | null>(null);
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -31,16 +31,22 @@ const Login = () => {
       //showing loader for user
       setLoading(true);
       // send otp to user email to confirm ownership
-      instance.post(requests.login, { username: email, password }).then((response) => {
-        // setSendOtp(true);
-        setLoading(false);
-        if (response.data) {
-          dispatch(userActions.loginUser(JSON.stringify(response.data)));
-          localStorage.setItem("user", JSON.stringify(response.data));
-          router.push("/dashboard");
-        }
-        console.log(response.data);
-      }).catch(() => setError("Incorrect Credentials"));
+      instance
+        .post(requests.login, { username: email, password })
+        .then((response) => {
+          // setSendOtp(true);
+          setLoading(false);
+          if (response.data) {
+            dispatch(userActions.loginUser(JSON.stringify(response.data)));
+            localStorage.setItem("user", JSON.stringify(response.data));
+            router.push("/dashboard");
+          }
+          console.log(response.data);
+        })
+        .catch(() => {
+          setError("Incorrect Credentials");
+          setLoading(false);
+        });
     };
 
     if (enteredEmail.current && enteredPassword) {
@@ -68,12 +74,19 @@ const Login = () => {
         <Bottom>
           <form onSubmit={(event) => onSubmitHandler(event)} method="post">
             <input type="text" ref={enteredEmail} placeholder="Username" />
-            <div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
-              <input style={{flex: 1}} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
-              <span style={{color: "var(--simple-blue)", cursor: "pointer"}} onClick={togglePasswordVisibility}>{passwordVisible ? "Hide" : "Show"}</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <input style={{ flex: 1 }} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
+              <span style={{ color: "var(--simple-blue)", cursor: "pointer" }} onClick={togglePasswordVisibility}>
+                {passwordVisible ? "Hide" : "Show"}
+              </span>
             </div>
             <button type="submit">Get In</button>
-            <p style={{color: "#fff"}}>Having trouble logining in? <Link href="/contact" style={{color: "var(--simple-blue)"}}>Contact us</Link></p>
+            <p style={{ color: "#fff" }}>
+              Having trouble logining in?{" "}
+              <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
+                Contact us
+              </Link>
+            </p>
           </form>
         </Bottom>
       </Mainframe>
