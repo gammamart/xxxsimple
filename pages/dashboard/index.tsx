@@ -147,6 +147,7 @@ const SendScreen = () => {
             </SingleButton>
           </NavigationBar>
           <InformationBox>{tab === "single" ? <p>Single SMS send single sms to the phone number you entered with custom SENDER NAME. It cost $0.5 per SMS</p> : <p>Bulk SMS sends sms to all the phone number lead. It cost $0.02 per SMS</p>}</InformationBox>
+          <InformationBox style={{backgroundColor: "#ca8107"}}>New users with free balance can only test with <strong>Single SMS</strong></InformationBox>
           <Body>
             {tab === "single" ? (
               <div>
