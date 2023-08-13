@@ -86,6 +86,7 @@ const Register = () => {
             </div>
             <input type="email" ref={enteredEmail} placeholder="Email" />
             <button type="submit">Register</button>
+            <p style={{color: "#fff"}}>Already have an account? <Link href="/getIn" style={{color: "var(--simple-blue)"}}>Login</Link></p>
             <p style={{color: "#fff"}}>Having trouble creating an account? <Link href="/contact" style={{color: "var(--simple-blue)"}}>Contact us</Link></p>
           </form>
         </Bottom>

@@ -82,6 +82,12 @@ const Login = () => {
             </div>
             <button type="submit">Get In</button>
             <p style={{ color: "#fff" }}>
+              Don&apos;t have an account?{" "}
+              <Link href="/register" style={{ color: "var(--simple-blue)" }}>
+                Register
+              </Link>
+            </p>
+            <p style={{ color: "#fff" }}>
               Having trouble logining in?{" "}
               <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
                 Contact us
