@@ -4,7 +4,14 @@ import moment from 'moment';
 import { fail } from "assert";
 
 
-const HistoryCard = ({id, status, job_type, date}) => {
+interface HistoryCardProps {
+  id: number;
+  status: string;
+  job_type: string;
+  date: string;
+}
+
+const HistoryCard: React.FC<HistoryCardProps> = ({id, status, job_type, date}) => {
 
   interface STATUS_COLOR {
     FAILED: string,
