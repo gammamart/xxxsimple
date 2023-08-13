@@ -22,7 +22,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({id, status, job_type, date}) =
   const originalDate = date;
   const timeAgo = moment(originalDate).fromNow();
 
-  const status_color: STATUS_COLOR ={ 
+  const status_color: Record<string, string> ={ 
     FAILED: "#ff0101",
     COMPLETED: "#1AA14E",
     IN_PROGRESS: "#FFA201",
@@ -51,7 +51,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({id, status, job_type, date}) =
 };
 
 type StatusProps = {
-  status: number
+  status: string
 }
 
 const Mainframe = styled.div`
