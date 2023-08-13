@@ -17,10 +17,11 @@ const Login = () => {
   const authenticate = useAuthentication()
 
   const enteredEmail = useRef<HTMLInputElement | null>(null);
-  const enteredPassword = useRef<HTMLInputElement | null>(null);
+  const [enteredPassword, setEnteredPassword] = useState("");
   const [sendOtp, setSendOtp] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,12 +43,16 @@ const Login = () => {
       }).catch(() => setError("Incorrect Credentials"));
     };
 
-    if (enteredEmail.current && enteredPassword.current) {
+    if (enteredEmail.current && enteredPassword) {
       const email: string = enteredEmail.current.value;
-      const password: string = enteredPassword.current.value;
+      const password: string = enteredPassword;
 
       getIn(email, password);
     }
+  };
+
+  const togglePasswordVisibility = (): void => {
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
@@ -63,8 +68,12 @@ const Login = () => {
         <Bottom>
           <form onSubmit={(event) => onSubmitHandler(event)} method="post">
             <input type="text" ref={enteredEmail} placeholder="Username" />
-            <input type="password" ref={enteredPassword} placeholder="Password" />
+            <div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+              <input style={{flex: 1}} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
+              <span style={{color: "var(--simple-blue)", cursor: "pointer"}} onClick={togglePasswordVisibility}>{passwordVisible ? "Hide" : "Show"}</span>
+            </div>
             <button type="submit">Get In</button>
+            <p style={{color: "#fff"}}>Having trouble logining in? <Link href="/contact" style={{color: "var(--simple-blue)"}}>Contact us</Link></p>
           </form>
         </Bottom>
       </Mainframe>

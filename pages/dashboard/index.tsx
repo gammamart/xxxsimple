@@ -342,7 +342,7 @@ export const SendButton = styled.button`
     font-size: 16px;
   }
 `;
-const InformationBox = styled.div`
+export const InformationBox = styled.div`
   background-color: var(--simple-blue);
   padding: 0.5rem 2rem 0.5rem 2rem;
 `;

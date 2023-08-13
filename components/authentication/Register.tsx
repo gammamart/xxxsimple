@@ -10,6 +10,7 @@ import instance from "../../axios";
 import requests from "../../requests";
 import { userActions } from "@/redux_store/store";
 import useAuthentication from "@/utils/hooks/useAuthentication";
+import { InformationBox } from "@/pages/dashboard";
 
 const Register = () => {
   const router = useRouter();
@@ -17,10 +18,11 @@ const Register = () => {
   // const authenticate = useAuthentication()
 
   const enteredUsername = useRef<HTMLInputElement | null>(null);
-  const enteredPassword = useRef<HTMLInputElement | null>(null);
+  const [enteredPassword, setEnteredPassword] = useState("");
   const enteredEmail = useRef<HTMLInputElement | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,27 +32,38 @@ const Register = () => {
       //showing loader for user
       setLoading(true);
       // send otp to user email to confirm ownership
-      instance.post(requests.register, { username, email, password }).then((response) => {
-        // setSendOtp(true);
-        setLoading(false);
-        if (response.data) {
-          dispatch(userActions.loginUser(JSON.stringify(response.data)));
-          localStorage.setItem("user", JSON.stringify(response.data));
-          router.push("/dashboard");
-        } else {
-          setError("Invalid OTP");
-        }
-        console.log(response.data);
-      });
+      instance
+        .post(requests.register, { username, email, password })
+        .then((response) => {
+          // setSendOtp(true);
+          setLoading(false);
+          if (response.data) {
+            dispatch(userActions.loginUser(JSON.stringify(response.data)));
+            localStorage.setItem("user", JSON.stringify(response.data));
+            router.push("/dashboard");
+            setLoading(false);
+          } else {
+            setError("Invalid OTP");
+          }
+          console.log(response.data);
+        })
+        .catch((err) => {
+          setError(err.response.data.message);
+          setLoading(false);
+        });
     };
 
-    if (enteredUsername.current && enteredPassword.current && enteredEmail.current) {
+    if (enteredUsername.current && enteredPassword && enteredEmail.current) {
       const username: string = enteredUsername.current.value;
       const email: string = enteredEmail.current.value;
-      const password: string = enteredPassword.current.value;
+      const password: string = enteredPassword;
 
       getIn(username, email, password);
     }
+  };
+
+  const togglePasswordVisibility = (): void => {
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
@@ -58,6 +71,7 @@ const Register = () => {
       {loading && <Loader></Loader>}
       <Mainframe>
         {error && <span style={{ width: "auto", color: "#831f29", padding: "8px 30px 8px 30px", backgroundColor: "#f8d7d9", position: "absolute", right: "100px" }}>{error}</span>}
+        <InformationBox style={{backgroundColor: "#ca8107"}}>Please check and confirm your password when registering account!!!</InformationBox>
         <Up>
           <BackButton href={"/"}>
             <BsArrowLeft size={28} color="white" />
@@ -66,9 +80,13 @@ const Register = () => {
         <Bottom>
           <form onSubmit={(event) => onSubmitHandler(event)} method="post">
             <input type="text" ref={enteredUsername} placeholder="Username" />
-            <input type="password" ref={enteredPassword} placeholder="Password" />
+            <div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+              <input style={{flex: 1}} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
+              <span style={{color: "var(--simple-blue)", cursor: "pointer"}} onClick={togglePasswordVisibility}>{passwordVisible ? "Hide" : "Show"}</span>
+            </div>
             <input type="email" ref={enteredEmail} placeholder="Email" />
             <button type="submit">Register</button>
+            <p style={{color: "#fff"}}>Having trouble creating an account? <Link href="/contact" style={{color: "var(--simple-blue)"}}>Contact us</Link></p>
           </form>
         </Bottom>
       </Mainframe>
@@ -146,6 +164,11 @@ const Loader = styled.div`
       margin-left: 90%;
     }
   }
+`;
+
+const PasswrodToggle = styled.button`
+  margin-left: 5px;
+  cursor: pointer;
 `;
 
 export default Register;
