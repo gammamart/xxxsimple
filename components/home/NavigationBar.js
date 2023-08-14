@@ -14,7 +14,7 @@ const NavigationBar = () => {
         </Link>
       </Mainframe>
       <InformationBox style={{width: "100%"}}>Use on computer for best experience</InformationBox>
-      <InformationBox style={{width: "100%", color: "#ca8107"}}>Due to the high amount of traffic, our team is working on scaling the system while the application is still working, this may make some users experience difficulty logging in to their accounts. <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
+      <InformationBox style={{width: "100%", backgroundColor: "#ca8107"}}>Due to the high amount of traffic, our team is working on scaling the system while the application is still working, this may make some users experience difficulty logging in to their accounts. <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
           Contact support if you&apos;re having this issue.
         </Link>  </InformationBox>
     </>
