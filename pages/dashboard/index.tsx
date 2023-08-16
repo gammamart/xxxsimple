@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import toast, { Toaster } from "react-hot-toast";
 import Head from "next/head";
+import { FcHighPriority } from "react-icons/fc";
 
 import instance from "@/axios";
 import requests from "@/requests";
@@ -23,7 +24,7 @@ const SendScreen = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState<User>();
 
-  const [tab, setTab] = useState("bulk");
+  const [tab, setTab] = useState("single");
   const [cost, setCost] = useState(0);
 
   const bulkButton = useRef<HTMLButtonElement>(null);
@@ -44,9 +45,10 @@ const SendScreen = () => {
     }
     toast.success("New Users now have free funds in their accounts to test the SMS service. Send a single test SMS to proceed.");
 
-    const inputElement = document.getElementById('multiline-input') as HTMLTextAreaElement;
-    inputElement.placeholder = "Paste you leads here without +1 and seperated by line\n\n2335671894\n5194573298\n4195674390\n5672234589\n2335671894\n7782335635\n5672234589\n2335671894\n7782335674\n5672234589\n2335671894\n7782335718\n";
-
+    const inputElement = document.getElementById("multiline-input") as HTMLTextAreaElement;
+    if (inputElement) {
+      inputElement.placeholder = "Paste you leads here without +1 and seperated by line\n\n2335671894\n5194573298\n4195674390\n5672234589\n2335671894\n7782335635\n5672234589\n2335671894\n7782335674\n5672234589\n2335671894\n7782335718\n";
+    }
   }, []);
 
   useEffect(() => {
@@ -93,40 +95,49 @@ const SendScreen = () => {
 
     if (tab === "single") {
       instance
-      .post(requests.sendSingleSMS, { phone_number: singlePhoneNumber, sender_name: senderName.current?.value, message: message.current?.value }, headerConfig)
-      .then((response) => {
-        if (response.data) {
-          toast.success("Job sent successfully.", { id: notification });
-          dispatch(userActions.switchSent());
-        } else {
-          toast.error("Invalid Phone number ", { id: notification });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.status === 402) {
-          toast.error("Insufficient Balance, fund your account!", { id: notification });
-        }
-      });
+        .post(requests.sendSingleSMS, { phone_number: singlePhoneNumber, sender_name: senderName.current?.value, message: message.current?.value }, headerConfig)
+        .then((response) => {
+          if (response.data) {
+            if (message.current && senderName.current) {
+              message.current.value = "";
+              senderName.current.value = "";
+            }
+            setSinglePhoneNumber("");
+            toast.success("Job sent successfully.", { id: notification });
+            dispatch(userActions.switchSent());
+          } else {
+            toast.error("Invalid Phone number ", { id: notification });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 402) {
+            toast.error("Insufficient Balance, fund your account!", { id: notification });
+          }
+        });
     }
 
     if (tab === "bulk") {
       instance
-      .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value }, headerConfig)
-      .then((response) => {
-        if (response.data) {
-          toast.success("Job sent successfully.", { id: notification });
-          dispatch(userActions.switchSent());
-        } else {
-          toast.error("Invalid Phone number ", { id: notification });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.status === 402) {
-          toast.error("Insufficient Balance, fund your account!", { id: notification });
-        }
-      });
+        .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value }, headerConfig)
+        .then((response) => {
+          if (response.data) {
+            setPhoneNumberList("");
+            if (message.current) {
+              message.current.value = "";
+            }
+            toast.success("Job sent successfully.", { id: notification });
+            dispatch(userActions.switchSent());
+          } else {
+            toast.error("Invalid Phone number ", { id: notification });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 402) {
+            toast.error("Insufficient Balance, fund your account!", { id: notification });
+          }
+        });
     }
   };
 
@@ -139,27 +150,35 @@ const SendScreen = () => {
         <Navbar />
         <Frame>
           <NavigationBar>
-            <BulkButton ref={bulkButton} onClick={() => setTab("bulk")} active={tab}>
-              Bulk SMS
-            </BulkButton>
             <SingleButton ref={singleButton} onClick={() => setTab("single")} active={tab}>
               Single SMS
             </SingleButton>
+            <BulkButton ref={bulkButton} onClick={() => setTab("bulk")} active={tab}>
+              Bulk SMS
+            </BulkButton>
           </NavigationBar>
-          <InformationBox>{tab === "single" ? <p>Single SMS, send single sms to the phone number you entered with custom SENDER NAME. Note that some countries donot accept it. It cost $0.399 per SMS</p> : <p>Bulk SMS sends sms to the bulk phone number lead loaded. It cost $0.02 per SMS</p>}</InformationBox>
-          <InformationBox style={{backgroundColor: "#ca8107"}}>New users with free balance can only test with <strong>Single SMS</strong></InformationBox>
+          <InformationBox>{<p>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</p>}</InformationBox>
+          <InformationBox>
+            {tab === "single" ? <p>Single SMS, send single sms to the phone number you entered with custom SENDER NAME. Note that some countries donot accept it. It cost $0.399 per SMS</p> : <p>Bulk SMS sends sms to the bulk phone number lead loaded. It cost $0.02 per SMS</p>}
+          </InformationBox>
+          <InformationBox style={{ backgroundColor: "#ca8107" }}>
+            <FcHighPriority size={24} />
+            <FcHighPriority size={24} />
+            <FcHighPriority size={24} />
+            New users with free balance can only test with <strong>Single SMS</strong>
+            <FcHighPriority size={24} />
+            <FcHighPriority size={24} />
+            <FcHighPriority size={24} />
+          </InformationBox>
           {/* <InformationBox style={{backgroundColor: "#ca8107"}}>We&apos;re currently performing essential system maintenance to enhance your experience. During this time, there might be a slight delay in processing pending sends. We apologize for any inconvenience this may cause and appreciate your patience.</InformationBox> */}
           <Body>
             {tab === "single" ? (
               <div>
                 <input ref={senderName} type="text" placeholder="Sender Name..." />
-                <input onChange={(e) => setSinglePhoneNumber(e.target.value)} type="tel" placeholder="Phone number" />
+                <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number" />
               </div>
             ) : (
-              <textarea
-                id="multiline-input"
-                onChange={(e) => setPhoneNumberList(e.target.value)}
-              ></textarea>
+              <textarea id="multiline-input" onChange={(e) => setPhoneNumberList(e.target.value)} value={phoneNumberList}></textarea>
             )}
             <textarea ref={message} placeholder="Message..."></textarea>
           </Body>
@@ -183,7 +202,7 @@ const SendScreen = () => {
         toastOptions={{
           // Define default options
           className: "",
-          duration: 8000,
+          duration: 3000,
           style: {
             background: "#2F2E41",
             color: "#fff",
@@ -345,6 +364,10 @@ export const SendButton = styled.button`
 export const InformationBox = styled.div`
   background-color: var(--simple-blue);
   padding: 0.5rem 2rem 0.5rem 2rem;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
 `;
 
 export default SendScreen;

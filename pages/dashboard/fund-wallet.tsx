@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Head from "next/head";
+import toast, { Toaster } from "react-hot-toast";
 
 import Navbar from "@/components/global/Navbar";
 import useAuthentication from "@/utils/hooks/useAuthentication";
@@ -35,6 +36,8 @@ const FundWallet = () => {
   }, []);
 
   const fundWalletHandler = (): void => {
+    toast.loading("Redirecting to payment...");
+
     instance.post(requests.fundWallet, { amount: amount.current?.value }, headerConfig).then((response) => {
       router.replace(response.data.url);
     });
@@ -59,6 +62,24 @@ const FundWallet = () => {
           <Bottom>{/* <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton> */}</Bottom>
         </Frame>
       </Mainframe>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 3000,
+          style: {
+            background: "#2F2E41",
+            color: "#fff",
+            boxShadow: "none",
+            fontSize: "12px",
+          },
+        }}
+      />
     </>
   );
 };

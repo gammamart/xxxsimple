@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Head from "next/head";
- 
+
 import Body from "../components/home/Body";
 import NavigationBar from "../components/home/NavigationBar";
 
 const HomeScreen = () => {
-  
   return (
     <>
       <Head>
-      <meta name="google" content="notranslate" />
+        <meta name="google" content="notranslate" />
+        <title>Home | просто</title>
       </Head>
       <Mainframe>
         <NavigationBar />
