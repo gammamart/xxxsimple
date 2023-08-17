@@ -50,8 +50,8 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, date })
   };
 
   const status_animation: Record<string, any> = {
-    PREPARING: <Lottie options={preparingAnimationOptions} width={40} height={80} />,
-    SENDING: <Lottie options={sendingAnimationOptions} />,
+    PREPARING: <Lottie options={preparingAnimationOptions} width={30} height={60} />,
+    SENDING: <Lottie options={sendingAnimationOptions} width={85} height={100} />,
   };
 
   return (
@@ -72,8 +72,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, date })
           <b>Status:</b> <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
         </p>
         <div>
-          {/* <Lottie options={preparingAnimationOptions} width={40} height={80} /> */}
-          {status_animation["SENDING"]}
+          {status_animation[`${status.replace(" ", "_")}`]}
         </div>
       </Right>
     </Mainframe>
@@ -109,9 +108,10 @@ const Left = styled.div`
 `;
 const Right = styled.div`
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  /* justify-content: center; */
 
   & > div {
     /* border: 1px solid tomato; */
