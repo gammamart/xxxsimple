@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import moment from 'moment';
-import { fail } from "assert";
-
+import moment from "moment";
+import Lottie from "react-lottie";
+import * as preparingAnimation from "../../public/statics/animations/preparing.json";
+import * as sendingAnimation from "../../public/statics/animations/sending.json";
 
 interface HistoryCardProps {
   id: number;
@@ -11,48 +12,77 @@ interface HistoryCardProps {
   date: string;
 }
 
-const HistoryCard: React.FC<HistoryCardProps> = ({id, status, job_type, date}) => {
+// lottie preparing animation configuration
+const preparingAnimationOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: preparingAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
+const sendingAnimationOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: sendingAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, date }) => {
   interface STATUS_COLOR {
-    FAILED: string,
-    COMPLETED: string,
-    IN_PROGRESS: string,
+    FAILED: string;
+    COMPLETED: string;
+    PREPARING: string;
+    SENDING: string;
   }
   // const status: number = 0;
   const originalDate = date;
   const timeAgo = moment(originalDate).fromNow();
 
-  const status_color: Record<string, string> ={ 
+  const status_color: Record<string, string> = {
     FAILED: "#ff0101",
     COMPLETED: "#1AA14E",
-    IN_PROGRESS: "#FFA201",
-  }
+    PREPARING: "#FFA201",
+    SENDING: "#009DD2",
+  };
+
+  const status_animation: Record<string, any> = {
+    PREPARING: <Lottie options={preparingAnimationOptions} width={40} height={80} />,
+    SENDING: <Lottie options={sendingAnimationOptions} />,
+  };
 
   return (
     <Mainframe>
-      <Up>
-        <p style={{fontSize: "14px"}}>
+      <Left>
+        <p style={{ fontSize: "14px" }}>
           <b>ID</b> {id}{" "}
         </p>
-        <p style={{fontSize: "14px", color: "#009DD2"}}>
+        <p style={{ fontSize: "14px", color: "#fff" }}>
           <b>TYPE:</b> {job_type}{" "}
         </p>
-      </Up>
-      <Bottom>
-        <p style={{fontSize: "14px"}}>
+        <p style={{ fontSize: "14px" }}>
           <b>Date:</b> {timeAgo}{" "}
         </p>
-        <p style={{fontSize: "14px"}}>
+      </Left>
+      <Right>
+        <p style={{ fontSize: "14px" }}>
           <b>Status:</b> <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
         </p>
-      </Bottom>
+        <div>
+          {/* <Lottie options={preparingAnimationOptions} width={40} height={80} /> */}
+          {status_animation["SENDING"]}
+        </div>
+      </Right>
     </Mainframe>
   );
 };
 
 type StatusProps = {
-  status: string
-}
+  status: string;
+};
 
 const Mainframe = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -60,25 +90,32 @@ const Mainframe = styled.div`
   width: 580px !important;
   padding: 0.5em 1em 0.5em 1em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   /* align-items: center; */
   justify-content: space-around;
   /* gap: 2em; */
   font-size: 18px;
   color: #fff;
 `;
-const Up = styled.div`
+const Left = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
+  flex-direction: column;
 `;
-const Bottom = styled.div`
+const Right = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
+  flex-direction: column;
+
+  & > div {
+    /* border: 1px solid tomato; */
+    height: 100%;
+  }
 `;
 const Status = styled.span<StatusProps>`
-  color: ${({ status }) => (status)};
+  color: ${({ status }) => status};
 `;
 
 export default HistoryCard;

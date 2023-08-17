@@ -243,6 +243,7 @@ const NavigationBar = styled.div`
   align-items: center;
   justify-content: space-around;
   height: 70px;
+  margin-bottom: 1rem;
 `;
 const NavButton = styled.button`
   font-size: 1.1rem;
