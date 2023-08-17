@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import moment from "moment";
 import Lottie from "react-lottie";
+import moment from "moment";
 import * as preparingAnimation from "../../public/statics/animations/preparing.json";
 import * as sendingAnimation from "../../public/statics/animations/sending.json";
 
@@ -96,6 +96,10 @@ const Mainframe = styled.div`
   /* gap: 2em; */
   font-size: 18px;
   color: #fff;
+
+  & p {
+    color: #ffffffa6;
+  }
 `;
 const Left = styled.div`
   display: flex;
