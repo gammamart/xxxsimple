@@ -13,10 +13,15 @@ const NavigationBar = () => {
           Contact us
         </Link>
       </Mainframe>
-      <InformationBox style={{width: "100%"}}>Use on computer for best experience</InformationBox>
-      <InformationBox style={{width: "100%", backgroundColor: "#ca8107"}}>Due to the high amount of traffic, our team is working on scaling the system while the application is still working, this may make some users experience difficulty logging in to their accounts. <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
+      <InformationBox style={{ width: "100%" }}>Use on computer for best experience</InformationBox>
+      {/* TRAFFFICE NOTIFICATION */}
+      {/* <InformationBox style={{ width: "100%", backgroundColor: "#ca8107" }}>
+        Due to the high amount of traffic, our team is working on scaling the system while the application is still working, this may make some users experience difficulty logging in to their accounts.{" "}
+        <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
           Contact support if you&apos;re having this issue.
-        </Link>  </InformationBox>
+        </Link>{" "}
+      </InformationBox> */}
+      <InformationBox style={{ width: "100%", backgroundColor: "#058f21" }}>The system upgrade has been successfully completed, and all features are now fully operational. We appreciate your patience during this process. If you encounter any lingering issues or have any questions, please don&apos;t hesitate to reach out to our support team.</InformationBox>
     </>
   );
 };

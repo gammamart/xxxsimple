@@ -49,7 +49,7 @@ const SendScreen = () => {
     if (inputElement) {
       inputElement.placeholder = "Paste you leads here without +1 and seperated by line\n\n2335671894\n5194573298\n4195674390\n5672234589\n2335671894\n7782335635\n5672234589\n2335671894\n7782335674\n5672234589\n2335671894\n7782335718\n";
     }
-  }, []);
+  }, [tab]);
 
   useEffect(() => {
     if (tab === "bulk") bulkButton.current?.focus();
