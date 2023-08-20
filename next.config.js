@@ -2,6 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  experimental: {
+    serverActions: true,
+  },
+
   compiler: {
     styledComponents: true,
   },

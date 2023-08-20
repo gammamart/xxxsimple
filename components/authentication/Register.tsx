@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import ReCAPTCHA from "react-google-recaptcha";
 
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -13,10 +12,16 @@ import { userActions } from "@/redux_store/store";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import { InformationBox } from "@/pages/dashboard";
 
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { verifyCaptchaAction } from "@/verifyCaptchaAction";
+
+
 const Register = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   // const authenticate = useAuthentication()
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const enteredUsername = useRef<HTMLInputElement | null>(null);
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -25,52 +30,55 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
-
-  const handleRecaptchaChange = (value: string | null) => {
-    setRecaptchaValue(value);
-  };
-
-  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!recaptchaValue) {
-      setError("Please complete the reCAPTCHA.");
+    // if the component is not mounted yet
+    if (!executeRecaptcha) {
       return;
     }
+    // receive a token
+    const token = await executeRecaptcha("onSubmit");
+    // validate the token via the server action we've created previously
+    const verified = await verifyCaptchaAction(token);
 
-    // it handles both the registering and loggin in user
-    const getIn = (username: string, email: string, password: string) => {
-      //showing loader for user
-      setLoading(true);
-      // send otp to user email to confirm ownership
-      instance
-        .post(requests.register, { username, email, password })
-        .then((response) => {
-          // setSendOtp(true);
-          setLoading(false);
-          if (response.data) {
-            dispatch(userActions.loginUser(JSON.stringify(response.data)));
-            localStorage.setItem("user", JSON.stringify(response.data));
-            router.push("/dashboard");
+    if (verified) {
+      // Here you would send the input data to a database, and
+      // reset the form UI, display success message logic etc.
+
+      // it handles both the registering and loggin in user
+      const getIn = (username: string, email: string, password: string) => {
+        //showing loader for user
+        setLoading(true);
+        // send otp to user email to confirm ownership
+        instance
+          .post(requests.register, { username, email, password })
+          .then((response) => {
+            // setSendOtp(true);
             setLoading(false);
-          } else {
-            setError("Invalid OTP");
-          }
-          console.log(response.data);
-        })
-        .catch((err) => {
-          setError(err.response.data.message);
-          setLoading(false);
-        });
-    };
+            if (response.data) {
+              dispatch(userActions.loginUser(JSON.stringify(response.data)));
+              localStorage.setItem("user", JSON.stringify(response.data));
+              router.push("/dashboard");
+              setLoading(false);
+            } else {
+              setError("Invalid OTP");
+            }
+            console.log(response.data);
+          })
+          .catch((err) => {
+            setError(err.response.data.message);
+            setLoading(false);
+          });
+      };
 
-    if (enteredUsername.current && enteredPassword && enteredEmail.current) {
-      const username: string = enteredUsername.current.value;
-      const email: string = enteredEmail.current.value;
-      const password: string = enteredPassword;
+      if (enteredUsername.current && enteredPassword && enteredEmail.current) {
+        const username: string = enteredUsername.current.value;
+        const email: string = enteredEmail.current.value;
+        const password: string = enteredPassword;
 
-      getIn(username, email, password);
+        getIn(username, email, password);
+      }
     }
   };
 
@@ -99,7 +107,6 @@ const Register = () => {
               </span>
             </div>
             <input type="email" ref={enteredEmail} placeholder="Email" />
-            <ReCAPTCHA sitekey="6Lf6374nAAAAACevsPMWiI2SfZ1idsRSq0h85nbs" onChange={handleRecaptchaChange} />
             <button type="submit">Register</button>
             <p style={{ color: "#fff" }}>
               Already have an account?{" "}
