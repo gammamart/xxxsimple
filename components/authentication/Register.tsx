@@ -121,7 +121,8 @@ const Register = () => {
             <input type="email" ref={enteredEmail} placeholder="Email" />
             <input style={{ width: "12rem" }} type="text" ref={user_captcha_value} placeholder="Captcha" />
             {/* <LoadCanvasTemplate /> */}
-            <ReCAPTCHA sitekey="Your client site key" onChange={onChange} />,<button type="submit">Register</button>
+            <ReCAPTCHA sitekey={key} onChange={onChange} />
+            <button type="submit">Register</button>
             <p style={{ color: "#fff" }}>
               Already have an account?{" "}
               <Link href="/getIn" style={{ color: "var(--simple-blue)" }}>
