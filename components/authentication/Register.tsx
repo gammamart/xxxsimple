@@ -13,6 +13,7 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 import { InformationBox } from "@/pages/dashboard";
 
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+// @ts-ignore
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from "react-simple-captcha";
 
 
