@@ -11,6 +11,10 @@ import requests from "../../requests";
 import { userActions } from "@/redux_store/store";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 
+import ReCAPTCHA from "react-google-recaptcha";
+
+const key = "6Lclb8AnAAAAAFFD4D_b6sndcdRcGpXfL57lAw5m";
+
 const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -22,6 +26,13 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const [captchaIsDone, setCaptchaIsDone] = useState(false);
+
+  function onChange() {
+    setCaptchaIsDone(true);
+    console.log("changed");
+  }
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,7 +64,11 @@ const Login = () => {
       const email: string = enteredEmail.current.value;
       const password: string = enteredPassword;
 
-      getIn(email, password);
+      if (captchaIsDone) {
+        getIn(email, password);
+      } else {
+        alert("Captcha Does Not Match");
+      }
     }
   };
 
@@ -80,6 +95,7 @@ const Login = () => {
                 {passwordVisible ? "Hide" : "Show"}
               </span>
             </div>
+            <ReCAPTCHA sitekey={key} onChange={onChange} />
             <button type="submit">Get In</button>
             <p style={{ color: "#fff" }}>
               Don&apos;t have an account?{" "}

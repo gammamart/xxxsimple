@@ -87,7 +87,6 @@ const Register = () => {
 
       if (captchaIsDone) {
         getIn(username, email, password);
-        alert("Captcha matched");
       } else {
         alert("Captcha Does Not Match");
       }
@@ -119,7 +118,6 @@ const Register = () => {
               </span>
             </div>
             <input type="email" ref={enteredEmail} placeholder="Email" />
-            <input style={{ width: "12rem" }} type="text" ref={user_captcha_value} placeholder="Captcha" />
             {/* <LoadCanvasTemplate /> */}
             <ReCAPTCHA sitekey={key} onChange={onChange} />
             <button type="submit">Register</button>
