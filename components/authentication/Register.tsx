@@ -12,16 +12,10 @@ import { userActions } from "@/redux_store/store";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import { InformationBox } from "@/pages/dashboard";
 
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { verifyCaptchaAction } from "@/verifyCaptchaAction";
-
-
 const Register = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   // const authenticate = useAuthentication()
-
-  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const enteredUsername = useRef<HTMLInputElement | null>(null);
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -30,55 +24,41 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // if the component is not mounted yet
-    if (!executeRecaptcha) {
-      return;
-    }
-    // receive a token
-    const token = await executeRecaptcha("onSubmit");
-    // validate the token via the server action we've created previously
-    const verified = await verifyCaptchaAction(token);
-
-    if (verified) {
-      // Here you would send the input data to a database, and
-      // reset the form UI, display success message logic etc.
-
-      // it handles both the registering and loggin in user
-      const getIn = (username: string, email: string, password: string) => {
-        //showing loader for user
-        setLoading(true);
-        // send otp to user email to confirm ownership
-        instance
-          .post(requests.register, { username, email, password })
-          .then((response) => {
-            // setSendOtp(true);
+    // it handles both the registering and loggin in user
+    const getIn = (username: string, email: string, password: string) => {
+      //showing loader for user
+      setLoading(true);
+      // send otp to user email to confirm ownership
+      instance
+        .post(requests.register, { username, email, password })
+        .then((response) => {
+          // setSendOtp(true);
+          setLoading(false);
+          if (response.data) {
+            dispatch(userActions.loginUser(JSON.stringify(response.data)));
+            localStorage.setItem("user", JSON.stringify(response.data));
+            router.push("/dashboard");
             setLoading(false);
-            if (response.data) {
-              dispatch(userActions.loginUser(JSON.stringify(response.data)));
-              localStorage.setItem("user", JSON.stringify(response.data));
-              router.push("/dashboard");
-              setLoading(false);
-            } else {
-              setError("Invalid OTP");
-            }
-            console.log(response.data);
-          })
-          .catch((err) => {
-            setError(err.response.data.message);
-            setLoading(false);
-          });
-      };
+          } else {
+            setError("Invalid OTP");
+          }
+          console.log(response.data);
+        })
+        .catch((err) => {
+          setError(err.response.data.message);
+          setLoading(false);
+        });
+    };
 
-      if (enteredUsername.current && enteredPassword && enteredEmail.current) {
-        const username: string = enteredUsername.current.value;
-        const email: string = enteredEmail.current.value;
-        const password: string = enteredPassword;
+    if (enteredUsername.current && enteredPassword && enteredEmail.current) {
+      const username: string = enteredUsername.current.value;
+      const email: string = enteredEmail.current.value;
+      const password: string = enteredPassword;
 
-        getIn(username, email, password);
-      }
+      getIn(username, email, password);
     }
   };
 
@@ -91,7 +71,7 @@ const Register = () => {
       {loading && <Loader></Loader>}
       <Mainframe>
         {error && <span style={{ width: "auto", color: "#831f29", padding: "8px 30px 8px 30px", backgroundColor: "#f8d7d9", position: "absolute", right: "100px" }}>{error}</span>}
-        <InformationBox style={{ backgroundColor: "#ca8107" }}>Please check and confirm your password when registering account!!!</InformationBox>
+        <InformationBox style={{backgroundColor: "#ca8107"}}>Please check and confirm your password when registering account!!!</InformationBox>
         <Up>
           <BackButton href={"/"}>
             <BsArrowLeft size={28} color="white" />
@@ -100,26 +80,14 @@ const Register = () => {
         <Bottom>
           <form onSubmit={(event) => onSubmitHandler(event)} method="post">
             <input type="text" ref={enteredUsername} placeholder="Username" />
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <input style={{ flex: 1 }} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
-              <span style={{ color: "var(--simple-blue)", cursor: "pointer" }} onClick={togglePasswordVisibility}>
-                {passwordVisible ? "Hide" : "Show"}
-              </span>
+            <div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+              <input style={{flex: 1}} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
+              <span style={{color: "var(--simple-blue)", cursor: "pointer"}} onClick={togglePasswordVisibility}>{passwordVisible ? "Hide" : "Show"}</span>
             </div>
             <input type="email" ref={enteredEmail} placeholder="Email" />
             <button type="submit">Register</button>
-            <p style={{ color: "#fff" }}>
-              Already have an account?{" "}
-              <Link href="/getIn" style={{ color: "var(--simple-blue)" }}>
-                Login
-              </Link>
-            </p>
-            <p style={{ color: "#fff" }}>
-              Having trouble creating an account?{" "}
-              <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
-                Contact us
-              </Link>
-            </p>
+            <p style={{color: "#fff"}}>Already have an account? <Link href="/getIn" style={{color: "var(--simple-blue)"}}>Login</Link></p>
+            <p style={{color: "#fff"}}>Having trouble creating an account? <Link href="/contact" style={{color: "var(--simple-blue)"}}>Contact us</Link></p>
           </form>
         </Bottom>
       </Mainframe>

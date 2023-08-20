@@ -6,19 +6,19 @@ import { Provider } from "react-redux";
 import NextNProgress from "nextjs-progressbar";
 
 import { store } from "@/redux_store/store";
-import ReCaptcha from "../components/client/ReCaptcha";
+import { GoogleReCaptchaProvider, withGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <Mainframe>
-        <ReCaptcha>
+      <GoogleReCaptchaProvider reCaptchaKey={"6Lf6374nAAAAACevsPMWiI2SfZ1idsRSq0h85nbs"}>
+        <Mainframe>
           <NextNProgress color="#009DD2" startPosition={0.1} stopDelayMs={100} height={2} showOnShallow={true} options={{ easing: "ease", speed: 300 }} />
           <Component {...pageProps} />
-        </ReCaptcha>
-      </Mainframe>
+        </Mainframe>
+      </GoogleReCaptchaProvider>
     </Provider>
   );
 }

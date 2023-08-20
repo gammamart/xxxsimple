@@ -11,15 +11,10 @@ import requests from "../../requests";
 import { userActions } from "@/redux_store/store";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { verifyCaptchaAction } from "@/verifyCaptchaAction";
-
 const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const authenticate = useAuthentication();
-
-  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const enteredEmail = useRef<HTMLInputElement | null>(null);
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -28,47 +23,37 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // if the component is not mounted yet
-    if (!executeRecaptcha) {
-      return;
-    }
-    // receive a token
-    const token = await executeRecaptcha("onSubmit");
-    // validate the token via the server action we've created previously
-    const verified = await verifyCaptchaAction(token);
 
-    if (verified) {
-      // it handles both the registering and loggin in user
-      const getIn = (email: string, password: string) => {
-        //showing loader for user
-        setLoading(true);
-        // send otp to user email to confirm ownership
-        instance
-          .post(requests.login, { username: email, password })
-          .then((response) => {
-            // setSendOtp(true);
-            setLoading(false);
-            if (response.data) {
-              dispatch(userActions.loginUser(JSON.stringify(response.data)));
-              localStorage.setItem("user", JSON.stringify(response.data));
-              router.push("/dashboard");
-            }
-            console.log(response.data);
-          })
-          .catch(() => {
-            setError("Incorrect Credentials");
-            setLoading(false);
-          });
-      };
+    // it handles both the registering and loggin in user
+    const getIn = (email: string, password: string) => {
+      //showing loader for user
+      setLoading(true);
+      // send otp to user email to confirm ownership
+      instance
+        .post(requests.login, { username: email, password })
+        .then((response) => {
+          // setSendOtp(true);
+          setLoading(false);
+          if (response.data) {
+            dispatch(userActions.loginUser(JSON.stringify(response.data)));
+            localStorage.setItem("user", JSON.stringify(response.data));
+            router.push("/dashboard");
+          }
+          console.log(response.data);
+        })
+        .catch(() => {
+          setError("Incorrect Credentials");
+          setLoading(false);
+        });
+    };
 
-      if (enteredEmail.current && enteredPassword) {
-        const email: string = enteredEmail.current.value;
-        const password: string = enteredPassword;
+    if (enteredEmail.current && enteredPassword) {
+      const email: string = enteredEmail.current.value;
+      const password: string = enteredPassword;
 
-        getIn(email, password);
-      }
+      getIn(email, password);
     }
   };
 
