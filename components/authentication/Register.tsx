@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -13,6 +13,7 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 import { InformationBox } from "@/pages/dashboard";
 
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from "react-simple-captcha";
 
 const Register = () => {
   const router = useRouter();
@@ -22,6 +23,7 @@ const Register = () => {
   const enteredUsername = useRef<HTMLInputElement | null>(null);
   const [enteredPassword, setEnteredPassword] = useState("");
   const enteredEmail = useRef<HTMLInputElement | null>(null);
+  const user_captcha_value = useRef<HTMLInputElement | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -29,6 +31,10 @@ const Register = () => {
   const [query, setQuery] = useState({
     "g-recaptcha-response": "",
   });
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,7 +70,16 @@ const Register = () => {
       const email: string = enteredEmail.current.value;
       const password: string = enteredPassword;
 
-      getIn(username, email, password);
+      const captcha: string | undefined = user_captcha_value.current?.value;
+
+      if (captcha !== undefined) {
+        if ((validateCaptcha as any)(captcha)) {
+          getIn(username, email, password);
+          alert("Captcha matched");
+        } else {
+          alert("Captcha Does Not Match");
+        }
+      }
     }
   };
 
@@ -93,11 +108,9 @@ const Register = () => {
               </span>
             </div>
             <input type="email" ref={enteredEmail} placeholder="Email" />
-            <GoogleReCaptcha
-              onVerify={(token) => {
-                setQuery({ "g-recaptcha-response": token });
-              }}
-            />
+            <input style={{ width: "12rem" }} type="text" ref={user_captcha_value} placeholder="Captcha" />
+            <LoadCanvasTemplate />
+
             <button type="submit">Register</button>
             <p style={{ color: "#fff" }}>
               Already have an account?{" "}
