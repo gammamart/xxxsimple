@@ -13,8 +13,8 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 import { InformationBox } from "@/pages/dashboard";
 
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
-// @ts-ignore
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from "react-simple-captcha";
+
+// import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from "react-simple-captcha";
 
 
 const Register = () => {
@@ -34,9 +34,9 @@ const Register = () => {
     "g-recaptcha-response": "",
   });
 
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  // useEffect(() => {
+  //   loadCaptchaEnginge(6);
+  // }, []);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,14 +74,14 @@ const Register = () => {
 
       const captcha: string | undefined = user_captcha_value.current?.value;
 
-      if (captcha !== undefined) {
-        if ((validateCaptcha as any)(captcha)) {
-          getIn(username, email, password);
-          alert("Captcha matched");
-        } else {
-          alert("Captcha Does Not Match");
-        }
-      }
+      // if (captcha !== undefined) {
+      //   if ((validateCaptcha as any)(captcha)) {
+      //     getIn(username, email, password);
+      //     alert("Captcha matched");
+      //   } else {
+      //     alert("Captcha Does Not Match");
+      //   }
+      // }
     }
   };
 
@@ -111,7 +111,7 @@ const Register = () => {
             </div>
             <input type="email" ref={enteredEmail} placeholder="Email" />
             <input style={{ width: "12rem" }} type="text" ref={user_captcha_value} placeholder="Captcha" />
-            <LoadCanvasTemplate />
+            {/* <LoadCanvasTemplate /> */}
 
             <button type="submit">Register</button>
             <p style={{ color: "#fff" }}>
