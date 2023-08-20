@@ -12,15 +12,19 @@ import { userActions } from "@/redux_store/store";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import { InformationBox } from "@/pages/dashboard";
 
-import { GoogleReCaptcha } from "react-google-recaptcha-v3";
+import { GoogleReCaptcha, useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import ReCAPTCHA from "react-google-recaptcha";
 
 // import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from "react-simple-captcha";
 
+const key = "6Lclb8AnAAAAAFFD4D_b6sndcdRcGpXfL57lAw5m";
 
 const Register = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   // const authenticate = useAuthentication()
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const enteredUsername = useRef<HTMLInputElement | null>(null);
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -30,9 +34,16 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const [captchaIsDone, setCaptchaIsDone] = useState(false);
+
   const [query, setQuery] = useState({
     "g-recaptcha-response": "",
   });
+
+  function onChange() {
+    setCaptchaIsDone(true);
+    console.log("changed");
+  }
 
   // useEffect(() => {
   //   loadCaptchaEnginge(6);
@@ -74,14 +85,12 @@ const Register = () => {
 
       const captcha: string | undefined = user_captcha_value.current?.value;
 
-      // if (captcha !== undefined) {
-      //   if ((validateCaptcha as any)(captcha)) {
-      //     getIn(username, email, password);
-      //     alert("Captcha matched");
-      //   } else {
-      //     alert("Captcha Does Not Match");
-      //   }
-      // }
+      if (captchaIsDone) {
+        getIn(username, email, password);
+        alert("Captcha matched");
+      } else {
+        alert("Captcha Does Not Match");
+      }
     }
   };
 
@@ -112,8 +121,7 @@ const Register = () => {
             <input type="email" ref={enteredEmail} placeholder="Email" />
             <input style={{ width: "12rem" }} type="text" ref={user_captcha_value} placeholder="Captcha" />
             {/* <LoadCanvasTemplate /> */}
-
-            <button type="submit">Register</button>
+            <ReCAPTCHA sitekey="Your client site key" onChange={onChange} />,<button type="submit">Register</button>
             <p style={{ color: "#fff" }}>
               Already have an account?{" "}
               <Link href="/getIn" style={{ color: "var(--simple-blue)" }}>
