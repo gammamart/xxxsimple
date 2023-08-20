@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -24,8 +25,19 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value);
+  };
+
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!recaptchaValue) {
+      setError("Please complete the reCAPTCHA.");
+      return;
+    }
 
     // it handles both the registering and loggin in user
     const getIn = (username: string, email: string, password: string) => {
@@ -71,7 +83,7 @@ const Register = () => {
       {loading && <Loader></Loader>}
       <Mainframe>
         {error && <span style={{ width: "auto", color: "#831f29", padding: "8px 30px 8px 30px", backgroundColor: "#f8d7d9", position: "absolute", right: "100px" }}>{error}</span>}
-        <InformationBox style={{backgroundColor: "#ca8107"}}>Please check and confirm your password when registering account!!!</InformationBox>
+        <InformationBox style={{ backgroundColor: "#ca8107" }}>Please check and confirm your password when registering account!!!</InformationBox>
         <Up>
           <BackButton href={"/"}>
             <BsArrowLeft size={28} color="white" />
@@ -80,14 +92,27 @@ const Register = () => {
         <Bottom>
           <form onSubmit={(event) => onSubmitHandler(event)} method="post">
             <input type="text" ref={enteredUsername} placeholder="Username" />
-            <div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
-              <input style={{flex: 1}} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
-              <span style={{color: "var(--simple-blue)", cursor: "pointer"}} onClick={togglePasswordVisibility}>{passwordVisible ? "Hide" : "Show"}</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <input style={{ flex: 1 }} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
+              <span style={{ color: "var(--simple-blue)", cursor: "pointer" }} onClick={togglePasswordVisibility}>
+                {passwordVisible ? "Hide" : "Show"}
+              </span>
             </div>
             <input type="email" ref={enteredEmail} placeholder="Email" />
+            <ReCAPTCHA sitekey="6Lf6374nAAAAACevsPMWiI2SfZ1idsRSq0h85nbs" onChange={handleRecaptchaChange} />
             <button type="submit">Register</button>
-            <p style={{color: "#fff"}}>Already have an account? <Link href="/getIn" style={{color: "var(--simple-blue)"}}>Login</Link></p>
-            <p style={{color: "#fff"}}>Having trouble creating an account? <Link href="/contact" style={{color: "var(--simple-blue)"}}>Contact us</Link></p>
+            <p style={{ color: "#fff" }}>
+              Already have an account?{" "}
+              <Link href="/getIn" style={{ color: "var(--simple-blue)" }}>
+                Login
+              </Link>
+            </p>
+            <p style={{ color: "#fff" }}>
+              Having trouble creating an account?{" "}
+              <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
+                Contact us
+              </Link>
+            </p>
           </form>
         </Bottom>
       </Mainframe>

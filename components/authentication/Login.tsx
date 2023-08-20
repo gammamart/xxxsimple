@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -23,8 +24,19 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value);
+  };
+
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!recaptchaValue) {
+      setError("Please complete the reCAPTCHA.");
+      return;
+    }
 
     // it handles both the registering and loggin in user
     const getIn = (email: string, password: string) => {
@@ -80,6 +92,7 @@ const Login = () => {
                 {passwordVisible ? "Hide" : "Show"}
               </span>
             </div>
+            <ReCAPTCHA sitekey="6Lf6374nAAAAACevsPMWiI2SfZ1idsRSq0h85nbs" onChange={handleRecaptchaChange} />
             <button type="submit">Get In</button>
             <p style={{ color: "#fff" }}>
               Don&apos;t have an account?{" "}
