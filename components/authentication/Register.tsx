@@ -15,6 +15,7 @@ import { InformationBox } from "@/pages/dashboard";
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from "react-simple-captcha";
 
+
 const Register = () => {
   const router = useRouter();
   const dispatch = useDispatch();
