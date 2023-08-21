@@ -159,7 +159,7 @@ const SendScreen = () => {
           </NavigationBar>
           <InformationBox>{<p>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</p>}</InformationBox>
           <InformationBox>
-            {tab === "single" ? <p>Single SMS, send single sms to the phone number you entered with custom SENDER NAME. Note that some countries donot accept it. It cost $0.399 per SMS</p> : <p>Bulk SMS sends sms to the bulk phone number lead loaded. It cost $0.02 per SMS</p>}
+            {tab === "single" ? <p>Single SMS, send single sms to the phone number you entered with custom SENDER NAME. Note that some countries donot accept it. Bulk SMS cost $0.02 per SMS</p> : <p>Bulk SMS sends sms to the bulk phone number lead loaded. It cost $0.02 per SMS</p>}
           </InformationBox>
           <InformationBox style={{ backgroundColor: "#ca8107" }}>
             <FcHighPriority size={24} />
