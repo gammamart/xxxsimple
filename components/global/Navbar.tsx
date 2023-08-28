@@ -113,7 +113,7 @@ const Mainframe = styled.div`
   max-height: 900px;
 
   @media (min-width: 1200px) {
-    width: 550px;
+    width: 400px;
   }
   @media (max-width: 700px) {
     width: 100px;
