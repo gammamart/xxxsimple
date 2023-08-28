@@ -108,7 +108,7 @@ const Mainframe = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  width: 550px;
+  width: 400px;
   height: 100%;
   max-height: 900px;
 
