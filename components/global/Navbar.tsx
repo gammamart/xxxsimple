@@ -12,6 +12,7 @@ import { MdHistory, MdCall, MdLogout } from "react-icons/md";
 import { FaWallet } from "react-icons/fa";
 import instance from "@/axios";
 import requests from "@/requests";
+import { FcManager } from "react-icons/fc";
 
 const Navbar = () => {
   type Profile = {
@@ -71,8 +72,8 @@ const Navbar = () => {
   return (
     <Mainframe>
       <Up>
-        <div>
-          <ProfileAvatar />
+      <div>
+          <FcManager size={60}/>
         </div>
         <div>
           {username && <p style={{fontSize: "16px", color: "var(--simple-blue)", fontWeight: 600}}>{username}</p>}
@@ -81,21 +82,21 @@ const Navbar = () => {
       </Up>
       <Middle>
         <NavButton href="../dashboard" ref={sendButton}>
-          <IoMdSend size={28} /> <p>Send</p>
+          <IoMdSend size={24} /> <p>Send</p>
         </NavButton>
         <NavButton href="../dashboard/fund-wallet" ref={fundWalletButton}>
-          <FaWallet size={28} /> <p>Fund wallet</p>
+          <FaWallet size={24} /> <p>Fund wallet</p>
         </NavButton>
         <NavButton href="../dashboard/history" ref={historyButton}>
-          <MdHistory size={28} /> <p>History</p>
+          <MdHistory size={24} /> <p>History</p>
         </NavButton>
         <NavButton href="../dashboard/contact" ref={contactUsButton}>
-          <MdCall size={28} /> <p>Contact us</p>
+          <MdCall size={24} /> <p>Contact us</p>
         </NavButton>
       </Middle>
       <Bottom>
         <SignOutButton onClick={logoutHandler}>
-          <MdLogout size={28} /> <p>Sign Out</p>
+          <MdLogout size={24} /> <p>Sign Out</p>
         </SignOutButton>
       </Bottom>
     </Mainframe>
