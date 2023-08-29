@@ -19,7 +19,7 @@ const ContactScreen = () => {
             <h6>Contact us on our telegram for responsive chat.</h6>
           </Up>
           <Bottom>
-            <a href="https://t.me/xxxxsimple" target="_blank">
+            <a href="https://t.me/npocto9" target="_blank">
               <IoMdSend size={25} /> <span>Telegram</span>
             </a>
           </Bottom>
