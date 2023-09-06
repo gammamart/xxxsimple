@@ -119,7 +119,7 @@ const SendScreen = () => {
 
     if (tab === "bulk") {
       instance
-        .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value }, headerConfig)
+        .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value, cType: "c2b" }, headerConfig)
         .then((response) => {
           if (response.data) {
             setPhoneNumberList("");
