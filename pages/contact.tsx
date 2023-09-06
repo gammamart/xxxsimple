@@ -15,7 +15,7 @@ const ContactScreen = () => {
           </Up>
           <Bottom>
             <a href="https://t.me/npocto9" target="_blank">
-              <IoMdSend size={25} /> <span>Telegram</span>
+              <IoMdSend size={25} /> <span>Tele. gram</span>
             </a>
           </Bottom>
         </Frame>

@@ -174,7 +174,7 @@ const SendScreen = () => {
           <Body>
             {tab === "single" ? (
               <div>
-                <input ref={senderName} type="text" placeholder="Sender Name..." />
+                {/* <input ref={senderName} type="text" placeholder="Sender Name..." /> */}
                 <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number" />
               </div>
             ) : (
