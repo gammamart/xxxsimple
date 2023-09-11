@@ -170,7 +170,7 @@ const SendScreen = () => {
             <FcHighPriority size={24} />
             <FcHighPriority size={24} />
           </InformationBox>
-          {/* <InformationBox style={{backgroundColor: "#ca8107"}}>We&apos;re currently performing essential system maintenance to enhance your experience. During this time, there might be a slight delay in processing pending sends. We apologize for any inconvenience this may cause and appreciate your patience.</InformationBox> */}
+          <InformationBox style={{backgroundColor: "#ca8107"}}>We&apos;re currently performing essential system maintenance to enhance your experience. During this time, there might be a slight delay in processing pending sends. We apologize for any inconvenience this may cause and appreciate your patience.</InformationBox>
           <Body>
             {tab === "single" ? (
               <div>
