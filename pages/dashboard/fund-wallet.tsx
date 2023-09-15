@@ -19,6 +19,7 @@ const FundWallet = () => {
   }
 
   const router = useRouter();
+  const usdtWallet = "TWyBksSTjNM7EEab2XgNie7jYKriXYKWmK";
   const authenticate = useAuthentication();
   const [user, setUser] = useState<User>();
 
@@ -58,6 +59,24 @@ const FundWallet = () => {
               <input ref={amount} type="number" placeholder="Amount" />
             </AmountFrame>
             <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton>
+            <div style={{ marginTop: "2rem" }}>
+              <h6>USDT(TRC20/TRX) wallet.</h6>
+              <div style={{ marginTop: "1rem", color: "#fff" }}>
+                <p>1. Make sure you are logged into your account.</p>
+                <p>2. Send to the wallet.</p>
+                <p>3. Automatically reflect in your account once it has been confirmed on our network.</p>
+              </div>
+
+              <USDTButton
+                onClick={() => {
+                  navigator.clipboard.writeText(usdtWallet);
+                  toast.success("Wallet address copied");
+                }}
+              >
+                <p>TWyBksSTjNM7EEab2XgNie7jYKriXYKWmK</p>
+              </USDTButton>
+              <p style={{ color: "#ca8107", marginTop: "0.7rem" }}>Click to copy</p>
+            </div>
           </Up>
           <Bottom>{/* <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton> */}</Bottom>
         </Frame>
@@ -104,7 +123,7 @@ const Frame = styled.div`
 `;
 const Up = styled.div`
   /* border: 1px solid aqua; */
-  height: 220px;
+  height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -163,6 +182,20 @@ const ContinueButton = styled.div`
   cursor: pointer;
 
   & p {
+    font-size: 16px;
+  }
+`;
+const USDTButton = styled.button`
+  height: 50px;
+  width: 400px;
+  background: #ffffff10;
+  border: 1px solid #ffffff50;
+  color: #ffffffd2;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-family: inherit;
+
+  & > p {
     font-size: 16px;
   }
 `;
