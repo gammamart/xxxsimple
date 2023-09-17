@@ -53,6 +53,8 @@ const HistoryScreen = () => {
 
   console.log(history)
 
+  
+
 
   return (
     <>
