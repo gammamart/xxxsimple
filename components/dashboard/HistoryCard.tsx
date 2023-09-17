@@ -74,7 +74,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
         </p>
         <div>{status_animation[`${status.replace(" ", "_")}`]}</div>
       </Right>
-      <p style={{ fontSize: "14px" }}>
+      <p style={{ fontSize: "14px", color: "#009DD2" }}>
         <b>Status message:</b> {failure_message}
       </p>
     </Mainframe>
