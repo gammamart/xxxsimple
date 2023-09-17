@@ -22,6 +22,7 @@ const HistoryScreen = () => {
     id: number;
     status: string;
     job_type: string;
+    failure_message: string;
     createed_at: string;
   }
   const authenticate = useAuthentication();
@@ -66,7 +67,7 @@ const HistoryScreen = () => {
           </Up>
           <Bottom>
             {history?.map((job: History) => (
-              <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} date={job.createed_at} />
+              <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} failure_message={job.failure_message} date={job.createed_at} />
             ))}
           </Bottom>
         </Frame>

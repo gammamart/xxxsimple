@@ -9,6 +9,7 @@ interface HistoryCardProps {
   id: number;
   status: string;
   job_type: string;
+  failure_message: string;
   date: string;
 }
 
@@ -31,7 +32,7 @@ const sendingAnimationOptions = {
   },
 };
 
-const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, date }) => {
+const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure_message, date }) => {
   interface STATUS_COLOR {
     FAILED: string;
     COMPLETED: string;
@@ -71,10 +72,11 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, date })
         <p style={{ fontSize: "14px" }}>
           <b>Status:</b> <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
         </p>
-        <div>
-          {status_animation[`${status.replace(" ", "_")}`]}
-        </div>
+        <div>{status_animation[`${status.replace(" ", "_")}`]}</div>
       </Right>
+      <p style={{ fontSize: "14px" }}>
+        <b>Job message:</b> {failure_message}
+      </p>
     </Mainframe>
   );
 };
