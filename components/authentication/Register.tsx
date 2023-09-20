@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import { Source_Code_Pro } from "next/font/google";
 
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -18,6 +19,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 // import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from "react-simple-captcha";
 
 const key = "6Lclb8AnAAAAAFFD4D_b6sndcdRcGpXfL57lAw5m";
+const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
 const Register = () => {
   const router = useRouter();
@@ -177,14 +179,17 @@ const Bottom = styled.div`
   }
 
   & form button {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     height: 40px;
     border: none;
     width: 120px;
     font-size: 16px;
     align-self: flex-end;
     cursor: pointer;
+    border-radius: 8px;
+    font-family: ${source_code_pro.style.fontFamily};
+    font-weight: 600;
   }
 `;
 

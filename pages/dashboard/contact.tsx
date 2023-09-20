@@ -13,6 +13,7 @@ const ContactScreen = () => {
     <>
       <Mainframe>
         <Navbar />
+        <nav></nav>
 
         <Frame>
           <Up>
@@ -24,7 +25,8 @@ const ContactScreen = () => {
             </a>
           </Bottom>
         </Frame>
-      </Mainframe> 8iu
+      </Mainframe>{" "}
+      8iu
     </>
   );
 };
@@ -35,6 +37,23 @@ const Mainframe = styled.div`
   min-height: 650px;
   display: flex;
   min-width: 1000px;
+
+  & > nav {
+    /* border: 1px solid red; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 100%;
+    max-height: 900px;
+
+    @media (min-width: 1200px) {
+      width: 280px;
+    }
+    @media (max-width: 700px) {
+      width: 100px;
+    }
+  }
 `;
 
 const Frame = styled.div`
@@ -51,7 +70,7 @@ const Frame = styled.div`
 
   & h6 {
     font-size: 18px;
-    color: var(--simple-blue);
+    color: #fcfdffef;
   }
 `;
 const Up = styled.div`

@@ -35,8 +35,8 @@ const Body = () => {
         </ButtonFrame>
       </Left>
       <Right>
-        <div><Banner1 /></div>
-        <div><Banner2 /></div>
+        {/* <div><Banner1 /></div> */}
+        {/* <div><Banner2 /></div> */}
       </Right>
     </Mainframe>
   );
@@ -60,6 +60,7 @@ const Left = styled.div`
   justify-content: center;
   padding-left: 40px;
   gap: 70px;
+  margin-top: 3rem;
 
   @media (max-width: 1050px) {
     width: 100%;

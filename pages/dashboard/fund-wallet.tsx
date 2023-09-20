@@ -22,8 +22,10 @@ const FundWallet = () => {
   const usdtWallet = "TWyBksSTjNM7EEab2XgNie7jYKriXYKWmK";
   const authenticate = useAuthentication();
   const [user, setUser] = useState<User>();
+  const [walletReveal, setWalletReveal] = useState(false);
 
   const amount = useRef<HTMLInputElement | null>(null);
+  const USDTAmount = useRef<HTMLInputElement | null>(null);
 
   const headerConfig = {
     headers: { Authorization: `Bearer ${user?.token}` },
@@ -44,6 +46,14 @@ const FundWallet = () => {
     });
   };
 
+  const usdtFundWalletHandler = (): void => {
+    toast.loading("Fetching wallet for payment...");
+
+    instance.post(requests.fundUSDTWallet, { amount: USDTAmount.current?.value }, headerConfig).then((response) => {
+      setWalletReveal(true);
+    });
+  };
+
   return (
     <>
       <Head>
@@ -51,34 +61,47 @@ const FundWallet = () => {
       </Head>
       <Mainframe>
         <Navbar />
+        <nav></nav>
         <Frame>
           <Up>
-            <h6>Fund your wallet with your favourite Cryto currency.</h6>
-            <AmountFrame>
-              <p>$</p>
-              <input ref={amount} type="number" placeholder="Amount" />
-            </AmountFrame>
-            <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton>
-            <div style={{ marginTop: "2rem" }}>
+            <section style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+              <h6>BTC/ETH/LITECOIN/USD COIN/DOGECOIN/BITCOIN CASH/APE COIN/DAI/SHIBA/TETHER/MATIC/WRAPPED ETHER</h6>
+              <div style={{ marginTop: "1rem", color: "#fff" }}>
+                <p style={{color: "#ffffff7e"}}>Funds will reflect automatically once it has been confirmed on our network.</p>
+              </div>
+              <AmountFrame>
+                <p>$</p>
+                <input ref={amount} type="number" placeholder="Amount" />
+              </AmountFrame>
+              <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton>
+            </section>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginTop: "4rem" }}>
               <h6>USDT(TRC20/TRX) wallet.</h6>
               <div style={{ marginTop: "1rem", color: "#fff" }}>
                 <p>1. Make sure you are logged into your account.</p>
                 <p>2. Send to the wallet.</p>
                 <p>3. Automatically reflect in your account once it has been confirmed on our network.</p>
               </div>
-
-              <USDTButton
-                onClick={() => {
-                  navigator.clipboard.writeText(usdtWallet);
-                  toast.success("Wallet address copied");
-                }}
-              >
-                <p>TWyBksSTjNM7EEab2XgNie7jYKriXYKWmK</p>
-              </USDTButton>
-              <p style={{ color: "#ca8107", marginTop: "0.7rem" }}>Click to copy</p>
+              <AmountFrame>
+                <p>$</p>
+                <input ref={USDTAmount} type="number" placeholder="Amount" />
+              </AmountFrame>
+              <ContinueButton onClick={usdtFundWalletHandler}>Continue</ContinueButton>
+              {walletReveal && (
+                <section>
+                  <p style={{ color: "#a8acb4", marginTop: "0.7rem", fontSize: "12px" }}>Click to copy</p>
+                  <USDTButton
+                    onClick={() => {
+                      navigator.clipboard.writeText(usdtWallet);
+                      toast.success("Wallet address copied");
+                    }}
+                  >
+                    <p>TWyBksSTjNM7EEab2XgNie7jYKriXYKWmK</p>
+                  </USDTButton>
+                </section>
+              )}
             </div>
           </Up>
-          <Bottom>{/* <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton> */}</Bottom>
         </Frame>
       </Mainframe>
       <Toaster
@@ -109,6 +132,23 @@ const Mainframe = styled.div`
   min-height: 650px;
   display: flex;
   min-width: 1000px;
+
+  & > nav {
+    /* border: 1px solid red; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 100%;
+    max-height: 900px;
+
+    @media (min-width: 1200px) {
+      width: 280px;
+    }
+    @media (max-width: 700px) {
+      width: 100px;
+    }
+  }
 `;
 
 const Frame = styled.div`
@@ -119,11 +159,12 @@ const Frame = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
   width: 100%;
+  
 `;
 const Up = styled.div`
   /* border: 1px solid aqua; */
-  height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -131,18 +172,20 @@ const Up = styled.div`
 
   & h6 {
     font-size: 18px;
-    color: var(--simple-blue);
+    color: #fcfdffef;
   }
 `;
 const AmountFrame = styled.div`
   /* border: 1px solid red; */
   width: 400px;
-  height: 60px;
+  height: 50px;
   padding: 1em;
   display: flex;
   align-items: center;
   gap: 1em;
-  border: 1px solid rgb(255, 255, 255, 0.7);
+  background: #1d1f29;
+  border: 1px solid #414651;
+  border-radius: 10px;
 
   & p {
     font-size: 18px;
@@ -170,16 +213,19 @@ const Bottom = styled.div`
   padding: 2em;
 `;
 const ContinueButton = styled.div`
-  height: 50px;
-  width: 150px;
+  height: 40px;
+  width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5em;
-  background-color: var(--simple-dark-blue);
+  background-color: #fff;
   border: none;
-  color: #fff;
+  color: #000;
   cursor: pointer;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
 
   & p {
     font-size: 16px;

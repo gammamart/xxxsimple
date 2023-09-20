@@ -25,4 +25,5 @@ export default function App({ Component, pageProps }: AppProps) {
 
 const Mainframe = styled.div`
   font-family: ${source_code_pro.style.fontFamily};
+  position: relative;
 `;

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Lottie from "react-lottie";
 import moment from "moment";
+import { v4 } from "uuid";
 import * as preparingAnimation from "../../public/statics/animations/preparing.json";
 import * as sendingAnimation from "../../public/statics/animations/sending.json";
 
@@ -44,10 +45,10 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
   const timeAgo = moment(originalDate).fromNow();
 
   const status_color: Record<string, string> = {
-    FAILED: "#ff0101",
-    COMPLETED: "#1AA14E",
-    PREPARING: "#FFA201",
-    SENDING: "#009DD2",
+    FAILED: "#ff0101a0",
+    COMPLETED: "#1aa14e87",
+    PREPARING: "#ffa20182",
+    SENDING: "#009ed28c",
   };
 
   const status_animation: Record<string, any> = {
@@ -55,28 +56,28 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
     SENDING: <Lottie options={sendingAnimationOptions} width={85} height={100} />,
   };
 
+  console.log(id);
+
   return (
     <Mainframe>
-      <Left>
+      <TableSmallBox>
+        <p style={{ fontSize: "14px", }}>{v4().slice(0,4)} </p>
+      </TableSmallBox>
+      <TableSmallBox>
         <p style={{ fontSize: "14px" }}>
-          <b>ID</b> {id}{" "}
+          <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
         </p>
-        <p style={{ fontSize: "14px", color: "#fff" }}>
-          <b>TYPE:</b> {job_type}{" "}
-        </p>
-        <p style={{ fontSize: "14px" }}>
-          <b>Date:</b> {timeAgo}{" "}
-        </p>
-      </Left>
-      <Right>
-        <p style={{ fontSize: "14px" }}>
-          <b>Status:</b> <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
-        </p>
-        <div>{status_animation[`${status.replace(" ", "_")}`]}</div>
-      </Right>
-      <p style={{ fontSize: "14px", color: "#009DD2" }}>
-        <b>Status message:</b> {failure_message === "UNNAMED" ? "No message" : failure_message}
-      </p>
+      </TableSmallBox>
+      <TableSmallBox style={{marginLeft: "1rem"}}>
+        <p style={{ fontSize: "14px", color: "#fff" }}>{job_type} </p>
+      </TableSmallBox>
+      <TableSmallBox>
+        <p style={{ fontSize: "14px" }}>{timeAgo} </p>
+      </TableSmallBox>
+
+      <TableSmallBox>
+        <p style={{ fontSize: "14px", color: "#fff", width: "150px" }}>{failure_message === "UNNAMED" ? "No message" : failure_message}</p>
+      </TableSmallBox>
     </Mainframe>
   );
 };
@@ -85,43 +86,35 @@ type StatusProps = {
   status: string;
 };
 
-const Mainframe = styled.div`
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  height: 120px;
-  width: 580px !important;
-  padding: 0.5em 1em 0.5em 1em;
+const Mainframe = styled.tr`
+  border-bottom: 1px solid #d4e4fe31;
+  width: 100% !important;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
-  justify-content: space-around;
-  /* gap: 2em; */
+  height: 2.5rem !important;
+  align-items: center;
+  /* justify-content: space-between; */
   font-size: 18px;
   color: #fff;
+  flex: 1;
 
   & p {
     color: #ffffffa6;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
-const Left = styled.div`
-  display: flex;
-  /* align-items: center; */
-  justify-content: space-between;
-  flex-direction: column;
-`;
-const Right = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  /* justify-content: center; */
 
-  & > div {
-    /* border: 1px solid tomato; */
-    height: 100%;
-  }
-`;
 const Status = styled.span<StatusProps>`
   color: ${({ status }) => status};
+`;
+const TableSmallBox = styled.span`
+  /* border: 1px solid red; */
+  flex: 1;
+  /* display: flex; */
 `;
 
 export default HistoryCard;

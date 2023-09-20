@@ -7,12 +7,11 @@ import Image from "next/image";
 
 import { userActions } from "@/redux_store/store";
 import ProfileAvatar from "@/public/statics/images/profileAvatar";
-import { IoMdSend } from "react-icons/io";
 import { MdHistory, MdCall, MdLogout } from "react-icons/md";
-import { FaWallet } from "react-icons/fa";
+import { CiWallet, CiHeadphones } from "react-icons/ci";
 import instance from "@/axios";
 import requests from "@/requests";
-import { FcManager } from "react-icons/fc";
+import { BsEmojiSunglasses, BsSend, BsClockHistory } from "react-icons/bs";
 
 const Navbar = () => {
   type Profile = {
@@ -59,7 +58,7 @@ const Navbar = () => {
 
   useEffect(() => {
     instance.get(requests.profile, headerConfig).then((response) => setProfile(response.data));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sentSwitch]);
 
   useEffect(() => {
@@ -71,32 +70,45 @@ const Navbar = () => {
 
   return (
     <Mainframe>
+      <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
       <Up>
-      <div>
-          <FcManager size={60}/>
+        <div>
+          <BsEmojiSunglasses color="#fff" size={40} />
         </div>
         <div>
-          {username && <p style={{fontSize: "16px", color: "var(--simple-blue)", fontWeight: 600}}>{username}</p>}
-          <p>${profile?.wallet_balance.toFixed(2)}</p>
+          {username && <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>@{username}</Username>}
+          <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
         </div>
       </Up>
       <Middle>
         <NavButton href="../dashboard" ref={sendButton}>
-          <IoMdSend size={24} /> <p>Send</p>
+          <span>
+            <BsSend color={"#fbfbfb"} size={18} />
+          </span>{" "}
+          <p>Send</p>
         </NavButton>
         <NavButton href="../dashboard/fund-wallet" ref={fundWalletButton}>
-          <FaWallet size={24} /> <p>Fund wallet</p>
+          <span>
+            <CiWallet color={"#fbfbfb"} size={20} />
+          </span>{" "}
+          <p>Fund wallet</p>
         </NavButton>
         <NavButton href="../dashboard/history" ref={historyButton}>
-          <MdHistory size={24} /> <p>History</p>
+          <span>
+            <BsClockHistory color={"#fbfbfb"} size={18} />{" "}
+          </span>
+          <p>History</p>
         </NavButton>
         <NavButton href="../dashboard/contact" ref={contactUsButton}>
-          <MdCall size={24} /> <p>Contact us</p>
+          <span>
+            <CiHeadphones color={"#fbfbfb"} size={20} />
+          </span>{" "}
+          <p>Contact us</p>
         </NavButton>
       </Middle>
       <Bottom>
         <SignOutButton onClick={logoutHandler}>
-          <MdLogout size={24} /> <p>Sign Out</p>
+          <MdLogout color={"#fbfbfb"} size={20} /> <p>Sign Out</p>
         </SignOutButton>
       </Bottom>
     </Mainframe>
@@ -105,18 +117,35 @@ const Navbar = () => {
 
 const Mainframe = styled.div`
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 234px;
   height: 100%;
   max-height: 900px;
+  position: fixed;
+  /* border: 1px solid yellow; */
+  border-right: 1px solid #2c3039;
+  background-color: #05050a;
 
   @media (min-width: 1200px) {
-    width: 400px;
+    width: 234px;
   }
   @media (max-width: 700px) {
     width: 100px;
+  }
+`;
+const Logo = styled.p`
+  @media (max-width: 700px) {
+    margin: 20px !important;
+    font-size: 16px !important;
+
+  }
+`;
+const Username = styled.p`
+  @media (max-width: 700px) {
+    font-size: 12px !important;
+
   }
 `;
 const Up = styled.div`
@@ -168,8 +197,7 @@ const Middle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* gap: 3.5rem; */
-  justify-content: space-between;
+  gap: 0.8rem;
   padding: 20px 20px 20px 40px;
 `;
 const Bottom = styled.div`
@@ -182,17 +210,28 @@ const Bottom = styled.div`
 `;
 const NavButton = styled(Link)`
   text-decoration: none;
-  color: rgb(255, 255, 255, 0.7);
-  font-size: 1.1rem;
+  color: #a8acb4;
+  font-size: 0.88rem;
+  font-weight: 400;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  /* justify-content: space-between; */
+  gap: 0.7rem;
   cursor: pointer;
 
+  padding-right: 8px;
+  padding-left: 8px;
+  height: 32px;
+  border-radius: 6px;
+  width: 100%;
+
   &:focus {
-    color: var(--simple-blue);
+    background-color: #2c3039;
     outline: none;
+  }
+  &:hover {
+    background-color: #2c303997;
   }
   & p {
     @media (max-width: 700px) {
@@ -202,8 +241,8 @@ const NavButton = styled(Link)`
 `;
 const SignOutButton = styled.button`
   text-decoration: none;
-  color: rgb(255, 255, 255, 0.7);
-  font-size: 1.2rem;
+  color: #a8acb4;
+  font-size: 0.88rem;
   display: flex;
   flex-direction: row;
   align-items: center;

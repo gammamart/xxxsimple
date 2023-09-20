@@ -5,12 +5,15 @@ import styled from "styled-components";
 import toast, { Toaster } from "react-hot-toast";
 import Head from "next/head";
 import { FcHighPriority } from "react-icons/fc";
+import { Source_Code_Pro } from "next/font/google";
 
 import instance from "@/axios";
 import requests from "@/requests";
 import { userActions } from "@/redux_store/store";
 import { IoMdSend } from "react-icons/io";
 import useAuthentication from "@/utils/hooks/useAuthentication";
+
+const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
 const SendScreen = () => {
   interface User {
@@ -148,6 +151,7 @@ const SendScreen = () => {
       </Head>
       <Mainframe>
         <Navbar />
+        <nav></nav>
         <Frame>
           <NavigationBar>
             <SingleButton ref={singleButton} onClick={() => setTab("single")} active={tab}>
@@ -159,24 +163,24 @@ const SendScreen = () => {
           </NavigationBar>
           <InformationBox>{<p>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</p>}</InformationBox>
           <InformationBox>
-            {tab === "single" ? <p>Single SMS, send single sms to the phone number you entered with custom SENDER NAME. Note that some countries donot accept it. Bulk SMS cost $0.02 per SMS</p> : <p>Bulk SMS sends sms to the bulk phone number lead loaded. It cost $0.02 per SMS</p>}
-          </InformationBox>
-          <InformationBox style={{ backgroundColor: "#ca8107" }}>
-            <FcHighPriority size={24} />
-            <FcHighPriority size={24} />
-            <FcHighPriority size={24} />
+            <FcHighPriority size={15} />
             New users with free balance can only test with <strong>Single SMS</strong>
-            <FcHighPriority size={24} />
-            <FcHighPriority size={24} />
-            <FcHighPriority size={24} />
+            <FcHighPriority size={15} />
           </InformationBox>
-          {/* <InformationBox style={{backgroundColor: "#ca8107"}}>We&apos;re currently performing essential system maintenance to enhance your experience. During this time, there might be a slight delay in processing pending sends. We apologize for any inconvenience this may cause and appreciate your patience.</InformationBox> */}
+          <div style={{padding: "1rem 1rem 0rem 2rem", color: "#a8acb4"}}>
+            <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send your SMS</p>
+            <ul style={{marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem"}}>
+              <li>Bulk SMS phone number should be <b>without country code (+1)</b></li>
+              <li>Maximum number of phone number that can be loaded once is <strong>5000</strong></li>
+            </ul>
+          </div>
           <Body>
             {tab === "single" ? (
-              <div>
-                {/* <input ref={senderName} type="text" placeholder="Sender Name..." /> */}
-                <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number" />
-              </div>
+              <>
+                <div>
+                  <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (2232271673)" />
+                </div>
+              </>
             ) : (
               <textarea id="multiline-input" onChange={(e) => setPhoneNumberList(e.target.value)} value={phoneNumberList}></textarea>
             )}
@@ -188,13 +192,13 @@ const SendScreen = () => {
             </Cost>
             <SendButton onClick={sendHandler}>
               <p>Send</p>
-              <IoMdSend size={26} />
+              <IoMdSend size={20} />
             </SendButton>
           </Bottom>
         </Frame>
       </Mainframe>
       <Toaster
-        position="top-right"
+        position="top-left"
         reverseOrder={false}
         gutter={8}
         containerClassName=""
@@ -225,17 +229,37 @@ const Mainframe = styled.div`
   min-height: 650px;
   display: flex;
   min-width: 1000px;
+  /* position: relative; */
+  /* width: 70%; */
+  /* border: 1px solid red; */
+
+  & > nav {
+    /* border: 1px solid red; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 100%;
+    max-height: 900px;
+
+    @media (min-width: 1200px) {
+      width: 280px;
+    }
+    @media (max-width: 700px) {
+      width: 100px;
+    }
+  }
 `;
 
 const Frame = styled.div`
   /* border: 1px solid tomato; */
-  border-left: 1px solid rgb(255, 255, 255, 0.34);
   width: 100%;
   height: 100%;
   min-width: 670px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-self: flex-end;
 `;
 const NavigationBar = styled.div`
   /* border: 1px solid aqua; */
@@ -248,34 +272,38 @@ const NavigationBar = styled.div`
 const NavButton = styled.button`
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(255, 255, 255, 0.7);
+  color: #2c3039;
   background: none;
   border: none;
   padding: 5px;
   cursor: pointer;
+  font-family: ${source_code_pro.style.fontFamily};
+  padding: 1rem 3rem 1rem 3rem;
 
   &:focus {
-    color: var(--simple-blue);
-    border-bottom: 3px solid var(--simple-blue);
+    color: #a8acb4;
     outline: none;
+  }
+  &:hover {
+    background-color: #2c303997;
   }
 `;
 const BulkButton = styled(NavButton)<ButtonProps>`
-  color: ${({ active }) => active === "bulk" && "var(--simple-blue)"};
-  border-bottom: ${({ active }) => active === "bulk" && "3px solid var(--simple-blue)"};
+  color: ${({ active }) => active === "bulk" && "#a8acb4"};
+  background-color: ${({ active }) => active === "bulk" && "#2c303997"};
 `;
 const SingleButton = styled(NavButton)<ButtonProps>`
-  color: ${({ active }) => active === "single" && "var(--simple-blue)"};
-  border-bottom: ${({ active }) => active === "single" && "3px solid var(--simple-blue)"};
+  color: ${({ active }) => active === "single" && "#a8acb4"};
+  background-color: ${({ active }) => active === "single" && "#2c303997"};
 `;
 const Body = styled.div`
   /* border: 1px solid red; */
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 2em;
-  height: 65%;
-  min-height: 500px;
+  padding: 2em 2rem 0rem 2rem;
+  height: 30%;
+  min-height: 400px;
 
   & div {
     display: flex;
@@ -284,37 +312,49 @@ const Body = styled.div`
     gap: 2em;
 
     & input {
-      background: none;
-      border: 1px solid rgb(255, 255, 255, 0.7);
+      background: #1d1f29;
+      border: 1px solid #414651;
       resize: none;
       color: white;
-      font-family: "Source Sans Pro", sans-serif;
+      font-family: ${source_code_pro.style.fontFamily};
       font-size: 1rem;
       padding: 1em;
       width: 100%;
+      border-radius: 15px;
+      /* transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
+      /* transition: outline 0.8s linear; */
+
+      &::placeholder {
+        font-family: ${source_code_pro.style.fontFamily};
+        font-size: 1rem;
+        color: #afb3bd;
+      }
 
       &:focus {
-        outline: none;
+        outline: 2px solid #41465178;
+        outline-offset: 2px;
       }
     }
   }
 
   & textarea {
-    background: none;
-    border: 1px solid rgb(255, 255, 255, 0.7);
+    border-radius: 15px;
+    background: #1d1f29;
+    border: 1px solid #414651;
     resize: none;
     color: white;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: ${source_code_pro.style.fontFamily};
     font-size: 1rem;
     padding: 1em;
 
     &::placeholder {
-      font-family: "Source Sans Pro", sans-serif;
+      font-family: ${source_code_pro.style.fontFamily};
       font-size: 1rem;
+      color: #afb3bd;
     }
 
     &:focus {
-      outline: none;
+      outline: 2px solid #41465178;
     }
   }
 
@@ -330,45 +370,55 @@ const Body = styled.div`
 const Bottom = styled.div`
   /* border: 1px solid blue; */
   display: flex;
-  padding: 30px;
+  padding: 0px 30px 20px 30px;
   align-items: center;
   justify-content: flex-end;
   gap: 50px;
 `;
 const Cost = styled.div`
-  height: 50px;
+  height: 40px;
   padding: 20px;
   border: 3px solid var(--simple-dark-blue);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--simple-blue);
   font-size: 16px;
+  font-weight: 500;
+  font-family: ${source_code_pro.style.fontFamily};
 `;
 export const SendButton = styled.button`
-  height: 50px;
-  width: 150px;
+  height: 40px;
+  width: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
   align-self: flex-end;
   gap: 0.5em;
-  background-color: var(--simple-dark-blue);
+  background-color: #fff;
   border: none;
-  color: #fff;
+  color: #000;
   cursor: pointer;
+  border-radius: 8px;
+  font-weight: 500;
+  font-family: ${source_code_pro.style.fontFamily};
 
   & p {
     font-size: 16px;
   }
 `;
 export const InformationBox = styled.div`
-  background-color: var(--simple-blue);
+  background-color: #1d1f29;
+  border-top: 1px solid #414651;
+  border-bottom: 1px solid #414651;
   padding: 0.5rem 2rem 0.5rem 2rem;
   margin-bottom: 0.3rem;
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  color: #afb3bd;
+  font-size: 12px;
 `;
 
 export default SendScreen;

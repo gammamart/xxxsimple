@@ -3,8 +3,10 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import { Source_Code_Pro } from "next/font/google";
 
 import { BsArrowLeft } from "react-icons/bs";
+
 
 import instance from "../../axios";
 import requests from "../../requests";
@@ -14,6 +16,7 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const key = "6Lclb8AnAAAAAFFD4D_b6sndcdRcGpXfL57lAw5m";
+const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
 const Login = () => {
   const router = useRouter();
@@ -97,13 +100,13 @@ const Login = () => {
             </div>
             <ReCAPTCHA sitekey={key} onChange={onChange} />
             <button type="submit">Get In</button>
-            <p style={{ color: "#fff" }}>
+            <p style={{ color: "#ecedf0" }}>
               Don&apos;t have an account?{" "}
               <Link href="/register" style={{ color: "var(--simple-blue)" }}>
                 Register
               </Link>
             </p>
-            <p style={{ color: "#fff" }}>
+            <p style={{ color: "#ecedf0" }}>
               Having trouble logining in?{" "}
               <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
                 Contact us
@@ -119,6 +122,7 @@ const Login = () => {
 const Mainframe = styled.div`
   width: 100%;
   height: 100%;
+  font-family: ${source_code_pro.style.fontFamily};
 `;
 const Up = styled.div`
   height: 60px;
@@ -153,14 +157,17 @@ const Bottom = styled.div`
   }
 
   & form button {
-    background-color: black;
-    color: white;
-    height: 40px;
+    background-color: white;
+    color: black;
+    height: 38px;
     border: none;
-    width: 120px;
+    width: 100px;
     font-size: 16px;
     align-self: flex-end;
     cursor: pointer;
+    border-radius: 8px;
+    font-family: ${source_code_pro.style.fontFamily};
+    font-weight: 600;
   }
 `;
 
