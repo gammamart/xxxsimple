@@ -7,7 +7,6 @@ import { Source_Code_Pro } from "next/font/google";
 
 import { BsArrowLeft } from "react-icons/bs";
 
-
 import instance from "../../axios";
 import requests from "../../requests";
 import { userActions } from "@/redux_store/store";
@@ -150,10 +149,22 @@ const Bottom = styled.div`
     color: white;
     padding-left: 10px;
     font-size: 16px;
+    background: #1d1f29;
+    border: 1px solid #414651;
+    font-family: ${source_code_pro.style.fontFamily};
+    border-radius: 15px;
+
+    &::placeholder {
+      font-family: ${source_code_pro.style.fontFamily};
+      font-size: 1rem;
+      color: #afb3bd;
+    }
 
     &:focus {
-      outline: none;
-    }
+        outline: 2px solid #41465178;
+        outline-offset: 2px;
+        transition: outline 0.6s ease-out;
+      }
   }
 
   & form button {
