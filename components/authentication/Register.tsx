@@ -24,7 +24,7 @@ const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 const Register = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  // const authenticate = useAuthentication()
+  const authenticate = useAuthentication()
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
