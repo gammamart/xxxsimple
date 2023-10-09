@@ -12,6 +12,7 @@ import { CiWallet, CiHeadphones } from "react-icons/ci";
 import instance from "@/axios";
 import requests from "@/requests";
 import { BsEmojiSunglasses, BsSend, BsClockHistory } from "react-icons/bs";
+import { VscVerifiedFilled } from "react-icons/vsc";
 
 const Navbar = () => {
   type Profile = {
@@ -35,6 +36,7 @@ const Navbar = () => {
 
   const username: string = userInformation && JSON.parse(userInformation).username;
   const token: string = userInformation && JSON.parse(userInformation).token;
+  const verified: boolean = userInformation && JSON.parse(userInformation).verified;
 
   const headerConfig = {
     headers: { Authorization: `Bearer ${token}` },
@@ -68,6 +70,7 @@ const Navbar = () => {
     if (pathname === "contact") contactUsButton.current?.focus();
   }, [pathname]);
 
+
   return (
     <Mainframe>
       <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
@@ -76,7 +79,12 @@ const Navbar = () => {
           <BsEmojiSunglasses color="#fff" size={40} />
         </div>
         <div>
-          {username && <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>@{username}</Username>}
+          {username && (
+            <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
+              @{username}
+              {verified && <VscVerifiedFilled color="#009DD2" />}
+            </Username>
+          )}
           <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
         </div>
       </Up>
@@ -139,13 +147,15 @@ const Logo = styled.p`
   @media (max-width: 700px) {
     margin: 20px !important;
     font-size: 16px !important;
-
   }
 `;
-const Username = styled.p`
+const Username = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
   @media (max-width: 700px) {
     font-size: 12px !important;
-
   }
 `;
 const Up = styled.div`
