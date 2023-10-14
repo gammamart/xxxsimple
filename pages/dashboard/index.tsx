@@ -167,6 +167,7 @@ const SendScreen = () => {
             New users with free balance can only test with <strong>Single SMS</strong>
             <FcHighPriority size={15} />
           </InformationBox>
+          <InformationBox style={{background: "yellow", color: "white"}}>{<p><b>Our link tracking system has identified that the link included in the recent bulk SMS you sent has been blacklisted, preventing users from accessing it.</b></p>}</InformationBox>
           <div style={{ padding: "1rem 1rem 0rem 2rem", color: "#a8acb4" }}>
             <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send your SMS</p>
             <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
