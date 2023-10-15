@@ -23,9 +23,16 @@ const SendScreen = () => {
     username: string;
     email: string;
   }
+  type Profile = {
+    wallet_balance: number;
+    user: number;
+    [key: string]: any;
+  };
+
   const authenticate = useAuthentication();
   const dispatch = useDispatch();
   const [user, setUser] = useState<User>();
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   const [tab, setTab] = useState("single");
   const [cost, setCost] = useState(0);
@@ -65,6 +72,7 @@ const SendScreen = () => {
       instance
         .get(requests.profile, headerConfig)
         .then((response) => {
+          setProfile(response.data)
           dispatch(userActions.saveProfile(JSON.stringify(response.data)));
           console.log(response.data);
         })
@@ -167,7 +175,7 @@ const SendScreen = () => {
             New users with free balance can only test with <strong>Single SMS</strong>
             <FcHighPriority size={15} />
           </InformationBox>
-          <InformationBox style={{background: "yellow", color: "white"}}>{<p><b>Our link tracking system has identified that the link included in the recent bulk SMS you sent has been blacklisted, preventing users from accessing it.</b></p>}</InformationBox>
+          {profile.alert && <InformationBox style={{background: "yellow", color: "black"}}>{<p><b>{profile.alert_information}</b></p>}</InformationBox>}
           <div style={{ padding: "1rem 1rem 0rem 2rem", color: "#a8acb4" }}>
             <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send your SMS</p>
             <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
