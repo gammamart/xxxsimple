@@ -14,7 +14,7 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 
 import ReCAPTCHA from "react-google-recaptcha";
 
-const key = "6Lclb8AnAAAAAFFD4D_b6sndcdRcGpXfL57lAw5m";
+const key = "6LdSLqEoAAAAAK8slmrvMwL8vTvFJtv0LDNA26xy";
 const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
 const Login = () => {
@@ -161,10 +161,10 @@ const Bottom = styled.div`
     }
 
     &:focus {
-        outline: 2px solid #41465178;
-        outline-offset: 2px;
-        transition: outline 0.6s ease-out;
-      }
+      outline: 2px solid #41465178;
+      outline-offset: 2px;
+      transition: outline 0.6s ease-out;
+    }
   }
 
   & form button {
