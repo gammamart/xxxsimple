@@ -11,7 +11,7 @@ export default function middleware(request) {
 
   console.log(url)
 
-  const maintaining = false;
+  const maintaining = true;
 
   // privatizating AUTHENTICATED ROUTES
   if (maintaining) {
