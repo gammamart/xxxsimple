@@ -18,7 +18,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 // import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from "react-simple-captcha";
 
-const key = "6Le3saIoAAAAANfudm6R__UW8BQmmiqc8dy9BDnE";
+const key = "6Le3saIoAAAAAIG7n_zvmqk-xcHxSevNSDipyx-3";
 const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
 const Register = () => {
