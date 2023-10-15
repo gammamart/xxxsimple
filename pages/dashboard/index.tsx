@@ -175,7 +175,7 @@ const SendScreen = () => {
             New users with free balance can only test with <strong>Single SMS</strong>
             <FcHighPriority size={15} />
           </InformationBox>
-          {profile.alert && <InformationBox style={{background: "yellow", color: "black"}}>{<p><b>{profile.alert_information}</b></p>}</InformationBox>}
+          {profile?.alert && <InformationBox style={{background: "yellow", color: "black"}}>{<p><b>{profile?.alert_information}</b></p>}</InformationBox>}
           <div style={{ padding: "1rem 1rem 0rem 2rem", color: "#a8acb4" }}>
             <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send your SMS</p>
             <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
