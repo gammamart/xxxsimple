@@ -15,7 +15,8 @@ export default function middleware(request) {
 
   // privatizating AUTHENTICATED ROUTES
   if (maintaining) {
-    if (url.includes("/dashboard") || url.includes("/getIn") || url.includes("/register") || url === "/" || url.includes("/review")) {
+    // if (url.includes("/dashboard") || url.includes("/getIn") || url.includes("/register") || url === "/" || url.includes("/review")) {
+    if (url.includes("/dashboard") || url.includes("/getIn") || url === "/" || url.includes("/review")) {
       // if (token === undefined || token?.value === "undefined" || token?.value === undefined || token?.value === null) {
       tempUrl.pathname = "/maintainace";
       console.log("REDIRECTING !!!");
