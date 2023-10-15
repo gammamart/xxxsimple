@@ -13,7 +13,7 @@ const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <GoogleReCaptchaProvider reCaptchaKey={"6Le3saIoAAAAAIG7n_zvmqk-xcHxSevNSDipyx-3"}>
+      <GoogleReCaptchaProvider reCaptchaKey={"6Le3saIoAAAAANfudm6R__UW8BQmmiqc8dy9BDnE"}>
         <Mainframe>
           <NextNProgress color="#009DD2" startPosition={0.1} stopDelayMs={100} height={2} showOnShallow={true} options={{ easing: "ease", speed: 300 }} />
           <Component {...pageProps} />
