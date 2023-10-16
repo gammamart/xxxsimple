@@ -11,12 +11,12 @@ export default function middleware(request) {
 
   console.log(url)
 
-  const maintaining = true;
+  const maintaining = false;
 
   // privatizating AUTHENTICATED ROUTES
   if (maintaining) {
-    // if (url.includes("/dashboard") || url.includes("/getIn") || url.includes("/register") || url === "/" || url.includes("/review")) {
-    if (url.includes("/dashboard") || url.includes("/getIn") || url === "/" || url.includes("/review")) {
+    if (url.includes("/dashboard") || url.includes("/getIn") || url.includes("/register") || url === "/" || url.includes("/review")) {
+    // if (url.includes("/dashboard") || url.includes("/getIn") || url === "/" || url.includes("/review")) {
       // if (token === undefined || token?.value === "undefined" || token?.value === undefined || token?.value === null) {
       tempUrl.pathname = "/maintainace";
       console.log("REDIRECTING !!!");
