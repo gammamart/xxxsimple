@@ -152,6 +152,8 @@ const SendScreen = () => {
     }
   };
 
+  console.log("LOG: ", profile)
+
   return (
     <>
       <Head>
