@@ -59,7 +59,10 @@ const Navbar = () => {
   console.log(profile);
 
   useEffect(() => {
-    instance.get(requests.profile, headerConfig).then((response) => setProfile(response.data));
+    instance.get(requests.profile, headerConfig).then((response) => {
+      setProfile(response.data);
+      dispatch(userActions.saveProfile(JSON.stringify(response.data)));
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sentSwitch]);
 
@@ -69,7 +72,6 @@ const Navbar = () => {
     if (pathname === "history") historyButton.current?.focus();
     if (pathname === "contact") contactUsButton.current?.focus();
   }, [pathname]);
-
 
   return (
     <Mainframe>

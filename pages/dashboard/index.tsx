@@ -31,6 +31,9 @@ const SendScreen = () => {
 
   const authenticate = useAuthentication();
   const dispatch = useDispatch();
+
+  const userProfile = JSON.parse(useSelector((state: any) => state.userSlice.profile));
+
   const [user, setUser] = useState<User>();
   const [profile, setProfile] = useState<Profile | null>(null);
 
@@ -77,11 +80,6 @@ const SendScreen = () => {
         })
         .catch((error) => {});
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    instance.get(requests.profile, headerConfig).then((response) => setProfile(response.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -187,11 +185,11 @@ const SendScreen = () => {
             New users with free balance can only test with <strong>Single SMS</strong>
             <FcHighPriority size={15} />
           </InformationBox>
-          {profile?.alert && (
+          {userProfile?.alert && (
             <InformationBox style={{ background: "yellow", color: "black" }}>
               {
                 <p>
-                  <b>{profile?.alert_information}</b>
+                  <b>{userProfile?.alert_information}</b>
                 </p>
               }
             </InformationBox>
