@@ -77,6 +77,10 @@ const SendScreen = () => {
         })
         .catch((error) => {});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     instance.get(requests.profile, headerConfig).then((response) => setProfile(response.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
