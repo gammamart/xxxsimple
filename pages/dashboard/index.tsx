@@ -72,12 +72,12 @@ const SendScreen = () => {
       instance
         .get(requests.profile, headerConfig)
         .then((response) => {
-          setProfile(response.data)
           dispatch(userActions.saveProfile(JSON.stringify(response.data)));
           console.log(response.data);
         })
         .catch((error) => {});
     }
+    instance.get(requests.profile, headerConfig).then((response) => setProfile(response.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -152,7 +152,7 @@ const SendScreen = () => {
     }
   };
 
-  console.log("LOG: ", profile)
+  console.log("LOG: ", profile);
 
   return (
     <>
@@ -171,13 +171,27 @@ const SendScreen = () => {
               Bulk SMS
             </BulkButton>
           </NavigationBar>
-          <InformationBox>{<p><b>COST: $0.02/SMS</b>. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</p>}</InformationBox>
+          <InformationBox>
+            {
+              <p>
+                <b>COST: $0.02/SMS</b>. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
+              </p>
+            }
+          </InformationBox>
           <InformationBox>
             <FcHighPriority size={15} />
             New users with free balance can only test with <strong>Single SMS</strong>
             <FcHighPriority size={15} />
           </InformationBox>
-          {profile?.alert && <InformationBox style={{background: "yellow", color: "black"}}>{<p><b>{profile?.alert_information}</b></p>}</InformationBox>}
+          {profile?.alert && (
+            <InformationBox style={{ background: "yellow", color: "black" }}>
+              {
+                <p>
+                  <b>{profile?.alert_information}</b>
+                </p>
+              }
+            </InformationBox>
+          )}
           <div style={{ padding: "1rem 1rem 0rem 2rem", color: "#a8acb4" }}>
             <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send your SMS</p>
             <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
