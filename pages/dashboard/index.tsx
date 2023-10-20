@@ -209,7 +209,7 @@ const SendScreen = () => {
             {tab === "single" ? (
               <>
                 <div>
-                  <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (2232271673)" />
+                  <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (2232271673)" maxLength={15} />
                 </div>
               </>
             ) : (
