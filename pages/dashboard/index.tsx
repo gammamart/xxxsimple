@@ -303,7 +303,7 @@ const NavigationBar = styled.div`
 const NavButton = styled.button`
   font-size: 1.1rem;
   font-weight: 500;
-  color: #2c3039;
+  color: #676f80;
   background: none;
   border: none;
   padding: 5px;
