@@ -88,7 +88,7 @@ const Navbar = () => {
             </Username>
           )}
           <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
-          <UpgradeButton href={'../dashboard/upgrade'}>Upgrade</UpgradeButton>
+          {!verified && <UpgradeButton href={'../dashboard/upgrade'}>Upgrade</UpgradeButton>}
         </div>
       </Up>
       <Middle>

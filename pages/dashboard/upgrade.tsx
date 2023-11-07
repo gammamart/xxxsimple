@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import Head from "next/head";
 import { IoMdSend } from "react-icons/io";
 import styled from "styled-components";
 import { SendButton } from ".";
@@ -49,6 +50,9 @@ const ContactScreen = () => {
 
   return (
     <>
+      <Head>
+        <title>Upgrade</title>
+      </Head>
       <Mainframe>
         <Navbar />
         <nav></nav>
