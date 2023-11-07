@@ -37,7 +37,7 @@ const ContactScreen = () => {
   const upgradeHandler = (): void => {
     const notification = toast.loading("Processing...");
 
-    instance.get(requests.accountUpgrade).then((response) => {
+    instance.get(requests.accountUpgrade, headerConfig).then((response) => {
       if (response) {
         const externalUrl = "https://commerce.coinbase.com/checkout/a2e45cf4-cb40-42ab-b188-53ea20f06912";
         toast.loading("Redirecting...", { id: notification });
