@@ -11,6 +11,7 @@ const requests: endpointRequest = {
   profile: "account/profile/",
   fundWallet: "account/fund-wallet/",
   fundUSDTWallet: "account/usdt-fund-wallet/",
+  accountUpgrade: "account/upgrade/",
 
   calculateCost: "service/calculate-cost/",
   sendSingleSMS: "service/send-single-sms/",

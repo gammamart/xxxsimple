@@ -154,7 +154,7 @@ const SendScreen = () => {
     }
   };
 
-  console.log("LOG: ", profile);
+  // console.log("LOG: ", profile);
 
   return (
     <>

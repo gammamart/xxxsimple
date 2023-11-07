@@ -88,6 +88,7 @@ const Navbar = () => {
             </Username>
           )}
           <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
+          <UpgradeButton href={'../dashboard/upgrade'}>Upgrade</UpgradeButton>
         </div>
       </Up>
       <Middle>
@@ -270,6 +271,21 @@ const SignOutButton = styled.button`
     @media (max-width: 700px) {
       display: none;
     }
+  }
+`;
+
+const UpgradeButton = styled(Link)`
+  text-decoration: none;
+  border: 1.4px solid #009ed2;
+  padding: 0.5em 1em 0.5em 1em;
+  font-size: 14px;
+  color: #009DD2;
+  border-radius: 0.4rem;
+  font-weight: 500;
+  transition: background-color 0.4s linear;
+
+  &:hover {
+    background-color: #009ed249;
   }
 `;
 
