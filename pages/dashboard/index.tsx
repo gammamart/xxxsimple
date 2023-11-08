@@ -30,9 +30,12 @@ const SendScreen = () => {
   };
 
   const authenticate = useAuthentication();
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch()
   const userProfile = JSON.parse(useSelector((state: any) => state.userSlice.profile));
+  const userInformation: string | null = typeof localStorage !== "undefined" ? localStorage.getItem("user") : null;
+
+  const verified: boolean = userInformation && JSON.parse(userInformation).verified;
+
 
   const [user, setUser] = useState<User>();
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -176,7 +179,7 @@ const SendScreen = () => {
           <InformationBox>
             {
               <p>
-                <b>COST: $0.02/SMS</b>. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
+                <b style={{color: "#009DD2"}}>COST: $0.02/SMS</b>. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
               </p>
             }
           </InformationBox>
@@ -201,7 +204,7 @@ const SendScreen = () => {
                 Bulk SMS phone number should be <b>without country code (+1)</b>
               </li>
               <li>
-                Maximum number of phone number that can be loaded once is <strong>5000</strong>
+                Maximum number of phone number that can be loaded once is <strong>{verified ? "10,000" : "1,000"}</strong>
               </li>
             </ul>
           </div>
