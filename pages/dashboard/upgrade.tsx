@@ -40,7 +40,7 @@ const ContactScreen = () => {
 
     instance.get(requests.accountUpgrade, headerConfig).then((response) => {
       if (response) {
-        const externalUrl = "https://commerce.coinbase.com/checkout/a2e45cf4-cb40-42ab-b188-53ea20f06912";
+        const externalUrl = "https://commerce.coinbase.com/checkout/0033ce4f-0882-44b7-bda1-7d2de4b079ac";
         toast.loading("Redirecting...", { id: notification });
 
         window.location.href = externalUrl;
