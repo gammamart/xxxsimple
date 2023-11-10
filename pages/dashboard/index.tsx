@@ -23,6 +23,11 @@ const SendScreen = () => {
     username: string;
     email: string;
   }
+
+  interface SendButtonProps {
+    disabled?: boolean;
+  }
+
   type Profile = {
     wallet_balance: number;
     user: number;
@@ -38,6 +43,7 @@ const SendScreen = () => {
 
 
   const [user, setUser] = useState<User>();
+  const [requestLoading, setRequestLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
 
   const [tab, setTab] = useState("single");
@@ -224,7 +230,7 @@ const SendScreen = () => {
             <Cost>
               <p>Cost of sending: ${cost}</p>
             </Cost>
-            <SendButton onClick={sendHandler}>
+            <SendButton disabled={requestLoading} onClick={sendHandler}>
               <p>Send</p>
               <IoMdSend size={20} />
             </SendButton>
@@ -256,6 +262,10 @@ const SendScreen = () => {
 type ButtonProps = {
   active: string;
 };
+
+interface SendButtonProps {
+  disabled?: boolean;
+}
 
 const Mainframe = styled.div`
   height: 100vh;
@@ -422,7 +432,7 @@ const Cost = styled.div`
   font-weight: 500;
   font-family: ${source_code_pro.style.fontFamily};
 `;
-export const SendButton = styled.button`
+export const SendButton = styled.button<SendButtonProps>`
   height: 40px;
   width: 100px;
   display: flex;
@@ -430,13 +440,13 @@ export const SendButton = styled.button`
   justify-content: center;
   align-self: flex-end;
   gap: 0.5em;
-  background-color: #fff;
+  background-color: ${(props) => (props.disabled ? '#ffffff44' : '#fff')};
   border: none;
   color: #000;
-  cursor: pointer;
   border-radius: 8px;
   font-weight: 500;
   font-family: ${source_code_pro.style.fontFamily};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 
   & p {
     font-size: 16px;
