@@ -35,12 +35,11 @@ const SendScreen = () => {
   };
 
   const authenticate = useAuthentication();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const userProfile = JSON.parse(useSelector((state: any) => state.userSlice.profile));
   const userInformation: string | null = typeof localStorage !== "undefined" ? localStorage.getItem("user") : null;
 
   const verified: boolean = userInformation && JSON.parse(userInformation).verified;
-
 
   const [user, setUser] = useState<User>();
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
@@ -114,6 +113,7 @@ const SendScreen = () => {
 
   const sendHandler = () => {
     const notification = toast.loading("Sending your job...");
+    setRequestLoading(true);
 
     if (tab === "single") {
       instance
@@ -126,6 +126,7 @@ const SendScreen = () => {
             }
             setSinglePhoneNumber("");
             toast.success("Job sent successfully.", { id: notification });
+
             dispatch(userActions.switchSent());
           } else {
             toast.error("Invalid Phone number ", { id: notification });
@@ -136,6 +137,9 @@ const SendScreen = () => {
           if (err.response.status === 402) {
             toast.error("Insufficient Balance, fund your account!", { id: notification });
           }
+        })
+        .finally(() => {
+          setRequestLoading(false);
         });
     }
 
@@ -159,6 +163,9 @@ const SendScreen = () => {
           if (err.response.status === 402) {
             toast.error("Insufficient Balance, fund your account!", { id: notification });
           }
+        })
+        .finally(() => {
+          setRequestLoading(false);
         });
     }
   };
@@ -185,7 +192,7 @@ const SendScreen = () => {
           <InformationBox>
             {
               <p>
-                <b style={{color: "#009DD2"}}>COST: $0.02/SMS</b>. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
+                <b style={{ color: "#009DD2" }}>COST: $0.02/SMS</b>. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
               </p>
             }
           </InformationBox>
@@ -440,13 +447,13 @@ export const SendButton = styled.button<SendButtonProps>`
   justify-content: center;
   align-self: flex-end;
   gap: 0.5em;
-  background-color: ${(props) => (props.disabled ? '#ffffff44' : '#fff')};
+  background-color: ${(props) => (props.disabled ? "#ffffff44" : "#fff")};
   border: none;
   color: #000;
   border-radius: 8px;
   font-weight: 500;
   font-family: ${source_code_pro.style.fontFamily};
-  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   & p {
     font-size: 16px;
