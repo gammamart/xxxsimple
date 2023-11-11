@@ -66,7 +66,7 @@ const ImprovementScreen = () => {
           </Up>
           <Bottom>
             <section>
-              <textarea ref={message} placeholder="Message..."></textarea>
+              <textarea ref={message} placeholder="Tell us what we can do better..."></textarea>
               <SendFeedbackMessageButton onClick={feedbackSendHandler} disabled={requestLoading}>
                 <p>Send Feedback</p>
               </SendFeedbackMessageButton>
