@@ -24,10 +24,6 @@ const SendScreen = () => {
     email: string;
   }
 
-  interface SendButtonProps {
-    disabled?: boolean;
-  }
-
   type Profile = {
     wallet_balance: number;
     user: number;

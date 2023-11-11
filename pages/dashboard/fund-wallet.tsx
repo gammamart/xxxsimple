@@ -23,6 +23,7 @@ const FundWallet = () => {
   const authenticate = useAuthentication();
   const [user, setUser] = useState<User>();
   const [walletReveal, setWalletReveal] = useState(false);
+  const [requestLoading, setRequestLoading] = useState<boolean>(false);
 
   const amount = useRef<HTMLInputElement | null>(null);
   const USDTAmount = useRef<HTMLInputElement | null>(null);
@@ -40,17 +41,21 @@ const FundWallet = () => {
 
   const fundWalletHandler = (): void => {
     toast.loading("Redirecting to payment...");
+    setRequestLoading(true);
 
     instance.post(requests.fundWallet, { amount: amount.current?.value }, headerConfig).then((response) => {
       router.replace(response.data.url);
+      setRequestLoading(false);
     });
   };
 
   const usdtFundWalletHandler = (): void => {
     toast.loading("Fetching wallet for payment...");
+    setRequestLoading(true);
 
     instance.post(requests.fundUSDTWallet, { amount: USDTAmount.current?.value }, headerConfig).then((response) => {
       setWalletReveal(true);
+      setRequestLoading(false);
     });
   };
 
@@ -67,13 +72,15 @@ const FundWallet = () => {
             <section style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               <h6>BTC/ETH/LITECOIN/USD COIN/DOGECOIN/BITCOIN CASH/APE COIN/DAI/SHIBA/TETHER/MATIC/WRAPPED ETHER</h6>
               <div style={{ marginTop: "1rem", color: "#fff" }}>
-                <p style={{color: "#ffffff7e"}}>Funds will reflect automatically once it has been confirmed on our network.</p>
+                <p style={{ color: "#ffffff7e" }}>Funds will reflect automatically once it has been confirmed on our network.</p>
               </div>
               <AmountFrame>
                 <p>$</p>
                 <input ref={amount} type="number" placeholder="Amount" />
               </AmountFrame>
-              <ContinueButton onClick={fundWalletHandler}>Continue</ContinueButton>
+              <ContinueButton onClick={fundWalletHandler} disabled={requestLoading}>
+                Continue
+              </ContinueButton>
             </section>
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginTop: "4rem" }}>
               <h6>USDT(TRC20/TRX) wallet.</h6>
@@ -86,18 +93,20 @@ const FundWallet = () => {
                 <p>$</p>
                 <input ref={USDTAmount} type="number" placeholder="Amount" />
               </AmountFrame>
-              <ContinueButton onClick={usdtFundWalletHandler}>Continue</ContinueButton>
+              <ContinueButton onClick={usdtFundWalletHandler} disabled={requestLoading}>
+                Continue
+              </ContinueButton>
               {walletReveal && (
                 <section>
                   <p style={{ color: "#a8acb4", marginTop: "0.7rem", fontSize: "12px" }}>Click to copy</p>
-                  <USDTButton
+                  <USDTWalletAddressBox
                     onClick={() => {
                       navigator.clipboard.writeText(usdtWallet);
                       toast.success("Wallet address copied");
                     }}
                   >
                     <p>TWyBksSTjNM7EEab2XgNie7jYKriXYKWmK</p>
-                  </USDTButton>
+                  </USDTWalletAddressBox>
                 </section>
               )}
             </div>
@@ -125,6 +134,10 @@ const FundWallet = () => {
     </>
   );
 };
+
+interface FundButtonProps {
+  disabled?: boolean;
+}
 
 const Mainframe = styled.div`
   height: 100vh;
@@ -161,7 +174,6 @@ const Frame = styled.div`
   justify-content: space-between;
   height: 100%;
   width: 100%;
-  
 `;
 const Up = styled.div`
   /* border: 1px solid aqua; */
@@ -212,34 +224,36 @@ const Bottom = styled.div`
   justify-content: flex-end;
   padding: 2em;
 `;
-const ContinueButton = styled.div`
+const ContinueButton = styled.button<FundButtonProps>`
   height: 40px;
   width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5em;
-  background-color: #fff;
+  background-color: ${(props) => (props.disabled ? "#ffffff44" : "#fff")};
   border: none;
   color: #000;
   cursor: pointer;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   & p {
     font-size: 16px;
   }
 `;
-const USDTButton = styled.button`
+const USDTWalletAddressBox = styled.button<FundButtonProps>`
   height: 50px;
   width: 400px;
-  background: #ffffff10;
+  background: "#ffffff10";
   border: 1px solid #ffffff50;
   color: #ffffffd2;
   cursor: pointer;
   margin-top: 1rem;
   font-family: inherit;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   & > p {
     font-size: 16px;
