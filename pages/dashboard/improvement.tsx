@@ -37,10 +37,10 @@ const ImprovementScreen = () => {
   }, []);
 
   const feedbackSendHandler = (): void => {
-    const notification = toast.loading("Processing...");
+    const notification = toast.loading("Sending feedback...");
     setRequestLoading(true);
 
-    instance.post(requests.sendFeedback, { message }, headerConfig).then((response) => {
+    instance.post(requests.sendFeedback, { mssage: message.current?.value }, headerConfig).then((response) => {
       if (response) {
         toast.loading("Redirecting...", { id: notification });
         setRequestLoading(false);
