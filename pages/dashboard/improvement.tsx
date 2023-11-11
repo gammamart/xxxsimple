@@ -42,7 +42,7 @@ const ImprovementScreen = () => {
 
     instance.post(requests.sendFeedback, { mssage: message.current?.value }, headerConfig).then((response) => {
       if (response) {
-        toast.loading("Redirecting...", { id: notification });
+        toast.success("Feedback sent.", { id: notification });
         setRequestLoading(false);
         if (message.current) {
           message.current.value = "";
