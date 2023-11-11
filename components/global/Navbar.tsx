@@ -13,6 +13,7 @@ import instance from "@/axios";
 import requests from "@/requests";
 import { BsEmojiSunglasses, BsSend, BsClockHistory } from "react-icons/bs";
 import { VscVerifiedFilled } from "react-icons/vsc";
+import { GiChewedSkull } from "react-icons/gi";
 
 const Navbar = () => {
   type Profile = {
@@ -77,9 +78,7 @@ const Navbar = () => {
     <Mainframe>
       <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
       <Up>
-        <div>
-          <BsEmojiSunglasses color="#fff" size={40} />
-        </div>
+        <div>{verified ? <GiChewedSkull color="#fff" size={40} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>
         <div>
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
@@ -88,7 +87,7 @@ const Navbar = () => {
             </Username>
           )}
           <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
-          {!verified && <UpgradeButton href={'../dashboard/upgrade'}>Upgrade</UpgradeButton>}
+          {!verified && <UpgradeButton href={"../dashboard/upgrade"}>Upgrade</UpgradeButton>}
         </div>
       </Up>
       <Middle>
@@ -279,7 +278,7 @@ const UpgradeButton = styled(Link)`
   border: 1.4px solid #009ed2;
   padding: 0.5em 1em 0.5em 1em;
   font-size: 14px;
-  color: #009DD2;
+  color: #009dd2;
   border-radius: 0.4rem;
   font-weight: 500;
   transition: background-color 0.4s linear;
