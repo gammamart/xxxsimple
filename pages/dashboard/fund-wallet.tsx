@@ -247,13 +247,12 @@ const ContinueButton = styled.button<FundButtonProps>`
 const USDTWalletAddressBox = styled.button<FundButtonProps>`
   height: 50px;
   width: 400px;
-  background: "#fff";
+  background: "#ffffff10";
   border: 1px solid #ffffff50;
-  color: #ffffff10;
+  color: #ffffffd2;
   cursor: pointer;
   margin-top: 1rem;
   font-family: inherit;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   & > p {
     font-size: 16px;
