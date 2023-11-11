@@ -244,10 +244,10 @@ const ContinueButton = styled.button<FundButtonProps>`
     font-size: 16px;
   }
 `;
-const USDTWalletAddressBox = styled.button<FundButtonProps>`
+const USDTWalletAddressBox = styled.button`
   height: 50px;
   width: 400px;
-  background: "#ffffff10";
+  background: red;
   border: 1px solid #ffffff50;
   color: #ffffffd2;
   cursor: pointer;
