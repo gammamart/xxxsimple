@@ -7,12 +7,13 @@ import Image from "next/image";
 
 import { userActions } from "@/redux_store/store";
 import ProfileAvatar from "@/public/statics/images/profileAvatar";
-import { MdHistory, MdCall, MdLogout } from "react-icons/md";
+import { MdOutlineFeedback, MdLogout } from "react-icons/md";
 import { CiWallet, CiHeadphones } from "react-icons/ci";
 import instance from "@/axios";
 import requests from "@/requests";
 import { BsEmojiSunglasses, BsSend, BsClockHistory } from "react-icons/bs";
-import { VscVerifiedFilled } from "react-icons/vsc";
+import { VscVerifiedFilled, } from "react-icons/vsc";
+import { GoReport, } from "react-icons/go";
 import { GiChewedSkull } from "react-icons/gi";
 
 const Navbar = () => {
@@ -115,6 +116,12 @@ const Navbar = () => {
           </span>{" "}
           <p>Contact us</p>
         </NavButton>
+        <NavButton href="../dashboard/improvement" ref={contactUsButton}>
+          <span>
+            <GoReport color={"#fbfbfb"} size={20} />
+          </span>{" "}
+          <p>Feedback</p>
+        </NavButton>
       </Middle>
       <Bottom>
         <SignOutButton onClick={logoutHandler}>
@@ -209,7 +216,7 @@ const Middle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.8rem;
+  gap: 0.9rem;
   padding: 20px 20px 20px 40px;
 `;
 const Bottom = styled.div`

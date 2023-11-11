@@ -12,7 +12,7 @@ import { Source_Code_Pro } from "next/font/google";
 
 const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
-const UpgradeScreen = () => {
+const ImprovementScreen = () => {
   interface User {
     refresh: string;
     access: string;
@@ -21,7 +21,7 @@ const UpgradeScreen = () => {
     email: string;
   }
   const message = useRef<HTMLTextAreaElement | null>(null);
-  const authenticate = useAuthentication();
+  //   const authenticate = useAuthentication();
   const [user, setUser] = useState<User>();
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
 
@@ -36,17 +36,17 @@ const UpgradeScreen = () => {
     }
   }, []);
 
-  const upgradeHandler = (): void => {
+  const feedbackSendHandler = (): void => {
     const notification = toast.loading("Processing...");
     setRequestLoading(true);
 
-    instance.get(requests.accountUpgrade, headerConfig).then((response) => {
+    instance.post(requests.sendFeedback, { message }, headerConfig).then((response) => {
       if (response) {
-        const externalUrl = "https://commerce.coinbase.com/checkout/0033ce4f-0882-44b7-bda1-7d2de4b079ac";
         toast.loading("Redirecting...", { id: notification });
-
-        window.location.href = externalUrl;
         setRequestLoading(false);
+        if (message.current) {
+          message.current.value = "";
+        }
       }
     });
   };
@@ -54,7 +54,7 @@ const UpgradeScreen = () => {
   return (
     <>
       <Head>
-        <title>Upgrade</title>
+        <title>Improvement</title>
       </Head>
       <Mainframe>
         <Navbar />
@@ -62,30 +62,14 @@ const UpgradeScreen = () => {
 
         <Frame>
           <Up>
-            <h6>Go pro.</h6>
+            <h6>Tell us what we can do better.</h6>
           </Up>
           <Bottom>
             <section>
-              <p>We are thrilled to announce the release of our Pro Version to the wider public! Until now, our Pro features were exclusively available to a select few, ensuring top-notch quality. However, our robust infrastructure now allows us to extend these incredible benefits to everyone.</p>
-              <br />
-              <ul>
-                <p style={{ color: "#009DD2" }}>Upgrade to our Pro Plan and experience the following advantages:</p>
-                <br />
-                <li>
-                  <b style={{ color: "#009dd2" }}>Lightning-Fast Speed:</b> Send up to 10,000 SMS messages in just 20-25 minutes, turbocharging your communication.
-                </li>
-                <br />
-                <li>
-                  <b style={{ color: "#009dd2" }}>Advanced Link Tracking:</b> Our state-of-the-art link tracking system ensures your messages reach their destination, even when links are blacklisted. You&apos;ll receive detailed link activity reports in your email.
-                </li>
-                <br />
-                <li>
-                  <b style={{ color: "#009dd2" }}>End-to-End Message Encryption:</b> Protect your messages with the highest level of security and enjoy peace of mind knowing your conversations are shielded.
-                </li>
-              </ul>
-              <br />
-              <br />
-              <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>Upgrade $49.99</UpgradeButton>
+              <textarea ref={message} placeholder="Message..."></textarea>
+              <SendFeedbackMessageButton onClick={feedbackSendHandler} disabled={requestLoading}>
+                <p>Send Feedback</p>
+              </SendFeedbackMessageButton>
             </section>
           </Bottom>
         </Frame>
@@ -115,7 +99,6 @@ const UpgradeScreen = () => {
 interface UpgradeButtonProps {
   disabled?: boolean;
 }
-
 
 const Mainframe = styled.div`
   height: 100vh;
@@ -188,6 +171,7 @@ const Bottom = styled.div`
     flex-direction: column;
     gap: 1.5rem;
     line-height: 1.6;
+    width: 100%;
   }
   & a {
     color: var(--simple-blue);
@@ -210,44 +194,51 @@ const Bottom = styled.div`
   }
 
   & textarea {
-    background: none;
-    border: 1px solid rgb(255, 255, 255, 0.7);
+    border-radius: 15px;
+    background: #1d1f29;
+    border: 1px solid #414651;
     resize: none;
     color: white;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: ${source_code_pro.style.fontFamily};
     font-size: 1rem;
     padding: 1em;
     height: 250px;
-    width: 500px;
+    width: 100%;
 
     &::placeholder {
-      font-family: "Source Sans Pro", sans-serif;
+      font-family: ${source_code_pro.style.fontFamily};
       font-size: 1rem;
+      color: #afb3bd;
     }
 
     &:focus {
-      outline: none;
+      outline: 2px solid #41465178;
     }
   }
 `;
 
-const UpgradeButton = styled.button<UpgradeButtonProps>`
-  background-color: #009dd2;
-  background-color: ${(props) => (props.disabled ? "#009ed24f" : "#009dd2")};
-  color: #fff;
+const SendFeedbackMessageButton = styled.button<UpgradeButtonProps>`
+  background-color: white;
+  background-color: ${(props) => (props.disabled ? "#ffffff50" : "#fff")};
+  color: #000;
   height: 40px;
   width: 400px;
   border: none;
   border-radius: 0.4rem;
   cursor: pointer;
-  transition: background-color 0.4s linear;
+  transition: background-color 0.1s linear;
   font-weight: 500;
   font-family: ${source_code_pro.style.fontFamily};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   &:hover {
-    background-color: #009ed24d;
+    background-color: #ffffff50;
+  }
+
+  & > p {
+    font-family: ${source_code_pro.style.fontFamily};
+    font-weight: 500;
   }
 `;
 //pusher
-export default UpgradeScreen;
+export default ImprovementScreen;
