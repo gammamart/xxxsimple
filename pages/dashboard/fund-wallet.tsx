@@ -247,7 +247,7 @@ const ContinueButton = styled.button<FundButtonProps>`
 const USDTWalletAddressBox = styled.button`
   height: 50px;
   width: 400px;
-  background: green;
+  background: #ffffff10;
   border: 1px solid #ffffff50;
   color: #ffffffd2;
   cursor: pointer;
