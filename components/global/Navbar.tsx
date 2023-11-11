@@ -78,7 +78,7 @@ const Navbar = () => {
     <Mainframe>
       <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
       <Up>
-        <div>{verified ? <GiChewedSkull color="#fff" size={40} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>
+        <div>{verified ? <GiChewedSkull color="#fff" size={42} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>
         <div>
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
