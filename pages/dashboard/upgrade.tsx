@@ -23,6 +23,7 @@ const ContactScreen = () => {
   const message = useRef<HTMLTextAreaElement | null>(null);
   const authenticate = useAuthentication();
   const [user, setUser] = useState<User>();
+  const [requestLoading, setRequestLoading] = useState<boolean>(false);
 
   const headerConfig = {
     headers: { Authorization: `Bearer ${user?.token}` },
@@ -37,6 +38,7 @@ const ContactScreen = () => {
 
   const upgradeHandler = (): void => {
     const notification = toast.loading("Processing...");
+    setRequestLoading(true);
 
     instance.get(requests.accountUpgrade, headerConfig).then((response) => {
       if (response) {
@@ -44,6 +46,7 @@ const ContactScreen = () => {
         toast.loading("Redirecting...", { id: notification });
 
         window.location.href = externalUrl;
+        setRequestLoading(false);
       }
     });
   };
@@ -82,7 +85,7 @@ const ContactScreen = () => {
               </ul>
               <br />
               <br />
-              <UpgradeButton onClick={upgradeHandler}>Upgrade $49.99</UpgradeButton>
+              <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>Upgrade $49.99</UpgradeButton>
             </section>
           </Bottom>
         </Frame>
@@ -108,6 +111,11 @@ const ContactScreen = () => {
     </>
   );
 };
+
+interface UpgradeButtonProps {
+  disabled?: boolean;
+}
+
 
 const Mainframe = styled.div`
   height: 100vh;
@@ -223,8 +231,9 @@ const Bottom = styled.div`
   }
 `;
 
-const UpgradeButton = styled.button`
+const UpgradeButton = styled.button<UpgradeButtonProps>`
   background-color: #009dd2;
+  background-color: ${(props) => (props.disabled ? "#009ed24f" : "#009dd2")};
   color: #fff;
   height: 40px;
   width: 400px;
@@ -234,6 +243,7 @@ const UpgradeButton = styled.button`
   transition: background-color 0.4s linear;
   font-weight: 500;
   font-family: ${source_code_pro.style.fontFamily};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   &:hover {
     background-color: #009ed24d;
