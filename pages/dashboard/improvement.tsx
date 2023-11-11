@@ -40,7 +40,7 @@ const ImprovementScreen = () => {
     const notification = toast.loading("Sending feedback...");
     setRequestLoading(true);
 
-    instance.post(requests.sendFeedback, { mssage: message.current?.value }, headerConfig).then((response) => {
+    instance.post(requests.sendFeedback, { message: message.current?.value }, headerConfig).then((response) => {
       if (response) {
         toast.success("Feedback sent.", { id: notification });
         setRequestLoading(false);
