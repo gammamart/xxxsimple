@@ -249,6 +249,5 @@ const UpgradeButton = styled.button<UpgradeButtonProps>`
     background-color: #009ed24d;
   }
 `;
-//pusher
 
 export default ContactScreen;
