@@ -4,6 +4,7 @@ import { Source_Code_Pro } from "next/font/google";
 import styled from "styled-components";
 import { Provider } from "react-redux";
 import NextNProgress from "nextjs-progressbar";
+import { Analytics } from '@vercel/analytics/react';
 
 import { store } from "@/redux_store/store";
 import { GoogleReCaptchaProvider, withGoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Mainframe>
           <NextNProgress color="#009DD2" startPosition={0.1} stopDelayMs={100} height={2} showOnShallow={true} options={{ easing: "ease", speed: 300 }} />
           <Component {...pageProps} />
+          <Analytics />
         </Mainframe>
       </GoogleReCaptchaProvider>
     </Provider>
