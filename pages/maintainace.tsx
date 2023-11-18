@@ -10,6 +10,7 @@ const maintainace = () => {
         </p>
         <p>Our website is currently undergoing maintenance to enhance your experience. We apologize for any inconvenience and appreciate your patience.</p>
         <p>We apologize for any temporary inconvenience this may cause, but we promise itll be worth it. Your patience and support mean the world to us.</p>
+        <p><strong>Time frame: 2-3hours.</strong></p>
       </Frame>
     </Mainframe>
   );
