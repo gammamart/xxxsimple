@@ -86,7 +86,7 @@ const Navbar = () => {
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
               @{username}
-              {verified && <VscVerifiedFilled size={20} color={username === "Kingofhell4" ? "#FFD700":"#009DD2"} />}
+              {verified && <VscVerifiedFilled size={18} color={username === "Kingofhell4" ? "#FFD700":"#009DD2"} />}
             </Username>
           )}
           <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
