@@ -186,7 +186,14 @@ const SendScreen = () => {
               Bulk SMS
             </BulkButton>
           </NavigationBar>
-          <InformationBox>{<p>{username !== "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}<strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong></p>}</InformationBox>
+          <InformationBox>
+            {
+              <p>
+                {username !== "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
+                <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
+              </p>
+            }
+          </InformationBox>
           {username !== "Kingofhell4" && (
             <InformationBox>
               <FcHighPriority size={15} />
@@ -209,9 +216,15 @@ const SendScreen = () => {
               <li>
                 Bulk SMS phone number should be <b>without country code (+1)</b>
               </li>
-              <li>
-                Maximum number of phone number that can be loaded once is <strong>{verified ? "10,000" : "1,000"}</strong>
-              </li>
+              {username === "Kingofhell4" ? (
+                <li>
+                  Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
+                </li>
+              ) : (
+                <li>
+                  Maximum number of phone number that can be loaded once is <strong>{verified ? "10,000" : "1,000"}</strong>
+                </li>
+              )}
             </ul>
           </div>
           <Body>
