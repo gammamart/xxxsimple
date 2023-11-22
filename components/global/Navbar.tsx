@@ -81,12 +81,12 @@ const Navbar = () => {
       <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
       <Up>
         {username !== "Kingofhell4" && <div>{verified ? <GiChewedSkull color="#fff" size={42} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>}
-        {username === "Kingofhell4" && <div><FaGhost color="#FFD700" size={42} /></div>}
+        {username === "Kingofhell4" && <div><FaGhost color="#fff" size={42} /></div>}
         <div>
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
               @{username}
-              {verified && <VscVerifiedFilled color="#009DD2" />}
+              {verified && <VscVerifiedFilled color={username === "Kingofhell4" ? "#FFD700":"#009DD2"} />}
             </Username>
           )}
           <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
