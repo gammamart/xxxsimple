@@ -36,6 +36,7 @@ const SendScreen = () => {
   const userInformation: string | null = typeof localStorage !== "undefined" ? localStorage.getItem("user") : null;
 
   const verified: boolean = userInformation && JSON.parse(userInformation).verified;
+  const username: string = userInformation && JSON.parse(userInformation).username;
 
   const [user, setUser] = useState<User>();
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
@@ -50,6 +51,7 @@ const SendScreen = () => {
   const [singlePhoneNumber, setSinglePhoneNumber] = useState("");
   const senderName = useRef<HTMLInputElement | null>(null);
   const message = useRef<HTMLTextAreaElement | null>(null);
+
 
   const headerConfig = {
     headers: { Authorization: `Bearer ${user?.token}` },
@@ -188,7 +190,7 @@ const SendScreen = () => {
           <InformationBox>
             {
               <p>
-                <b style={{ color: "#009DD2" }}>COST: $0.02/SMS</b>. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
+                {username === "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS</b>}. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
               </p>
             }
           </InformationBox>
