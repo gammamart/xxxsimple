@@ -15,6 +15,7 @@ import { BsEmojiSunglasses, BsSend, BsClockHistory } from "react-icons/bs";
 import { VscVerifiedFilled, } from "react-icons/vsc";
 import { GoReport, } from "react-icons/go";
 import { GiChewedSkull } from "react-icons/gi";
+import { FaGhost } from "react-icons/fa6";
 
 const Navbar = () => {
   type Profile = {
@@ -79,7 +80,8 @@ const Navbar = () => {
     <Mainframe>
       <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
       <Up>
-        <div>{verified ? <GiChewedSkull color="#fff" size={42} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>
+        {username !== "Kingofhell4" && <div>{verified ? <GiChewedSkull color="#fff" size={42} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>}
+        {username === "Kingofhell4" && <div><FaGhost color="#fff" size={42} /></div>}
         <div>
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
