@@ -190,7 +190,7 @@ const SendScreen = () => {
           <InformationBox>
             {
               <p>
-                {username === "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS</b>}. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
+                {username !== "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS</b>}. &nbsp;Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
               </p>
             }
           </InformationBox>
