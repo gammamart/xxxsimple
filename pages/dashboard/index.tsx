@@ -186,7 +186,7 @@ const SendScreen = () => {
               Bulk SMS
             </BulkButton>
           </NavigationBar>
-          <InformationBox>{<p>{username !== "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</p>}</InformationBox>
+          <InformationBox>{<p>{username !== "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}<strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong></p>}</InformationBox>
           {username !== "Kingofhell4" && (
             <InformationBox>
               <FcHighPriority size={15} />
