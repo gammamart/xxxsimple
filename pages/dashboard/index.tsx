@@ -52,7 +52,6 @@ const SendScreen = () => {
   const senderName = useRef<HTMLInputElement | null>(null);
   const message = useRef<HTMLTextAreaElement | null>(null);
 
-
   const headerConfig = {
     headers: { Authorization: `Bearer ${user?.token}` },
   };
@@ -187,18 +186,14 @@ const SendScreen = () => {
               Bulk SMS
             </BulkButton>
           </NavigationBar>
-          <InformationBox>
-            {
-              <p>
-                {username !== "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.
-              </p>
-            }
-          </InformationBox>
-          <InformationBox>
-            <FcHighPriority size={15} />
-            New users with free balance can only test with <strong>Single SMS</strong>
-            <FcHighPriority size={15} />
-          </InformationBox>
+          <InformationBox>{<p>{username !== "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</p>}</InformationBox>
+          {username !== "Kingofhell4" && (
+            <InformationBox>
+              <FcHighPriority size={15} />
+              New users with free balance can only test with <strong>Single SMS</strong>
+              <FcHighPriority size={15} />
+            </InformationBox>
+          )}
           {userProfile?.alert && (
             <InformationBox style={{ background: "yellow", color: "black" }}>
               {
