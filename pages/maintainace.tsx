@@ -5,13 +5,14 @@ const maintainace = () => {
   return (
     <Mainframe>
       <Frame>
-        <p style={{color:"#009DD2"}}>
-          <strong>[просто] Notice: Website Undergoing Maintenance</strong>
-        </p>
-        <p>Our website is currently undergoing maintenance to enhance your experience. We apologize for any inconvenience and appreciate your patience.</p>
-        <p>We apologize for any temporary inconvenience this may cause, but we promise itll be worth it. Your patience and support mean the world to us.</p>
-        <p><strong>Time frame: 2-3hours.</strong></p>
-      </Frame>
+    <p style={{color:"#009DD2"}}>
+        <strong>[Your Company Name] Notice: Software Transition to Private Access</strong>
+    </p>
+    <p>Our software is transitioning to private and invite-only access to uphold the quality we're known for. We appreciate your understanding and support during this period of enhancement.</p>
+    <p>We apologize for any temporary inconvenience this may cause, but we assure you it will be worth it. Your patience and support mean the world to us.</p>
+    
+</Frame>
+
     </Mainframe>
   );
 };
