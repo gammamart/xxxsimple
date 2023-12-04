@@ -96,38 +96,38 @@ const Navbar = () => {
       <Middle>
         <NavButton href="../dashboard" ref={sendButton}>
           <span>
-            <BsSend color={"#fbfbfb"} size={18} />
+            <BsSend color={"#fbfbfb"} size={16} />
           </span>{" "}
           <p>Send</p>
         </NavButton>
         <NavButton href="../dashboard/fund-wallet" ref={fundWalletButton}>
           <span>
-            <CiWallet color={"#fbfbfb"} size={20} />
+            <CiWallet color={"#fbfbfb"} size={19} />
           </span>{" "}
           <p>Fund wallet</p>
         </NavButton>
         <NavButton href="../dashboard/history" ref={historyButton}>
           <span>
-            <BsClockHistory color={"#fbfbfb"} size={18} />{" "}
+            <BsClockHistory color={"#fbfbfb"} size={16} />{" "}
           </span>
           <p>History</p>
         </NavButton>
         <NavButton href="../dashboard/contact" ref={contactUsButton}>
           <span>
-            <CiHeadphones color={"#fbfbfb"} size={20} />
+            <CiHeadphones color={"#fbfbfb"} size={18} />
           </span>{" "}
           <p>Contact us</p>
         </NavButton>
         <NavButton href="../dashboard/improvement" ref={contactUsButton}>
           <span>
-            <GoReport color={"#fbfbfb"} size={20} />
+            <GoReport color={"#fbfbfb"} size={18} />
           </span>{" "}
           <p>Feedback</p>
         </NavButton>
       </Middle>
       <Bottom>
         <SignOutButton onClick={logoutHandler}>
-          <MdLogout color={"#fbfbfb"} size={20} /> <p>Sign Out</p>
+          <MdLogout color={"#fbfbfb"} size={18} /> <p>Sign Out</p>
         </SignOutButton>
       </Bottom>
     </Mainframe>

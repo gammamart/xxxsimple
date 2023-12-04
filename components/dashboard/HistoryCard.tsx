@@ -77,7 +77,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
         <p style={{ fontSize: "14px", color: "#fff" }}>{job_type} </p>
       </TableSmallBox>
       <TableSmallBox>
-        <p style={{ fontSize: "14px" }}>{halfTimeAgo} </p>
+        <p style={{ fontSize: "14px" }}>{timeAgo} </p>
       </TableSmallBox>
 
       <TableSmallBox>
