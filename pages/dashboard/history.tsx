@@ -25,7 +25,7 @@ const HistoryScreen = () => {
     failure_message: string;
     created_at: string;
   }
-  const authenticate = useAuthentication();
+  // const authenticate = useAuthentication();
 
   const [user, setUser] = useState<User>();
   const [history, setHistory] = useState<[]>();
@@ -64,24 +64,44 @@ const HistoryScreen = () => {
         <Frame>
           <Up>
             <h6>Ongoing and past messages.</h6>
-            <section style={{display: "flex", flexDirection: "column", gap: "0.4rem"}}>
-              <span style={{color: "#fff", display: "flex", fontSize: "14px"}}><p style={{color: "#ffa20182"}}>PREPARING:&nbsp;</p>{"System sorting leads according to their carrier."}</span>
-              <span style={{color: "#fff", display: "flex", fontSize: "14px"}}><p style={{color: "#009ed28c"}}>SENDING:&nbsp;</p>{"Sending started"}</span>
-              <span style={{color: "#fff", display: "flex", fontSize: "14px"}}><p style={{color: "#1aa14e87"}}>COMPLETED:&nbsp;</p>{"Sending/Dispatching completed."}</span>
-              <span style={{color: "#fff", display: "flex", fontSize: "14px"}}><p style={{color: "#ff0101a0"}}>FAILED:&nbsp;</p>{"Sending Failed. For more information you can check status message or contact support."}</span>
+            <section style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+              <span style={{ color: "#fff", display: "flex", fontSize: "14px" }}>
+                <p style={{ color: "#ffa20182" }}>PREPARING:&nbsp;</p>
+                {"System sorting leads according to their carrier."}
+              </span>
+              <span style={{ color: "#fff", display: "flex", fontSize: "14px" }}>
+                <p style={{ color: "#009ed28c" }}>SENDING:&nbsp;</p>
+                {"Sending started"}
+              </span>
+              <span style={{ color: "#fff", display: "flex", fontSize: "14px" }}>
+                <p style={{ color: "#1aa14e87" }}>COMPLETED:&nbsp;</p>
+                {"Sending/Dispatching completed."}
+              </span>
+              <span style={{ color: "#fff", display: "flex", fontSize: "14px" }}>
+                <p style={{ color: "#ff0101a0" }}>FAILED:&nbsp;</p>
+                {"Sending Failed. For more information you can check status message or contact support."}
+              </span>
             </section>
-            <TableHead>
-              <p>Id</p>
-              <p>Status</p>
-              <p>Type</p>
-              <p>Created</p>
-              <p>Status message</p>
-            </TableHead>
+            <Table>
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Status</th>
+                  <th>Type</th>
+                  <th>Created</th>
+                  <th>Status message</th>
+                </tr>
+              </thead>
+            </Table>
           </Up>
           <Bottom>
-            {history?.map((job: History) => (
-              <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} failure_message={job.failure_message} date={job.created_at} />
-            ))}
+            <Table>
+              <tbody>
+                {history?.map((job: History) => (
+                  <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} failure_message={job.failure_message} date={job.created_at} />
+                ))}
+              </tbody>
+            </Table>
           </Bottom>
         </Frame>
       </Mainframe>
@@ -155,26 +175,22 @@ const Bottom = styled.div`
   overflow-y: scroll;
 `;
 
-const TableHead = styled.div`
-  background-color: #bdc8ff17;
-  border-radius: 0.375rem;
-  height: 2rem;
+const Table = styled.table`
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 600px;
-  border: 1px solid #3a3e4b;
-  padding-right: 10px;
-  padding-left: 10px;
+  border-collapse: collapse;
+  margin-bottom: 1em;
 
-  & > p {
-    font-weight: 600;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+  th,
+  td {
+    border: 1px solid #3a3e4b;
+    padding: 0.75rem;
+    text-align: left;
     color: #adb1bb;
+  }
+
+  th {
+    background-color: #bdc8ff17;
+    font-weight: 600;
   }
 `;
 
