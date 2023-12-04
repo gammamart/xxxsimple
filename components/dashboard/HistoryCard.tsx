@@ -42,7 +42,12 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
   }
   // const status: number = 0;
   const originalDate = date;
+  const momentObject = moment(originalDate);
   const timeAgo = moment(originalDate).fromNow();
+
+
+  // x2 time achieved by halving the value of the original time ago
+  const halfTimeAgo = momentObject.subtract(momentObject.diff(moment(), 'milliseconds') / 2).fromNow();
 
   const status_color: Record<string, string> = {
     FAILED: "#ff0101a0",
@@ -72,7 +77,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
         <p style={{ fontSize: "14px", color: "#fff" }}>{job_type} </p>
       </TableSmallBox>
       <TableSmallBox>
-        <p style={{ fontSize: "14px" }}>{timeAgo} </p>
+        <p style={{ fontSize: "14px" }}>{halfTimeAgo} </p>
       </TableSmallBox>
 
       <TableSmallBox>
