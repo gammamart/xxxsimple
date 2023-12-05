@@ -231,9 +231,7 @@ const SendScreen = () => {
             {
               <p>
                 <b>
-                  We&apos;re excited to share that we&apos;ve moved to a Bit Daily Maintenance System! This change allows us to enhance and improve the system daily, ensuring efficiency and preventing the accumulation of maintenance tasks that could lead to longer downtimes. Your experience is our
-                  priority, and this move will contribute to a smoother and more reliable platform. Thank you for your understanding and continued support..
-                </b>
+                Exciting news! We&apos;ve shifted to a Bit Daily Maintenance System for ongoing system improvements, reducing downtime. Your experience matters. Thanks for your support! Note: Daily maintenance times will be regularly updated.
               </p>
             }
           </InformationBox>
