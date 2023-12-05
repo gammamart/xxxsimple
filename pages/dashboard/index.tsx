@@ -182,7 +182,17 @@ const SendScreen = () => {
             <SingleButton ref={singleButton} onClick={() => setTab("single")} active={tab}>
               Single SMS
             </SingleButton>
-            <BulkButton ref={bulkButton} onClick={() => setTab("bulk")} active={tab}>
+            <BulkButton
+              ref={bulkButton}
+              onClick={() => {
+                if (verified) {
+                  setTab("bulk");
+                } else {
+                  toast.error("Not available for free user.");
+                }
+              }}
+              active={tab}
+            >
               Bulk SMS
             </BulkButton>
           </NavigationBar>
@@ -210,6 +220,23 @@ const SendScreen = () => {
               }
             </InformationBox>
           )}
+          <InformationBox style={{ background: "yellow", color: "black" }}>
+            {
+              <p>
+                <b>Attention: All unupgraded accounts will be deleted soon.</b>
+              </p>
+            }
+          </InformationBox>
+          <InformationBox style={{ background: "yellow", color: "black" }}>
+            {
+              <p>
+                <b>
+                  We&apos;re excited to share that we&apos;ve moved to a Bit Daily Maintenance System! This change allows us to enhance and improve the system daily, ensuring efficiency and preventing the accumulation of maintenance tasks that could lead to longer downtimes. Your experience is our
+                  priority, and this move will contribute to a smoother and more reliable platform. Thank you for your understanding and continued support..
+                </b>
+              </p>
+            }
+          </InformationBox>
           <div style={{ padding: "1rem 1rem 0rem 2rem", color: "#a8acb4" }}>
             <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send your SMS</p>
             <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
