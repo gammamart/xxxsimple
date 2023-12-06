@@ -9,19 +9,19 @@ export default function middleware(request) {
   const { _parsed } = cookies;
   const token = _parsed?.get("token");
 
-  console.log(url)
-
   const maintaining = false;
 
   // privatizating AUTHENTICATED ROUTES
   if (maintaining) {
     if (url.includes("/dashboard") || url.includes("/getIn") || url.includes("/register") || url === "/" || url.includes("/review")) {
-    // if (url.includes("/dashboard") || url.includes("/getIn") || url === "/" || url.includes("/review")) {
-      // if (token === undefined || token?.value === "undefined" || token?.value === undefined || token?.value === null) {
       tempUrl.pathname = "/maintainace";
-      console.log("REDIRECTING !!!");
       return NextResponse.redirect(tempUrl);
-      // }
+      return NextResponse.next();
+    }
+  } else {
+    if (url.includes("/maintainace")) {
+      tempUrl.pathname = "/getIn";
+      return NextResponse.redirect(tempUrl);
       return NextResponse.next();
     }
   }
