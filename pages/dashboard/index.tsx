@@ -204,13 +204,6 @@ const SendScreen = () => {
               </p>
             }
           </InformationBox>
-          {username !== "Kingofhell4" && (
-            <InformationBox>
-              <FcHighPriority size={15} />
-              New users with free balance can only test with <strong>Single SMS</strong>
-              <FcHighPriority size={15} />
-            </InformationBox>
-          )}
           {userProfile?.alert && (
             <InformationBox style={{ background: "yellow", color: "black" }}>
               {
