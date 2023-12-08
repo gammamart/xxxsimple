@@ -81,7 +81,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
       </TableSmallBox>
 
       <TableSmallBox>
-        <p style={{ fontSize: "14px", color: "#fff", width: "150px" }}>{failure_message === "UNNAMED" ? "No message" : failure_message}</p>
+        <p style={{ fontSize: "10px", color: "#fff", width: "150px" }}>{failure_message === "UNNAMED" ? "No message" : failure_message}</p>
       </TableSmallBox>
     </Mainframe>
   );

@@ -231,7 +231,8 @@ const SendScreen = () => {
             {
               <p>
                 <b>
-                Exciting news! We&apos;ve shifted to a Bit Daily Maintenance System for ongoing system improvements, reducing downtime. Your experience matters. Thanks for your support! <br/>Note: Daily maintenance times will be regularly updated.
+                  Exciting news! We&apos;ve shifted to a Bit Daily Maintenance System for ongoing system improvements, reducing downtime. Your experience matters. Thanks for your support! <br />
+                  Note: Daily maintenance times will be regularly updated.
                 </b>
               </p>
             }
