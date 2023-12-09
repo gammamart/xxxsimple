@@ -80,12 +80,9 @@ const Mainframe = styled.div`
   flex-direction: column;
   gap: 1rem;
   flex: 1;
-  /* border: 1px solid red; */
-  /* margin-top: 1rem; */
 
   & > section {
     display: flex;
-    /* border: 1px solid red; */
     align-items: flex-start;
     flex-direction: column;
     gap: 0.6rem;
@@ -94,7 +91,6 @@ const Mainframe = styled.div`
       display: flex;
       gap: 0.8rem;
       align-items: center;
-      /* border: 1px solid yellow; */
 
       & > div {
         display: flex;

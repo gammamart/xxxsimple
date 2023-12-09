@@ -414,7 +414,7 @@ const Body = styled.div`
 
       &::placeholder {
         font-family: ${source_code_pro.style.fontFamily};
-        font-size: 1rem;
+        font-size: 14px;
         color: #afb3bd;
       }
 
@@ -437,7 +437,7 @@ const Body = styled.div`
 
     &::placeholder {
       font-family: ${source_code_pro.style.fontFamily};
-      font-size: 1rem;
+      font-size: 14px;
       color: #afb3bd;
     }
 
