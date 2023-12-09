@@ -282,7 +282,7 @@ const SendScreen = () => {
         </Frame>
       </Mainframe>
       <Toaster
-        position="top-center"
+        position="top-left"
         reverseOrder={false}
         gutter={8}
         containerClassName=""
