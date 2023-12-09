@@ -64,7 +64,7 @@ const Mainframe = styled.div`
 
       & > div {
         display: flex;
-        gap: 0.3rem;
+        gap: 0.2rem;
         align-items: center;
       }
     }
