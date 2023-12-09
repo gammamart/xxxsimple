@@ -47,7 +47,7 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
   const status_text: any = {
     LL: "Low Load",
     ML: "Moderate Load",
-    OL: "Overloaded",
+    OL: "High Load",
   };
 
   const statusAnimation: any = {
