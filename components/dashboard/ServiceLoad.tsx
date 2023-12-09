@@ -29,9 +29,9 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({status}) => {
         <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Status</p>
         <section>
           <div>
-            <VscServer color={`${status_color[status]}`} />
-            <VscServer color={`${status_color[status]}`} />
-            <VscServer color={`${status_color[status]}`} />
+            <VscServer size={20} color={`${status_color[status]}`} />
+            <VscServer size={20} color={`${status_color[status]}`} />
+            <VscServer size={20} color={`${status_color[status]}`} />
             {/* <CiHeadphones color={`${status_color[status]}`} size={18} /> */}
           </div>
           <p style={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}>{status_text[status]}</p>
@@ -63,7 +63,7 @@ const Mainframe = styled.div`
 
       & > div {
         display: flex;
-        gap: 0.2rem;
+        gap: 0.1rem;
         align-items: center;
       }
     }
