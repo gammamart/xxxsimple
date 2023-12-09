@@ -87,6 +87,11 @@ const SendScreen = () => {
         })
         .catch((error) => {});
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     instance
       .get(requests.serverStatus, headerConfig)
       .then((response) => {
@@ -94,7 +99,6 @@ const SendScreen = () => {
         console.log("STATUS", response.data);
       })
       .catch((error) => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
