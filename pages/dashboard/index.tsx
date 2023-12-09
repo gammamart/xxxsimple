@@ -38,6 +38,7 @@ const SendScreen = () => {
 
   const verified: boolean = userInformation && JSON.parse(userInformation).verified;
   const username: string = userInformation && JSON.parse(userInformation).username;
+  const token: string = userInformation && JSON.parse(userInformation).token;
 
   const [user, setUser] = useState<User>();
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
@@ -55,7 +56,7 @@ const SendScreen = () => {
   const message = useRef<HTMLTextAreaElement | null>(null);
 
   const headerConfig = {
-    headers: { Authorization: `Bearer ${user?.token}` },
+    headers: { Authorization: `Bearer ${token}` },
   };
 
   useEffect(() => {
@@ -78,20 +79,13 @@ const SendScreen = () => {
 
   useEffect(() => {
     // getting user profile from the backend and saving them to redux store
-    if (user) {
-      instance
-        .get(requests.profile, headerConfig)
-        .then((response) => {
-          dispatch(userActions.saveProfile(JSON.stringify(response.data)));
-          console.log(response.data);
-        })
-        .catch((error) => {});
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
+    instance
+      .get(requests.profile, headerConfig)
+      .then((response) => {
+        dispatch(userActions.saveProfile(JSON.stringify(response.data)));
+        console.log(response.data);
+      })
+      .catch((error) => {});
     instance
       .get(requests.serverStatus, headerConfig)
       .then((response) => {
@@ -99,7 +93,11 @@ const SendScreen = () => {
         console.log("STATUS", response.data);
       })
       .catch((error) => {});
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     instance
