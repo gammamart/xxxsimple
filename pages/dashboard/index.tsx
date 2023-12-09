@@ -244,7 +244,7 @@ const SendScreen = () => {
             }
           </InformationBox>
           <IntroductionFrame>
-            <ServiceLoad status={serverStatus} />
+            <ServiceLoad status={serverStatus?.status} />
             <div style={{ color: "#a8acb4" }}>
               <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send SMS</p>
               <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
