@@ -90,7 +90,7 @@ const SendScreen = () => {
         .get(requests.serverStatus, headerConfig)
         .then((response) => {
           setServerStatus(response.data);
-          console.log(response.data);
+          console.log("STATUS", response.data);
         })
         .catch((error) => {});
     }
