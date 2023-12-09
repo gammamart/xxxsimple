@@ -61,7 +61,6 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
     SENDING: <Lottie options={sendingAnimationOptions} width={85} height={100} />,
   };
 
-  console.log(id);
 
   return (
     <Mainframe>

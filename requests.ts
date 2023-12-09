@@ -18,6 +18,7 @@ const requests: endpointRequest = {
   sendSingleSMS: "service/send-single-sms/",
   bulkSingleSMS: "service/send-bulk-sms/",
   history: "service/history/",
+  serverStatus: "service/server-status/",
 };
 
 export default requests;

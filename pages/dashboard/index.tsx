@@ -12,6 +12,7 @@ import requests from "@/requests";
 import { userActions } from "@/redux_store/store";
 import { IoMdSend } from "react-icons/io";
 import useAuthentication from "@/utils/hooks/useAuthentication";
+import ServiceLoad from "@/components/dashboard/ServiceLoad";
 
 const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
@@ -30,7 +31,7 @@ const SendScreen = () => {
     [key: string]: any;
   };
 
-  const authenticate = useAuthentication();
+  // const authenticate = useAuthentication();
   const dispatch = useDispatch();
   const userProfile = JSON.parse(useSelector((state: any) => state.userSlice.profile));
   const userInformation: string | null = typeof localStorage !== "undefined" ? localStorage.getItem("user") : null;
@@ -41,6 +42,7 @@ const SendScreen = () => {
   const [user, setUser] = useState<User>();
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [serverStatus, setServerStatus] = useState<any>(null);
 
   const [tab, setTab] = useState("single");
   const [cost, setCost] = useState(0);
@@ -81,6 +83,13 @@ const SendScreen = () => {
         .get(requests.profile, headerConfig)
         .then((response) => {
           dispatch(userActions.saveProfile(JSON.stringify(response.data)));
+          console.log(response.data);
+        })
+        .catch((error) => {});
+      instance
+        .get(requests.serverStatus, headerConfig)
+        .then((response) => {
+          setServerStatus(response.data);
           console.log(response.data);
         })
         .catch((error) => {});
@@ -230,23 +239,26 @@ const SendScreen = () => {
               </p>
             }
           </InformationBox>
-          <div style={{ padding: "1rem 1rem 0rem 2rem", color: "#a8acb4" }}>
-            <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send your SMS</p>
-            <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
-              <li>
-                Bulk SMS phone number should be <b>without country code (+1)</b>
-              </li>
-              {username === "Kingofhell4" ? (
+          <IntroductionFrame>
+            <ServiceLoad status={serverStatus} />
+            <div style={{color: "#a8acb4" }}>
+              <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send SMS</p>
+              <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
                 <li>
-                  Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
+                  Bulk SMS phone number should be <b>without country code (+1)</b>
                 </li>
-              ) : (
-                <li>
-                  Maximum number of phone number that can be loaded once is <strong>{verified ? "10,000" : "1,000"}</strong>
-                </li>
-              )}
-            </ul>
-          </div>
+                {username === "Kingofhell4" ? (
+                  <li>
+                    Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
+                  </li>
+                ) : (
+                  <li>
+                    Maximum number of phone number that can be loaded once is <strong>{verified ? "10,000" : "1,000"}</strong>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </IntroductionFrame>
           <Body>
             {tab === "single" ? (
               <>
@@ -378,9 +390,9 @@ const Body = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 2em 2rem 0rem 2rem;
+  padding: 2em 1rem 0rem 1rem;
   height: 30%;
-  min-height: 400px;
+  min-height: 280px;
 
   & div {
     display: flex;
@@ -397,7 +409,7 @@ const Body = styled.div`
       font-size: 1rem;
       padding: 1em;
       width: 100%;
-      border-radius: 15px;
+      border-radius: 8px;
       /* transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
       /* transition: outline 0.8s linear; */
 
@@ -415,7 +427,7 @@ const Body = styled.div`
   }
 
   & textarea {
-    border-radius: 15px;
+    border-radius: 8px;
     background: #1d1f29;
     border: 1px solid #414651;
     resize: none;
@@ -496,6 +508,17 @@ export const InformationBox = styled.div`
   gap: 0.2rem;
   color: #afb3bd;
   font-size: 12px;
+`;
+
+const IntroductionFrame = styled.div`
+  display: flex;
+  /* gap: 1rem; */
+  border: 1px solid #d4ebfe30;
+  border-radius: 8px;
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 `;
 
 export default SendScreen;
