@@ -59,7 +59,7 @@ const Mainframe = styled.div`
 
     & > section {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.8rem;
       /* border: 1px solid yellow; */
 
       & > div {
