@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { GrServers } from "react-icons/gr";
+import { GrServers, GrServerCluster } from "react-icons/gr";
 import { CiWallet, CiHeadphones } from "react-icons/ci";
 import { VscServer } from "react-icons/vsc";
 import { FaServer } from "react-icons/fa";
@@ -32,7 +32,7 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({status}) => {
           <div>
             <FaServer size={18} color={`${status_color[status]}`} />
             <GrServers size={18} color={`${status_color[status]}`} />
-            <FaServer size={18} color={`${status_color[status]}`} />
+            <GrServerCluster size={18} color={`${status_color[status]}`} />
             {/* <CiHeadphones color={`${status_color[status]}`} size={18} /> */}
           </div>
           <p style={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}>{status_text[status]}</p>
