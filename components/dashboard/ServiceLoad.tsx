@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GrServerCluster } from "react-icons/gr";
+import { CiWallet, CiHeadphones } from "react-icons/ci";
 
 interface ServiceLoadProps {
   status: string;
@@ -27,9 +28,10 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({status}) => {
         <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Status</p>
         <section>
           <div>
-            <GrServerCluster color={'#ffcc4c'} />
+            <GrServerCluster size={19} color={'#ffcc4c'} />
             <GrServerCluster color={`${status_color[status]}`} />
             <GrServerCluster color={`${status_color[status]}`} />
+            <CiHeadphones color={"#fbfbfb"} size={18} />
           </div>
           <p style={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}>{status_text[status]}</p>
         </section>
