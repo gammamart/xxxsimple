@@ -1,16 +1,43 @@
 import React from "react";
 import styled from "styled-components";
-import { GrServers, GrServerCluster } from "react-icons/gr";
-import { CiWallet, CiHeadphones } from "react-icons/ci";
-import { VscServer } from "react-icons/vsc";
-import { FaServer } from "react-icons/fa";
+import { GrServerCluster } from "react-icons/gr";
+import Lottie from "react-lottie";
+import * as lowAnimation from "../../public/statics/animations/low.json";
+import * as moderateAnimation from "../../public/statics/animations/moderate.json";
+import * as overloadedAnimation from "../../public/statics/animations/overloaded.json";
 
 interface ServiceLoadProps {
   status: string;
 }
 
-const ServiceLoad: React.FC<ServiceLoadProps> = ({status}) => {
+const lowAnimationOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: lowAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
+const moderateAnimationOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: moderateAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+const overloadedAnimationOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: overloadedAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
   const status_color: any = {
     LL: "#50e3c2",
     ML: "#ffcc4c",
@@ -23,6 +50,12 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({status}) => {
     OL: "Overloaded",
   };
 
+  const statusAnimation: any = {
+    LL: <Lottie options={lowAnimationOptions} width={30} height={30} />,
+    ML: <Lottie options={moderateAnimationOptions} width={30} height={30} />,
+    OL: <Lottie options={overloadedAnimationOptions} width={30} height={30} />,
+  };
+
   return (
     <Mainframe>
       <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Server</p>
@@ -30,6 +63,7 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({status}) => {
         <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Status</p>
         <section>
           <div>
+            {statusAnimation[status]}
             <GrServerCluster size={18} color={`${status_color[status]}`} />
             <GrServerCluster size={18} color={`${status_color[status]}`} />
             <GrServerCluster size={18} color={`${status_color[status]}`} />
