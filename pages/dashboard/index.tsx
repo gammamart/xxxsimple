@@ -446,17 +446,17 @@ const Body = styled.div`
     }
 
     ::-webkit-scrollbar {
-      width: 12px; /* Set the width of the scrollbar track */
+      width: 6px; /* Set the width of the scrollbar track */
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: #888; /* Set the color of the scroll knob */
-      border-radius: 6px; /* Set the border radius of the knob */
+      background-color: #88888873; /* Set the color of the scroll knob */
+      border-radius: 3px; /* Set the border radius of the knob */
     }
 
     ::-webkit-scrollbar-track {
-      background-color: #f1f1f1; /* Set the color of the scrollbar track */
-      border-radius: 6px; /* Set the border radius of the track */
+      background-color: #f1f1f138; /* Set the color of the scrollbar track */
+      border-radius: 3px; /* Set the border radius of the track */
     }
   }
 
