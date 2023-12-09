@@ -86,14 +86,14 @@ const SendScreen = () => {
           console.log(response.data);
         })
         .catch((error) => {});
-      instance
-        .get(requests.serverStatus, headerConfig)
-        .then((response) => {
-          setServerStatus(response.data);
-          console.log("STATUS", response.data);
-        })
-        .catch((error) => {});
     }
+    instance
+      .get(requests.serverStatus, headerConfig)
+      .then((response) => {
+        setServerStatus(response.data);
+        console.log("STATUS", response.data);
+      })
+      .catch((error) => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -241,7 +241,7 @@ const SendScreen = () => {
           </InformationBox>
           <IntroductionFrame>
             <ServiceLoad status={serverStatus} />
-            <div style={{color: "#a8acb4" }}>
+            <div style={{ color: "#a8acb4" }}>
               <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send SMS</p>
               <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
                 <li>
