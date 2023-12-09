@@ -27,7 +27,7 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({status}) => {
         <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Status</p>
         <section>
           <div>
-            <GrServerCluster color={`${status_color[status]}`} />
+            <GrServerCluster color={'#ffcc4c'} />
             <GrServerCluster color={`${status_color[status]}`} />
             <GrServerCluster color={`${status_color[status]}`} />
           </div>
