@@ -31,7 +31,7 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({status}) => {
         <section>
           <div>
             <FaServer size={18} color={`${status_color[status]}`} />
-            <FaServer size={18} color={`${status_color[status]}`} />
+            <GrServerCluster size={18} color={`${status_color[status]}`} />
             <FaServer size={18} color={`${status_color[status]}`} />
             {/* <CiHeadphones color={`${status_color[status]}`} size={18} /> */}
           </div>
