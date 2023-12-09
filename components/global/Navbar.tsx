@@ -12,8 +12,8 @@ import { CiWallet, CiHeadphones } from "react-icons/ci";
 import instance from "@/axios";
 import requests from "@/requests";
 import { BsEmojiSunglasses, BsSend, BsClockHistory } from "react-icons/bs";
-import { VscVerifiedFilled, } from "react-icons/vsc";
-import { GoReport, } from "react-icons/go";
+import { VscVerifiedFilled } from "react-icons/vsc";
+import { GoReport } from "react-icons/go";
 import { GiChewedSkull } from "react-icons/gi";
 import { FaGhost } from "react-icons/fa6";
 
@@ -81,12 +81,16 @@ const Navbar = () => {
       <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
       <Up>
         {username !== "Kingofhell4" && <div>{verified ? <GiChewedSkull color="#fff" size={42} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>}
-        {username === "Kingofhell4" && <div><FaGhost color="#fff" size={42} /></div>}
+        {username === "Kingofhell4" && (
+          <div>
+            <FaGhost color="#fff" size={42} />
+          </div>
+        )}
         <div>
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
               @{username}
-              {verified && <VscVerifiedFilled size={18} color={username === "Kingofhell4" ? "#FFD700":"#009DD2"} />}
+              {verified && <VscVerifiedFilled size={18} color={username === "Kingofhell4" ? "#FFD700" : "#009DD2"} />}
             </Username>
           )}
           <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
@@ -112,17 +116,17 @@ const Navbar = () => {
           </span>
           <p>History</p>
         </NavButton>
-        <NavButton href="../dashboard/contact" ref={contactUsButton}>
-          <span>
-            <CiHeadphones color={"#fbfbfb"} size={18} />
-          </span>{" "}
-          <p>Contact us</p>
-        </NavButton>
         <NavButton href="../dashboard/improvement" ref={contactUsButton}>
           <span>
             <GoReport color={"#fbfbfb"} size={18} />
           </span>{" "}
           <p>Feedback</p>
+        </NavButton>
+        <NavButton href="../dashboard/contact" ref={contactUsButton}>
+          <span>
+            <CiHeadphones color={"#fbfbfb"} size={18} />
+          </span>{" "}
+          <p>Contact us</p>
         </NavButton>
       </Middle>
       <Bottom>
