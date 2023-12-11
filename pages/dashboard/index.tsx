@@ -258,7 +258,7 @@ const SendScreen = () => {
           <InformationBox style={{ background: "red", color: "black" }}>
             {
               <p>
-                <b>Attention: New country route rolling in ontribute to the high server load, it&apos;s completing soon. Thanks.</b>
+                <b>Attention: New country route rolling in contribute to the high server load, it&apos;s completing soon. Thanks.</b>
               </p>
             }
           </InformationBox>
