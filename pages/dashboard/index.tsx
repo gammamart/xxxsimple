@@ -13,6 +13,7 @@ import { userActions } from "@/redux_store/store";
 import { IoMdSend } from "react-icons/io";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import ServiceLoad from "@/components/dashboard/ServiceLoad";
+import Modal from "@/components/dashboard/Modal";
 
 const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 
@@ -44,6 +45,7 @@ const SendScreen = () => {
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [serverStatus, setServerStatus] = useState<any>(null);
+  const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
 
   const [tab, setTab] = useState("single");
   const [cost, setCost] = useState(0);
@@ -79,6 +81,7 @@ const SendScreen = () => {
 
   useEffect(() => {
     // getting user profile from the backend and saving them to redux store
+
     instance
       .get(requests.profile, headerConfig)
       .then((response) => {
@@ -97,7 +100,12 @@ const SendScreen = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (isFirstLoad) {
+      // Display the modal on the first load
+      setIsFirstLoad(true);
+    }
+  }, [isFirstLoad]);
 
   useEffect(() => {
     instance
@@ -186,6 +194,15 @@ const SendScreen = () => {
         <title>Dashboard</title>
       </Head>
       <Mainframe>
+        {/* <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>
+          <h3>Canadian Route 🇨🇦 now available!</h3>
+          <p>
+            We are excited to announce that our new Canadian route is now available! 🇨🇦{" "}🍁
+            <br /><br/>
+            This means faster and more reliable SMS delivery to Canada. <br/><br/>Thank you for choosing our service!
+          </p>
+          <button onClick={() => setIsFirstLoad(false)} style={{width: "100px", alignSelf: "flex-end"}}>Close</button>
+        </Modal> */}
         <Navbar />
         <nav></nav>
         <Frame>
@@ -235,6 +252,13 @@ const SendScreen = () => {
             {
               <p>
                 <b>Exciting news! We&apos;ve shifted to a Bit Daily Maintenance System for ongoing system improvements, reducing downtime. Your experience matters. Thanks for your support! Note: Daily maintenance times will be regularly updated.</b>
+              </p>
+            }
+          </InformationBox>
+          <InformationBox style={{ background: "red", color: "black" }}>
+            {
+              <p>
+                <b>Attention: New country route rolling in ontribute to the high server load, it&apos;s completing soon. Thanks.</b>
               </p>
             }
           </InformationBox>
@@ -313,6 +337,7 @@ interface SendButtonProps {
 
 const Mainframe = styled.div`
   height: 100vh;
+  position: relative;
   /* max-height: 900px; */
   min-height: 650px;
   display: flex;
