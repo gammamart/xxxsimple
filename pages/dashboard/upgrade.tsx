@@ -72,7 +72,7 @@ const UpgradeScreen = () => {
                 <p style={{ color: "#009DD2" }}>Upgrade to our Pro Plan and experience the following advantages:</p>
                 <br />
                 <li>
-                  <b style={{ color: "#009dd2" }}>Lightning-Fast Speed:</b> Send up to 10,000 SMS messages in just 20-25 minutes, turbocharging your communication.
+                  <b style={{ color: "#009dd2" }}>Lightning-Fast Speed:</b> Send up to 1,000 SMS messages in just 20-25 minutes, turbocharging your communication.
                 </li>
                 <br />
                 <li>
