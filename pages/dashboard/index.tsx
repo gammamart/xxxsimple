@@ -194,7 +194,7 @@ const SendScreen = () => {
         <title>Dashboard</title>
       </Head>
       <Mainframe>
-        {/* <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>
+        <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>
           <h3>Canadian Route 🇨🇦 now available!</h3>
           <p>
             We are excited to announce that our new Canadian route is now available! 🇨🇦{" "}🍁
@@ -202,7 +202,7 @@ const SendScreen = () => {
             This means faster and more reliable SMS delivery to Canada. <br/><br/>Thank you for choosing our service!
           </p>
           <button onClick={() => setIsFirstLoad(false)} style={{width: "100px", alignSelf: "flex-end"}}>Close</button>
-        </Modal> */}
+        </Modal>
         <Navbar />
         <nav></nav>
         <Frame>
