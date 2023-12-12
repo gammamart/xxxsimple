@@ -255,13 +255,13 @@ const SendScreen = () => {
               </p>
             }
           </InformationBox>
-          <InformationBox style={{ background: "red", color: "black" }}>
+          {/* <InformationBox style={{ background: "red", color: "black" }}>
             {
               <p>
                 <b>Attention: New country route rolling in contribute to the high server load, it&apos;s completing soon. Thanks.</b>
               </p>
             }
-          </InformationBox>
+          </InformationBox> */}
           <IntroductionFrame>
             <ServiceLoad status={serverStatus?.status} />
             <div style={{ color: "#a8acb4" }}>
