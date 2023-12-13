@@ -190,7 +190,7 @@ const TableHead = styled.div`
   padding-right: 10px;
   padding-left: 10px;
 
-  & > p {
+  & > span > p {
     font-weight: 600;
     font-size: 0.75rem;
     line-height: 1rem;
