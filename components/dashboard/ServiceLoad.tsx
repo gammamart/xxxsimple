@@ -45,9 +45,9 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
   };
 
   const status_text: any = {
-    LL: "Low Load[Smooth sailing]",
-    ML: "Moderate Load[Steady traffic]",
-    OL: "High Load[Expect delays]",
+    LL: "Low Load: Smooth sailing",
+    ML: "Moderate Load: Steady traffic",
+    OL: "High Load: Expect delays",
   };
 
   const statusAnimation: any = {
