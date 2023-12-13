@@ -187,8 +187,8 @@ const TableHead = styled.div`
   justify-content: space-between;
   min-width: 600px;
   border: 1px solid #3a3e4b;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
 
   & > span > p {
     font-weight: 600;
