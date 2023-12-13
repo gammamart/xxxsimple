@@ -122,6 +122,12 @@ const Navbar = () => {
           </span>{" "}
           <p>Feedback</p>
         </NavButton>
+        <NavButton href="../dashboard/improvement" ref={contactUsButton}>
+          <span>
+            <GoReport color={"#fbfbfb"} size={18} />
+          </span>{" "}
+          <p>Membership</p>
+        </NavButton>
         <NavButton href="../dashboard/contact" ref={contactUsButton}>
           <span>
             <CiHeadphones color={"#fbfbfb"} size={18} />
@@ -222,7 +228,7 @@ const Middle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.9rem;
+  gap: 1.6rem;
   padding: 20px 20px 20px 40px;
 `;
 const Bottom = styled.div`

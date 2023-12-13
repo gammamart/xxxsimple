@@ -286,13 +286,13 @@ const SendScreen = () => {
             {tab === "single" ? (
               <>
                 <div>
-                  <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (2232271673)" maxLength={15} />
+                  <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (2232271673)" maxLength={15} required />
                 </div>
               </>
             ) : (
-              <textarea id="multiline-input" onChange={(e) => setPhoneNumberList(e.target.value)} value={phoneNumberList}></textarea>
+              <textarea id="multiline-input" onChange={(e) => setPhoneNumberList(e.target.value)} value={phoneNumberList} required></textarea>
             )}
-            <textarea ref={message} placeholder="Message..."></textarea>
+            <textarea ref={message} placeholder="Message..." required></textarea>
           </Body>
           <Bottom>
             <Cost>
