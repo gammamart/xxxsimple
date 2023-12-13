@@ -70,7 +70,7 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
           </div>
           <p style={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}>{status_text[status]}</p>
         </section>
-        <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Forecasted relief: 59min</p>
+        {/* <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Forecasted relief: 59min</p> */}
       </section>
     </Mainframe>
   );
