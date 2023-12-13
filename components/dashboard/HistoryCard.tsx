@@ -103,7 +103,8 @@ const Mainframe = styled.tr`
   /* justify-content: space-between; */
   font-size: 18px;
   color: #fff;
-  flex: 1;
+  /* flex: 1; */
+  /* height: 50px; */
 
   & p {
     color: #ffffffa6;
