@@ -189,6 +189,7 @@ const TableHead = styled.div`
   border: 1px solid #3a3e4b;
   padding-right: 11px;
   padding-left: 15px;
+  margin-top: 1.5rem;
 
   & > span > p {
     font-weight: 600;
