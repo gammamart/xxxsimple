@@ -64,18 +64,40 @@ const HistoryScreen = () => {
         <Frame>
           <Up>
             <h6>Ongoing and past messages.</h6>
-            <section style={{display: "flex", flexDirection: "column", gap: "0.4rem"}}>
-              <span style={{color: "#fff", display: "flex", fontSize: "14px"}}><p style={{color: "#ffa20182"}}>PREPARING:&nbsp;</p>{"System sorting leads according to their carrier."}</span>
-              <span style={{color: "#fff", display: "flex", fontSize: "14px"}}><p style={{color: "#009ed28c"}}>SENDING:&nbsp;</p>{"Sending started"}</span>
-              <span style={{color: "#fff", display: "flex", fontSize: "14px"}}><p style={{color: "#1aa14e87"}}>COMPLETED:&nbsp;</p>{"Sending/Dispatching completed."}</span>
-              <span style={{color: "#fff", display: "flex", fontSize: "14px"}}><p style={{color: "#ff0101a0"}}>FAILED:&nbsp;</p>{"Sending Failed. For more information you can check status message or contact support."}</span>
+            <section style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+              <span style={{ color: "#fff", display: "flex", fontSize: "14px" }}>
+                <p style={{ color: "#ffa20182" }}>PREPARING:&nbsp;</p>
+                {"System sorting leads according to their carrier."}
+              </span>
+              <span style={{ color: "#fff", display: "flex", fontSize: "14px" }}>
+                <p style={{ color: "#009ed28c" }}>SENDING:&nbsp;</p>
+                {"Sending started"}
+              </span>
+              <span style={{ color: "#fff", display: "flex", fontSize: "14px" }}>
+                <p style={{ color: "#1aa14e87" }}>COMPLETED:&nbsp;</p>
+                {"Sending/Dispatching completed."}
+              </span>
+              <span style={{ color: "#fff", display: "flex", fontSize: "14px" }}>
+                <p style={{ color: "#ff0101a0" }}>FAILED:&nbsp;</p>
+                {"Sending Failed. For more information you can check status message or contact support."}
+              </span>
             </section>
             <TableHead>
-              <p>Id</p>
-              <p>Status</p>
-              <p>Type</p>
-              <p>Created</p>
-              <p>Status message</p>
+              <TableSmallBox>
+                <p>Id</p>
+              </TableSmallBox>
+              <TableSmallBox>
+                <p>Status</p>
+              </TableSmallBox>
+              <TableSmallBox>
+                <p>Type</p>
+              </TableSmallBox>
+              <TableSmallBox>
+                <p>Created</p>
+              </TableSmallBox>
+              <TableSmallBox>
+                <p>Status message</p>
+              </TableSmallBox>
             </TableHead>
           </Up>
           <Bottom>
@@ -172,10 +194,13 @@ const TableHead = styled.div`
     font-weight: 600;
     font-size: 0.75rem;
     line-height: 1rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    /* padding-left: 0.75rem; */
+    /* padding-right: 0.75rem; */
     color: #adb1bb;
   }
+`;
+const TableSmallBox = styled.span`
+  flex: 1;
 `;
 
 export default HistoryScreen;
