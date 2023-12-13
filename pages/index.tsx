@@ -10,7 +10,7 @@ const HomeScreen = () => {
     <>
       <Head>
         <meta name="google" content="notranslate" />
-        <title>Home | просто</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <NavigationBar />

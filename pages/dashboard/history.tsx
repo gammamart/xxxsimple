@@ -56,7 +56,7 @@ const HistoryScreen = () => {
   return (
     <>
       <Head>
-        <title>History</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <Navbar />

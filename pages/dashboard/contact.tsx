@@ -13,7 +13,7 @@ const ContactScreen = () => {
   return (
     <>
       <Head>
-        <title>Contact</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <Navbar />

@@ -191,7 +191,7 @@ const SendScreen = () => {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>

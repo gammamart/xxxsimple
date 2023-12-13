@@ -8,7 +8,7 @@ const GetInScreen = () => {
   return (
     <>
       <Head>
-        <title>Get In</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <Register />

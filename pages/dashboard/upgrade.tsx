@@ -54,7 +54,7 @@ const UpgradeScreen = () => {
   return (
     <>
       <Head>
-        <title>Upgrade</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <Navbar />

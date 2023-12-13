@@ -62,7 +62,7 @@ const FundWallet = () => {
   return (
     <>
       <Head>
-        <title>Fund Wallet</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <Navbar />

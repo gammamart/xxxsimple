@@ -54,7 +54,7 @@ const ImprovementScreen = () => {
   return (
     <>
       <Head>
-        <title>Feedback</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <Navbar />

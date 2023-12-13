@@ -26,7 +26,7 @@ const DashboardScreen = () => {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>просто</title>
       </Head>
       <Mainframe>
         <NavigationFrame>
