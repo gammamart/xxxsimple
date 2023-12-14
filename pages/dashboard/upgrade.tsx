@@ -148,11 +148,22 @@ const UpgradeScreen = () => {
                   <br />
                 </>
               )}
-              <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
-                {tab === "pro" && !verified && "Upgrade $49.99"}
-                {tab === "api" && "Check availability"}
-                {tab === "private" && "Check availability"}
-              </UpgradeButton>
+              {tab === "pro" && !verified && (
+                <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
+                  {"Upgrade $49.99"}
+                </UpgradeButton>
+              )}
+              {tab === "api" && (
+                <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
+                  {"Check availability"}
+                </UpgradeButton>
+              )}
+              {tab === "private" && (
+                <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
+                  {"Check availability"}
+                </UpgradeButton>
+              )}
+              
             </section>
           </Bottom>
         </Frame>
