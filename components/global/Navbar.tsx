@@ -16,6 +16,7 @@ import { VscVerifiedFilled } from "react-icons/vsc";
 import { GoReport } from "react-icons/go";
 import { GiChewedSkull } from "react-icons/gi";
 import { FaGhost } from "react-icons/fa6";
+import { MdOutlineCardMembership } from "react-icons/md";
 
 const Navbar = () => {
   type Profile = {
@@ -116,18 +117,18 @@ const Navbar = () => {
           </span>
           <p>History</p>
         </NavButton>
+        <NavButton href="../dashboard/upgrade" ref={contactUsButton}>
+          <span>
+            <MdOutlineCardMembership color={"#fbfbfb"} size={18} />
+          </span>{" "}
+          <p>Membership</p>
+        </NavButton>
         <NavButton href="../dashboard/improvement" ref={contactUsButton}>
           <span>
             <GoReport color={"#fbfbfb"} size={18} />
           </span>{" "}
           <p>Feedback</p>
         </NavButton>
-        {/* <NavButton href="../dashboard/improvement" ref={contactUsButton}>
-          <span>
-            <GoReport color={"#fbfbfb"} size={18} />
-          </span>{" "}
-          <p>Membership</p>
-        </NavButton> */}
         <NavButton href="../dashboard/contact" ref={contactUsButton}>
           <span>
             <CiHeadphones color={"#fbfbfb"} size={18} />
@@ -223,12 +224,12 @@ const Up = styled.div`
 `;
 const Middle = styled.div`
   /* border: 1px solid yellow; */
-  height: 40%;
+  height: 45%;
   min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.6rem;
+  gap: 1.2rem;
   padding: 20px 20px 20px 40px;
 `;
 const Bottom = styled.div`
@@ -253,7 +254,9 @@ const NavButton = styled(Link)`
 
   padding-right: 8px;
   padding-left: 8px;
-  height: 32px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  height: 36px;
   border-radius: 6px;
   width: 100%;
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { IoMdSend } from "react-icons/io";
 import styled from "styled-components";
 import { SendButton } from ".";
@@ -20,10 +21,17 @@ const UpgradeScreen = () => {
     username: string;
     email: string;
   }
+  const router = useRouter();
   const message = useRef<HTMLTextAreaElement | null>(null);
-  const authenticate = useAuthentication();
+  // const authenticate = useAuthentication();
   const [user, setUser] = useState<User>();
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
+
+  const proButton = useRef<HTMLButtonElement>(null);
+  const apiButton = useRef<HTMLButtonElement>(null);
+  const privateButton = useRef<HTMLButtonElement>(null);
+
+  const [tab, setTab] = useState("pro");
 
   const headerConfig = {
     headers: { Authorization: `Bearer ${user?.token}` },
@@ -37,18 +45,28 @@ const UpgradeScreen = () => {
   }, []);
 
   const upgradeHandler = (): void => {
-    const notification = toast.loading("Processing...");
-    setRequestLoading(true);
+    if (tab === "pro") {
+      const notification = toast.loading("Processing...");
+      setRequestLoading(true);
 
-    instance.get(requests.accountUpgrade, headerConfig).then((response) => {
-      if (response) {
-        const externalUrl = "https://commerce.coinbase.com/checkout/0033ce4f-0882-44b7-bda1-7d2de4b079ac";
-        toast.loading("Redirecting...", { id: notification });
+      instance.get(requests.accountUpgrade, headerConfig).then((response) => {
+        if (response) {
+          const externalUrl = "https://commerce.coinbase.com/checkout/0033ce4f-0882-44b7-bda1-7d2de4b079ac";
+          toast.loading("Redirecting...", { id: notification });
 
-        window.location.href = externalUrl;
-        setRequestLoading(false);
-      }
-    });
+          window.location.href = externalUrl;
+          setRequestLoading(false);
+        }
+      });
+    }
+    if (tab === "private") {
+      const externalURL = "https://t.me/npocto9";
+      window.location.href = externalURL;
+    }
+    if (tab === "api") {
+      const externalURL = "https://t.me/npocto9";
+      window.location.href = externalURL;
+    }
   };
 
   return (
@@ -61,31 +79,77 @@ const UpgradeScreen = () => {
         <nav></nav>
 
         <Frame>
+          <NavigationBar>
+            <ProButton ref={proButton} onClick={() => setTab("pro")} active={tab}>
+              Pro Membership
+            </ProButton>
+            <APIButton ref={apiButton} onClick={() => setTab("api")} active={tab}>
+              API Membership
+            </APIButton>
+            <PrivateButton ref={privateButton} onClick={() => setTab("private")} active={tab}>
+              Private Membership
+            </PrivateButton>
+          </NavigationBar>
           <Up>
-            <h6>Go pro.</h6>
+            {tab === "pro" && <h6>Pro.</h6>}
+            {tab === "api" && <h6>API.</h6>}
+            {tab === "private" && <h6>Private.</h6>}
           </Up>
           <Bottom>
             <section>
-              <p>We are thrilled to announce the release of our Pro Version to the wider public! Until now, our Pro features were exclusively available to a select few, ensuring top-notch quality. However, our robust infrastructure now allows us to extend these incredible benefits to everyone.</p>
-              <br />
-              <ul>
-                <p style={{ color: "#009DD2" }}>Upgrade to our Pro Plan and experience the following advantages:</p>
-                <br />
-                <li>
-                  <b style={{ color: "#009dd2" }}>Lightning-Fast Speed:</b> Send up to 1,000 SMS messages in just 20-25 minutes, turbocharging your communication.
-                </li>
-                <br />
-                <li>
-                  <b style={{ color: "#009dd2" }}>Advanced Link Tracking:</b> Our state-of-the-art link tracking system ensures your messages reach their destination, even when links are blacklisted. You&apos;ll receive detailed link activity reports in your email.
-                </li>
-                <br />
-                <li>
-                  <b style={{ color: "#009dd2" }}>End-to-End Message Encryption:</b> Protect your messages with the highest level of security and enjoy peace of mind knowing your conversations are shielded.
-                </li>
-              </ul>
-              <br />
-              <br />
-              <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>Upgrade $49.99</UpgradeButton>
+              {tab === "pro" && (
+                <>
+                  {/* <p>
+                    We are thrilled to announce the release of our Pro Version to the wider public! Until now, our Pro features were exclusively available to a select few, ensuring top-notch quality. However, our robust infrastructure now allows us to extend these incredible benefits to everyone.
+                  </p> */}
+                  <br />
+                  <ul>
+                    <p style={{ color: "#009DD2" }}>Upgrade to our Pro Plan and experience the following advantages:</p>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Lightning-Fast Speed:</b> Send up to 1,000 SMS messages in just 20-25 minutes, turbocharging your communication.
+                    </li>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Advanced Link Tracking:</b> Our state-of-the-art link tracking system ensures your messages reach their destination, even when links are blacklisted. You&apos;ll receive detailed link activity reports in your email.
+                    </li>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>End-to-End Message Encryption:</b> Protect your messages with the highest level of security and enjoy peace of mind knowing your conversations are shielded.
+                    </li>
+                  </ul>
+                  <br />
+                  <br />
+                </>
+              )}
+              {tab === "api" && (
+                <>
+                  <p>
+                    Supercharge your capabilities with our exclusive API Membership – a unique opportunity for unparalleled advantages. 🚀 Given its exceptional demand and limited resources, membership slots are selectively available. Ensure your access when openings arise for an extraordinary
+                    journey in API empowerment.
+                  </p>
+                  <br />
+
+                  <br />
+                  <br />
+                </>
+              )}
+              {tab === "private" && (
+                <>
+                  <p>
+                    Elevate your experience with our exclusive Private Membership – a rare opportunity for unparalleled benefits. 🌟 Due to its extraordinary demand and limited resources, membership slots are selectively available. Secure your spot when doors open for a truly exceptional journey.
+                  </p>
+
+                  <br />
+                  <br />
+                  <br />
+                </>
+              )}
+              <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
+                {tab === "pro" && "Upgrade $49.99"}
+                {tab === "api" && "Check availability"}
+                {tab === "private" && "Check availability"}
+              </UpgradeButton>
             </section>
           </Bottom>
         </Frame>
@@ -112,10 +176,13 @@ const UpgradeScreen = () => {
   );
 };
 
+type ButtonProps = {
+  active: string;
+};
+
 interface UpgradeButtonProps {
   disabled?: boolean;
 }
-
 
 const Mainframe = styled.div`
   height: 100vh;
@@ -188,6 +255,7 @@ const Bottom = styled.div`
     flex-direction: column;
     gap: 1.5rem;
     line-height: 1.6;
+    font-size: 14px;
   }
   & a {
     color: var(--simple-blue);
@@ -248,6 +316,47 @@ const UpgradeButton = styled.button<UpgradeButtonProps>`
   &:hover {
     background-color: #009ed24d;
   }
+`;
+const NavigationBar = styled.div`
+  /* border: 1px solid aqua; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 70px;
+  margin-bottom: 1rem;
+`;
+const NavButton = styled.button`
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #676f80;
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-family: ${source_code_pro.style.fontFamily};
+  font-size: 14px;
+  font-weight: 600;
+  padding: 1rem 3rem 1rem 3rem;
+
+  &:focus {
+    color: #a8acb4;
+    outline: none;
+  }
+  &:hover {
+    background-color: #2c303997;
+  }
+`;
+const ProButton = styled(NavButton)<ButtonProps>`
+  color: ${({ active }) => active === "pro" && "#a8acb4"};
+  background-color: ${({ active }) => active === "pro" && "#2c303997"};
+`;
+const APIButton = styled(NavButton)<ButtonProps>`
+  color: ${({ active }) => active === "api" && "#a8acb4"};
+  background-color: ${({ active }) => active === "api" && "#2c303997"};
+`;
+const PrivateButton = styled(NavButton)<ButtonProps>`
+  color: ${({ active }) => active === "private" && "#a8acb4"};
+  background-color: ${({ active }) => active === "private" && "#2c303997"};
 `;
 //pusher
 export default UpgradeScreen;
