@@ -27,6 +27,9 @@ const UpgradeScreen = () => {
   const [user, setUser] = useState<User>();
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
 
+  const userInformation: string | null = typeof localStorage !== "undefined" ? localStorage.getItem("user") : null;
+  const verified: boolean = userInformation && JSON.parse(userInformation).verified;
+
   const proButton = useRef<HTMLButtonElement>(null);
   const apiButton = useRef<HTMLButtonElement>(null);
   const privateButton = useRef<HTMLButtonElement>(null);
@@ -146,7 +149,7 @@ const UpgradeScreen = () => {
                 </>
               )}
               <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
-                {tab === "pro" && "Upgrade $49.99"}
+                {tab === "pro" && !verified && "Upgrade $49.99"}
                 {tab === "api" && "Check availability"}
                 {tab === "private" && "Check availability"}
               </UpgradeButton>
