@@ -120,7 +120,7 @@ const Navbar = () => {
         </NavButton>
         <NavButton href="../dashboard/upgrade" ref={contactUsButton}>
           <span>
-            <PiShieldCheck size={18} />
+            <PiShieldCheck size={20} />
           </span>{" "}
           <p>Membership</p>
         </NavButton>
