@@ -17,6 +17,7 @@ import { GoReport } from "react-icons/go";
 import { GiChewedSkull } from "react-icons/gi";
 import { FaGhost } from "react-icons/fa6";
 import { MdOutlineCardMembership } from "react-icons/md";
+import { PiShieldCheck } from "react-icons/pi";
 
 const Navbar = () => {
   type Profile = {
@@ -119,7 +120,7 @@ const Navbar = () => {
         </NavButton>
         <NavButton href="../dashboard/upgrade" ref={contactUsButton}>
           <span>
-            <MdOutlineCardMembership color={"#fbfbfb"} size={18} />
+            <PiShieldCheck />
           </span>{" "}
           <p>Membership</p>
         </NavButton>
