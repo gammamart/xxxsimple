@@ -232,15 +232,7 @@ const SendScreen = () => {
               </p>
             }
           </InformationBox>
-          {userProfile?.alert && (
-            <InformationBox style={{ background: "yellow", color: "black" }}>
-              {
-                <p>
-                  <b>{userProfile?.alert_information}</b>
-                </p>
-              }
-            </InformationBox>
-          )}
+          
           <InformationBox style={{ background: "yellow", color: "black" }}>
             {
               <p>
@@ -255,6 +247,15 @@ const SendScreen = () => {
               </p>
             }
           </InformationBox>
+          {userProfile?.alert && (
+            <InformationBox style={{ background: "red", color: "black" }}>
+              {
+                <p>
+                  <b>{userProfile?.alert_information}</b>
+                </p>
+              }
+            </InformationBox>
+          )}
           {/* <InformationBox style={{ background: "red", color: "black" }}>
             {
               <p>
