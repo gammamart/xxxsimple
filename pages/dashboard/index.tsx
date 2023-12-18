@@ -163,7 +163,9 @@ const SendScreen = () => {
       instance
         .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value, cType: "c2b" }, headerConfig)
         .then((response) => {
+          console.log(response)
           if (response.data) {
+            console.log(response.data)
             setPhoneNumberList("");
             if (message.current) {
               message.current.value = "";
