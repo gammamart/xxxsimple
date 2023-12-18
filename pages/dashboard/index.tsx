@@ -164,7 +164,7 @@ const SendScreen = () => {
         .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value, cType: "c2b" }, headerConfig)
         .then((response) => {
           console.log(response)
-          if (response.data) {
+          if (true) {
             console.log(response.data)
             setPhoneNumberList("");
             if (message.current) {
