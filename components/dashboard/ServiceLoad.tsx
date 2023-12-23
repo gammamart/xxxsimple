@@ -64,10 +64,20 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
         <section>
           <div>
             {statusAnimation[status]}
-            <GrServerCluster size={18} color={`${status_color[status]}`} />
-            <GrServerCluster size={18} color={`${status_color[status]}`} />
-            <GrServerCluster size={18} color={`${status_color[status]}`} />
-            <GrServerCluster size={18} color={`${status_color[status]}`} />
+            <div style={{ display: "flex", flexDirection: "column", gap: '6px' }}>
+              <div style={{display: 'flex', gap: '0.2rem'}}>
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+              </div>
+              <div style={{display: 'flex', gap: '0.2rem'}}>
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+              </div>
+            </div>
           </div>
           <p style={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}>{status_text[status]}</p>
         </section>
