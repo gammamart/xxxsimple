@@ -163,9 +163,9 @@ const SendScreen = () => {
       instance
         .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value, cType: "c2b" }, headerConfig)
         .then((response) => {
-          console.log(response)
+          console.log(response);
           if (true) {
-            console.log(response.data)
+            console.log(response.data);
             setPhoneNumberList("");
             if (message.current) {
               message.current.value = "";
@@ -199,11 +199,16 @@ const SendScreen = () => {
         <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>
           <h3>Canadian Route 🇨🇦 now available!</h3>
           <p>
-            We are excited to announce that our new Canadian route is now available! 🇨🇦{" "}🍁
-            <br /><br/>
-            This means faster and more reliable SMS delivery to Canada. <br/><br/>Thank you for choosing our service!
+            We are excited to announce that our new Canadian route is now available! 🇨🇦 🍁
+            <br />
+            <br />
+            This means faster and more reliable SMS delivery to Canada. <br />
+            <br />
+            Thank you for choosing our service!
           </p>
-          <button onClick={() => setIsFirstLoad(false)} style={{width: "100px", alignSelf: "flex-end"}}>Close</button>
+          <button onClick={() => setIsFirstLoad(false)} style={{ width: "100px", alignSelf: "flex-end" }}>
+            Close
+          </button>
         </Modal>
         <Navbar />
         <nav></nav>
@@ -229,12 +234,12 @@ const SendScreen = () => {
           <InformationBox>
             {
               <p>
-                {username !== "Kingofhell4" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
+                {username !== "godofseller1" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
                 <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
               </p>
             }
           </InformationBox>
-          
+
           <InformationBox style={{ background: "yellow", color: "black" }}>
             {
               <p>
@@ -273,7 +278,7 @@ const SendScreen = () => {
                 <li>
                   Bulk SMS phone number should be <b>without country code (+1)</b>
                 </li>
-                {username === "Kingofhell4" ? (
+                {username === "godofseller1" ? (
                   <li>
                     Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
                   </li>
