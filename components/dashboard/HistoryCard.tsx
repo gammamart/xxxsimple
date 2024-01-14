@@ -33,7 +33,7 @@ const sendingAnimationOptions = {
   },
 };
 
-const HistoryCard: f <HistoryCardProps> = ({ id, status, job_type, failure_message, date }) => {
+const HistoryCard: <HistoryCardProps> = ({ id, status, job_type, failure_message, date }) => {
   interface STATUS_COLOR {
     FAILED: string;
     COMPLETED: string;
