@@ -14,8 +14,8 @@ const ContactScreen = () => {
             <h6>Contact us on our telegram for responsive chat.</h6>
           </Up>
           <Bottom>
-            <a href="https://t.me/npocto9" target="_blank">
-              <IoMdSend size={25} /> <span>Tele. gram</span>
+            <a href="https://t.me/npocto97" target="_blank">
+              <IoMdSend size={25} /> <span>Telegram</span>
             </a>
           </Bottom>
         </Frame>
