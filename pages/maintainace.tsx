@@ -6,7 +6,7 @@ const maintainace = () => {
     <Mainframe>
       <Frame>
     <p style={{color:"#009DD2"}}>
-        <strong>[npocto] Maintenance Notice: Improving SMS Delivery, Downtime and User Anonymity</strong><br/>
+        <strong>[npocto] Maintenance Notice: Improving SMS Delivery, Downtime and User Anonymity</strong><br/><br/>
         <strong>Estimated time: 8hours</strong>
     </p>
     <p>We&apos;re conducting maintenance to enhance SMS delivery speed, ensure user anonymity, and minimize downtime. This will last approximately 8 hours, starting at 03:16
