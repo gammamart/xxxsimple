@@ -9,7 +9,7 @@ const maintainace = () => {
         <strong>[npocto] Maintenance Notice: Improving SMS Delivery, Downtime and User Anonymity</strong>
         <strong>Estimated time: 8hours</strong>
     </p>
-    <p>We're conducting maintenance to enhance SMS delivery speed, ensure user anonymity, and minimize downtime. This will last approximately 8 hours, starting at 03:16
+    <p>We&apos;re conducting maintenance to enhance SMS delivery speed, ensure user anonymity, and minimize downtime. This will last approximately 8 hours, starting at 03:16
 Monday, 19 February 2024 (GMT+3)
 Time in Moscow, Russia.
 
