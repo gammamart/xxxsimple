@@ -197,12 +197,14 @@ const SendScreen = () => {
       </Head>
       <Mainframe>
         <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>
-          <h3>Canadian Route 🇨🇦 now available!</h3>
+          <h3>Important Announcement: Official Telegram Account Update.</h3>
           <p>
-            We are excited to announce that our new Canadian route is now available! 🇨🇦 🍁
+           We regret to inform you that our official Telegram account (@npocto9) has been unexpectedly deleted.
             <br />
             <br />
-            This means faster and more reliable SMS delivery to Canada. <br />
+            New Support Telegram Account: <a href="https://t.me/npocto97">@npocto97</a>. <br />
+            <br />
+            New Channel: <a href="https://t.me/npoctochain">https://t.me/npoctochain</a>. <br />
             <br />
             Thank you for choosing our service!
           </p>
