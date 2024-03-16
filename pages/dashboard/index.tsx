@@ -236,7 +236,7 @@ const SendScreen = () => {
           <InformationBox>
             {
               <p>
-                {username !== "godofseller1" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
+                {username !== "glotraff1" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
                 <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
               </p>
             }
@@ -280,7 +280,7 @@ const SendScreen = () => {
                 <li>
                   Bulk SMS phone number should be <b>without country code (+1)</b>
                 </li>
-                {username === "godofseller1" ? (
+                {username === "glotraff1" ? (
                   <li>
                     Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
                   </li>
