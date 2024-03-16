@@ -242,14 +242,14 @@ const SendScreen = () => {
             }
           </InformationBox>
 
-          {username === "glotraff" && <InformationBox style={{ background: "yellow", color: "black" }}>
+          {username !== "glotraff" && <InformationBox style={{ background: "yellow", color: "black" }}>
             {
               <p>
                 <b>Attention: All unupgraded accounts will be deleted soon.</b>
               </p>
             }
           </InformationBox>}
-          {username === "glotraff" && <InformationBox style={{ background: "yellow", color: "black" }}>
+          {username !== "glotraff" && <InformationBox style={{ background: "yellow", color: "black" }}>
             {
               <p>
                 <b>Exciting news! We&apos;ve shifted to a Bit Daily Maintenance System for ongoing system improvements, reducing downtime. Your experience matters. Thanks for your support! Note: Daily maintenance times will be regularly updated.</b>
