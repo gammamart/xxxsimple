@@ -236,20 +236,20 @@ const SendScreen = () => {
           <InformationBox>
             {
               <p>
-                {username !== "glotraff" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
+                {(username !== "glotraff" || username !== "PHOEN11X") && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
                 <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
               </p>
             }
           </InformationBox>
 
-          {username !== "glotraff" && <InformationBox style={{ background: "yellow", color: "black" }}>
+          {(username !== "glotraff" || username !== "PHOEN11X") && <InformationBox style={{ background: "yellow", color: "black" }}>
             {
               <p>
                 <b>Attention: All unupgraded accounts will be deleted soon.</b>
               </p>
             }
           </InformationBox>}
-          {username !== "glotraff" && <InformationBox style={{ background: "yellow", color: "black" }}>
+          {(username !== "glotraff" || username !== "PHOEN11X") && <InformationBox style={{ background: "yellow", color: "black" }}>
             {
               <p>
                 <b>Exciting news! We&apos;ve shifted to a Bit Daily Maintenance System for ongoing system improvements, reducing downtime. Your experience matters. Thanks for your support! Note: Daily maintenance times will be regularly updated.</b>
@@ -280,7 +280,7 @@ const SendScreen = () => {
                 <li>
                   Bulk SMS phone number should be <b>without country code (+1)</b>
                 </li>
-                {username === "glotraff" ? (
+                {(username === "glotraff" || username === "PHOEN11X") ? (
                   <li>
                     Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
                   </li>
