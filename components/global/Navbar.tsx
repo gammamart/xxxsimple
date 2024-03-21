@@ -83,7 +83,7 @@ const Navbar = () => {
       <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
       <Up>
         {(username !== "glotraff" && username !== "PHOEN11X") && <div>{verified ? <GiChewedSkull color="#fff" size={42} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>}
-        {(username === "glotraff" && username === "PHOEN11X") && (
+        {(username === "glotraff" || username === "PHOEN11X") && (
           <div>
             <FaGhost color="#fff" size={42} />
           </div>
