@@ -69,7 +69,7 @@ const FundWallet = () => {
         <nav></nav>
         <Frame>
           <Up>
-            <section style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            {/*<section style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               <h6>BTC/ETH/LITECOIN/USD COIN/DOGECOIN/BITCOIN CASH/APE COIN/DAI/SHIBA/TETHER/MATIC/WRAPPED ETHER</h6>
               <div style={{ marginTop: "1rem", color: "#fff" }}>
                 <p style={{ color: "#ffffff7e" }}>Funds will reflect automatically once it has been confirmed on our network.</p>
@@ -81,7 +81,7 @@ const FundWallet = () => {
               <ContinueButton onClick={fundWalletHandler} disabled={requestLoading}>
                 Continue
               </ContinueButton>
-            </section>
+  </section>*/}
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginTop: "4rem" }}>
               <h6>USDT(TRC20/TRX) wallet.</h6>
               <div style={{ marginTop: "1rem", color: "#fff" }}>
