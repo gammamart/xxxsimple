@@ -129,7 +129,7 @@ const FundWallet = () => {
                       toast.success("Wallet address copied");
                     }}
                   >
-                    <p>TWyBksSTjNM7EEab2XgNie7jYKriXYKWmK</p>
+                    <p>{walletAddress}</p>
                   </USDTWalletAddressBox>
                 </section>
               )}
