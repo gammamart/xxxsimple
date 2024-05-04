@@ -65,7 +65,7 @@ const FundWallet = () => {
 
   const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedType = e.target.value;
-    const selectedWallet = staticWallet.find((wallet: WalletProp) => wallet.type === selectedType);
+    const selectedWallet = staticWallet.find((wallet: any) => wallet.type === selectedType);
     if (selectedWallet) {
       setSelectedCurrency(selectedWallet.type);
       setWalletAddress(selectedWallet.address);
