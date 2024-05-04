@@ -8,6 +8,7 @@ import Navbar from "@/components/global/Navbar";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import instance from "@/axios";
 import requests from "@/requests";
+import staticWallet from "@/utils/constants";
 
 const FundWallet = () => {
   interface User {
@@ -24,6 +25,9 @@ const FundWallet = () => {
   const [user, setUser] = useState<User>();
   const [walletReveal, setWalletReveal] = useState(false);
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
+
+  const [selectedCurrency, setSelectedCurrency] = useState<string>("");
+  const [walletAddress, setWalletAddress] = useState<string>("");
 
   const amount = useRef<HTMLInputElement | null>(null);
   const USDTAmount = useRef<HTMLInputElement | null>(null);
@@ -59,6 +63,15 @@ const FundWallet = () => {
     });
   };
 
+  const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedType = e.target.value;
+    const selectedWallet = staticWallet.find((wallet: WalletProp) => wallet.type === selectedType);
+    if (selectedWallet) {
+      setSelectedCurrency(selectedWallet.type);
+      setWalletAddress(selectedWallet.address);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -81,7 +94,7 @@ const FundWallet = () => {
               <ContinueButton onClick={fundWalletHandler} disabled={requestLoading}>
                 Continue
               </ContinueButton>
-  </section>*/}
+            </section>*/}
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginTop: "4rem" }}>
               <h6>USDT(TRC20/TRX) wallet.</h6>
               <div style={{ marginTop: "1rem", color: "#fff" }}>
@@ -89,6 +102,17 @@ const FundWallet = () => {
                 <p>2. Send to the wallet.</p>
                 <p>3. Automatically reflect in your account once it has been confirmed on our network.</p>
               </div>
+              <span>
+                <label htmlFor="currencySelect">Select Cryptocurrency:</label>
+                <SelectInput id="currencySelect" onChange={handleCurrencyChange} value={selectedCurrency}>
+                  <option value="">Select</option>
+                  {staticWallet.map((wallet: WalletProp) => (
+                    <option key={wallet.type} value={wallet.type}>
+                      {wallet.name}
+                    </option>
+                  ))}
+                </SelectInput>
+              </span>
               <AmountFrame>
                 <p>$</p>
                 <input ref={USDTAmount} type="number" placeholder="Amount" />
