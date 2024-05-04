@@ -8,7 +8,7 @@ import Navbar from "@/components/global/Navbar";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import instance from "@/axios";
 import requests from "@/requests";
-import staticWallet from "@/utils/constants";
+import { staticWallet } from "@/utils/constants";
 
 const FundWallet = () => {
   interface User {
