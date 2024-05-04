@@ -106,7 +106,7 @@ const FundWallet = () => {
                 <label htmlFor="currencySelect">Select Cryptocurrency:</label>
                 <select id="currencySelect" onChange={handleCurrencyChange} value={selectedCurrency}>
                   <option value="">Select</option>
-                  {staticWallet.map((wallet: WalletProp) => (
+                  {staticWallet.map((wallet: any) => (
                     <option key={wallet.type} value={wallet.type}>
                       {wallet.name}
                     </option>
