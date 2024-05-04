@@ -90,7 +90,7 @@ const FundWallet = () => {
                 <p>3. Automatically reflect in your account once it has been confirmed on our network.</p>
               </div>
               <span>
-                <label style={{color: "#fff"}} htmlFor="currencySelect">Select Cryptocurrency:</label>
+                <label style={{color: "#fff"}} htmlFor="currencySelect">Cryptocurrency:</label>
                 <select id="currencySelect" onChange={handleCurrencyChange} value={selectedCurrency}>
                   <option value="">Select</option>
                   {staticWallet.map((wallet: any) => (
