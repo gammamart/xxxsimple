@@ -82,28 +82,15 @@ const FundWallet = () => {
         <nav></nav>
         <Frame>
           <Up>
-            {/*<section style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-              <h6>BTC/ETH/LITECOIN/USD COIN/DOGECOIN/BITCOIN CASH/APE COIN/DAI/SHIBA/TETHER/MATIC/WRAPPED ETHER</h6>
-              <div style={{ marginTop: "1rem", color: "#fff" }}>
-                <p style={{ color: "#ffffff7e" }}>Funds will reflect automatically once it has been confirmed on our network.</p>
-              </div>
-              <AmountFrame>
-                <p>$</p>
-                <input ref={amount} type="number" placeholder="Amount" />
-              </AmountFrame>
-              <ContinueButton onClick={fundWalletHandler} disabled={requestLoading}>
-                Continue
-              </ContinueButton>
-            </section>*/}
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginTop: "4rem" }}>
-              <h6>USDT(TRC20/TRX) wallet.</h6>
+              <h6>Fund wallet.</h6>
               <div style={{ marginTop: "1rem", color: "#fff" }}>
                 <p>1. Make sure you are logged into your account.</p>
                 <p>2. Send to the wallet.</p>
                 <p>3. Automatically reflect in your account once it has been confirmed on our network.</p>
               </div>
               <span>
-                <label htmlFor="currencySelect">Select Cryptocurrency:</label>
+                <label style={{color: "#fff"}} htmlFor="currencySelect">Select Cryptocurrency:</label>
                 <select id="currencySelect" onChange={handleCurrencyChange} value={selectedCurrency}>
                   <option value="">Select</option>
                   {staticWallet.map((wallet: any) => (
