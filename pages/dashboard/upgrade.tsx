@@ -54,7 +54,7 @@ const UpgradeScreen = () => {
 
       instance.get(requests.accountUpgrade, headerConfig).then((response) => {
         if (response) {
-          const externalUrl = "https://commerce.coinbase.com/checkout/0033ce4f-0882-44b7-bda1-7d2de4b079ac";
+          const externalUrl = "https://www.npocto.cloud/dashboard/fund-wallet";
           toast.loading("Redirecting...", { id: notification });
 
           window.location.href = externalUrl;
