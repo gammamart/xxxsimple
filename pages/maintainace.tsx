@@ -5,18 +5,20 @@ const maintainace = () => {
   return (
     <Mainframe>
       <Frame>
-    <p style={{color:"#009DD2"}}>
-        <strong>[npocto] Maintenance Notice: Improving SMS Delivery, Downtime and User Anonymity</strong><br/><br/>
-        <strong>Estimated time: 4days</strong>
-    </p>
-    <p>We&apos;re conducting maintenance to enhance SMS delivery speed, ensure user anonymity, and minimize downtime. This will last approximately 4 days, starting at 03:40
-Wed, 24 April 2024 (GMT+3)
-Time in Moscow, Russia.
-
-</p>
-    
-</Frame>
-
+        <p style={{ color: "#009DD2" }}>
+          <strong>Subject: A Crucial Upgrade Begins: A New Dawn for Our Service</strong>
+        </p>
+        <p>
+          The time has come for a transformation. Starting now until tomorrow, we embark on a vital upgrade journey that will temporarily pause our service. This isn&apos;t just maintenance<b style={{ color: "#009DD2" }}>—it's a rebirth.</b>
+        </p>
+        <p>We&apos;re doubling our server strength, paving the way for unparalleled performance and safeguarding your privacy like never before.</p>
+        <p>Though a brief silence will follow, what awaits is a brighter, faster, and more secure experience.</p>
+        <p>Thank you for your patience as we elevate our service to new heights.</p>
+        <p>
+          In unity, <br />
+          [Your Company Name]
+        </p>
+      </Frame>
     </Mainframe>
   );
 };
