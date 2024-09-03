@@ -16,7 +16,7 @@ const maintainace = () => {
         <p>Thank you for your patience as we elevate our service to new heights.</p>
         <p>
           In unity, <br />
-          [Your Company Name]
+          [просто]
         </p>
       </Frame>
     </Mainframe>
