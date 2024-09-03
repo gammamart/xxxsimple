@@ -9,7 +9,7 @@ const maintainace = () => {
           <strong>Subject: A Crucial Upgrade Begins: A New Dawn for Our Service</strong>
         </p>
         <p>
-          The time has come for a transformation. Starting now until tomorrow, we embark on a vital upgrade journey that will temporarily pause our service. This isn&apos;t just maintenance<b style={{ color: "#009DD2" }}>—it's a rebirth.</b>
+          The time has come for a transformation. Starting now until tomorrow, we embark on a vital upgrade journey that will temporarily pause our service. This isn&apos;t just maintenance<b style={{ color: "#009DD2" }}>—it&apos;s a rebirth.</b>
         </p>
         <p>We&apos;re doubling our server strength, paving the way for unparalleled performance and safeguarding your privacy like never before.</p>
         <p>Though a brief silence will follow, what awaits is a brighter, faster, and more secure experience.</p>
