@@ -257,13 +257,15 @@ const ContinueButton = styled.button<FundButtonProps>`
 `;
 const USDTWalletAddressBox = styled.button`
   height: 50px;
-  width: 400px;
+  width: auto;
   background: #ffffff10;
   border: 1px solid #ffffff50;
   color: #ffffffd2;
   cursor: pointer;
   margin-top: 1rem;
   font-family: inherit;
+  padding-right: 1rem;
+  padding-left: 1rem;
 
   & > p {
     font-size: 16px;
