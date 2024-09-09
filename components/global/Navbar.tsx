@@ -19,7 +19,7 @@ import { FaGhost } from "react-icons/fa6";
 import { MdOutlineCardMembership } from "react-icons/md";
 import { PiShieldCheck } from "react-icons/pi";
 import { BsSendArrowUp } from "react-icons/bs";
-import { TbLogs } from "react-icons/tb";
+// import { TbLogs } from "react-icons/tb";
 
 const Navbar = () => {
   type Profile = {
@@ -116,7 +116,7 @@ const Navbar = () => {
         </NavButton>
         <NavButton href="../dashboard/history" ref={historyButton}>
           <span>
-            <TbLogs color={"#fbfbfb"} size={16} />{" "}
+            <BsClockHistory color={"#fbfbfb"} size={16} />{" "}
           </span>
           <p>History</p>
         </NavButton>
