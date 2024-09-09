@@ -9,7 +9,7 @@ export default function middleware(request) {
   const { _parsed } = cookies;
   const token = _parsed?.get("token");
 
-  const maintaining = true;
+  const maintaining = false;
 
   // privatizating AUTHENTICATED ROUTES
   if (maintaining) {
