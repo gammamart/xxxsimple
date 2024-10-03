@@ -8,9 +8,9 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 import toast, { Toaster } from "react-hot-toast";
 import instance from "@/axios";
 import requests from "@/requests";
-import { Source_Code_Pro } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 
-const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
+const open_sans = Open_Sans({ subsets: ["latin"] });
 
 const ImprovementScreen = () => {
   interface User {
@@ -199,14 +199,14 @@ const Bottom = styled.div`
     border: 1px solid #414651;
     resize: none;
     color: white;
-    font-family: ${source_code_pro.style.fontFamily};
+    font-family: ${open_sans.style.fontFamily};
     font-size: 1rem;
     padding: 1em;
     height: 250px;
     width: 100%;
 
     &::placeholder {
-      font-family: ${source_code_pro.style.fontFamily};
+      font-family: ${open_sans.style.fontFamily};
       font-size: 1rem;
       color: #afb3bd;
     }
@@ -228,7 +228,7 @@ const SendFeedbackMessageButton = styled.button<UpgradeButtonProps>`
   cursor: pointer;
   transition: background-color 0.1s linear;
   font-weight: 500;
-  font-family: ${source_code_pro.style.fontFamily};
+  font-family: ${open_sans.style.fontFamily};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   &:hover {
@@ -236,7 +236,7 @@ const SendFeedbackMessageButton = styled.button<UpgradeButtonProps>`
   }
 
   & > p {
-    font-family: ${source_code_pro.style.fontFamily};
+    font-family: ${open_sans.style.fontFamily};
     font-weight: 500;
   }
 `;

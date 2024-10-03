@@ -5,7 +5,7 @@ import styled from "styled-components";
 import toast, { Toaster } from "react-hot-toast";
 import Head from "next/head";
 import { FcHighPriority } from "react-icons/fc";
-import { Source_Code_Pro } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import dynamic from "next/dynamic";
 
 import instance from "@/axios";
@@ -19,7 +19,7 @@ const ServiceLoad = dynamic(() => import("@/components/dashboard/ServiceLoad"), 
   ssr: false,
 });
 
-const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
+const open_sans = Open_Sans({ subsets: ["latin"] });
 
 const SendScreen = () => {
   interface User {
@@ -404,7 +404,7 @@ const NavButton = styled.button`
   border: none;
   padding: 5px;
   cursor: pointer;
-  font-family: ${source_code_pro.style.fontFamily};
+  font-family: ${open_sans.style.fontFamily};
   padding: 1rem 3rem 1rem 3rem;
 
   &:focus {
@@ -443,7 +443,7 @@ const Body = styled.div`
       border: 1px solid #414651;
       resize: none;
       color: white;
-      font-family: ${source_code_pro.style.fontFamily};
+      font-family: ${open_sans.style.fontFamily};
       font-size: 1rem;
       padding: 1em;
       width: 100%;
@@ -452,7 +452,7 @@ const Body = styled.div`
       /* transition: outline 0.8s linear; */
 
       &::placeholder {
-        font-family: ${source_code_pro.style.fontFamily};
+        font-family: ${open_sans.style.fontFamily};
         font-size: 14px;
         color: #afb3bd;
       }
@@ -470,12 +470,12 @@ const Body = styled.div`
     border: 1px solid #414651;
     resize: none;
     color: white;
-    font-family: ${source_code_pro.style.fontFamily};
+    font-family: ${open_sans.style.fontFamily};
     font-size: 1rem;
     padding: 1em;
 
     &::placeholder {
-      font-family: ${source_code_pro.style.fontFamily};
+      font-family: ${open_sans.style.fontFamily};
       font-size: 14px;
       color: #afb3bd;
     }
@@ -527,7 +527,7 @@ const Cost = styled.div`
   color: var(--simple-blue);
   font-size: 16px;
   font-weight: 500;
-  font-family: ${source_code_pro.style.fontFamily};
+  font-family: ${open_sans.style.fontFamily};
 `;
 export const SendButton = styled.button<SendButtonProps>`
   height: 40px;
@@ -542,7 +542,7 @@ export const SendButton = styled.button<SendButtonProps>`
   color: #000;
   border-radius: 8px;
   font-weight: 500;
-  font-family: ${source_code_pro.style.fontFamily};
+  font-family: ${open_sans.style.fontFamily};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   & p {

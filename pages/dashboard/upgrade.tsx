@@ -9,9 +9,9 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 import toast, { Toaster } from "react-hot-toast";
 import instance from "@/axios";
 import requests from "@/requests";
-import { Source_Code_Pro } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 
-const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
+const open_sans = Open_Sans({ subsets: ["latin"] });
 
 const UpgradeScreen = () => {
   interface User {
@@ -324,7 +324,7 @@ const UpgradeButton = styled.button<UpgradeButtonProps>`
   cursor: pointer;
   transition: background-color 0.4s linear;
   font-weight: 500;
-  font-family: ${source_code_pro.style.fontFamily};
+  font-family: ${open_sans.style.fontFamily};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
   &:hover {
@@ -347,7 +347,7 @@ const NavButton = styled.button`
   border: none;
   padding: 5px;
   cursor: pointer;
-  font-family: ${source_code_pro.style.fontFamily};
+  font-family: ${open_sans.style.fontFamily};
   font-size: 14px;
   font-weight: 600;
   padding: 1rem 3rem 1rem 3rem;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { Source_Code_Pro } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -15,7 +15,7 @@ import useAuthentication from "@/utils/hooks/useAuthentication";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const key = "6Le3saIoAAAAAIG7n_zvmqk-xcHxSevNSDipyx-3";
-const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
+const open_sans = Open_Sans({ subsets: ["latin"] });
 
 const Login = () => {
   const router = useRouter();
@@ -121,7 +121,7 @@ const Login = () => {
 const Mainframe = styled.div`
   width: 100%;
   height: 100%;
-  font-family: ${source_code_pro.style.fontFamily};
+  font-family: ${open_sans.style.fontFamily};
 `;
 const Up = styled.div`
   height: 60px;
@@ -151,11 +151,11 @@ const Bottom = styled.div`
     font-size: 16px;
     background: #1d1f29;
     border: 1px solid #414651;
-    font-family: ${source_code_pro.style.fontFamily};
+    font-family: ${open_sans.style.fontFamily};
     border-radius: 15px;
 
     &::placeholder {
-      font-family: ${source_code_pro.style.fontFamily};
+      font-family: ${open_sans.style.fontFamily};
       font-size: 1rem;
       color: #afb3bd;
     }
@@ -177,7 +177,7 @@ const Bottom = styled.div`
     align-self: flex-end;
     cursor: pointer;
     border-radius: 8px;
-    font-family: ${source_code_pro.style.fontFamily};
+    font-family: ${open_sans.style.fontFamily};
     font-weight: 600;
   }
 `;

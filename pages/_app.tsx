@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Source_Code_Pro } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import styled from "styled-components";
 import { Provider } from "react-redux";
 import NextNProgress from "nextjs-progressbar";
@@ -9,7 +9,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { store } from "@/redux_store/store";
 import { GoogleReCaptchaProvider, withGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
+const open_sans = Open_Sans({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -26,6 +26,6 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 const Mainframe = styled.div`
-  font-family: ${source_code_pro.style.fontFamily};
+  font-family: ${open_sans.style.fontFamily};
   position: relative;
 `;
