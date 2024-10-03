@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import styled from "styled-components";
-import HistoryCard from "@/components/dashboard/HistoryCard";
+import dynamic from "next/dynamic";
+
 import Navbar from "@/components/global/Navbar";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import Head from "next/head";
@@ -9,6 +10,10 @@ import { useState, useEffect } from "react";
 
 import instance from "@/axios";
 import requests from "@/requests";
+
+const HistoryCard = dynamic(() => import("@/components/dashboard/HistoryCard"), {
+  ssr: false,
+});
 
 const HistoryScreen = () => {
   interface User {

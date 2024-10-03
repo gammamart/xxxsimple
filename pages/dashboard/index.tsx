@@ -6,14 +6,18 @@ import toast, { Toaster } from "react-hot-toast";
 import Head from "next/head";
 import { FcHighPriority } from "react-icons/fc";
 import { Source_Code_Pro } from "next/font/google";
+import dynamic from "next/dynamic";
 
 import instance from "@/axios";
 import requests from "@/requests";
 import { userActions } from "@/redux_store/store";
 import { IoMdSend } from "react-icons/io";
 import useAuthentication from "@/utils/hooks/useAuthentication";
-import ServiceLoad from "@/components/dashboard/ServiceLoad";
 import Modal from "@/components/dashboard/Modal";
+
+const ServiceLoad = dynamic(() => import("@/components/dashboard/ServiceLoad"), {
+  ssr: false,
+});
 
 const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
 

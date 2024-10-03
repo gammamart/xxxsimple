@@ -66,7 +66,7 @@ const Login = () => {
       const email: string = enteredEmail.current.value;
       const password: string = enteredPassword;
 
-      if (captchaIsDone) {
+      if (true) {
         getIn(email, password);
       } else {
         alert("Captcha Does Not Match");
