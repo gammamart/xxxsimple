@@ -7,6 +7,7 @@ import Head from "next/head";
 import { FcHighPriority } from "react-icons/fc";
 import { Open_Sans } from "next/font/google";
 import dynamic from "next/dynamic";
+import Lottie from "react-lottie";
 
 import instance from "@/axios";
 import requests from "@/requests";
@@ -14,10 +15,24 @@ import { userActions } from "@/redux_store/store";
 import { IoMdSend } from "react-icons/io";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 import Modal from "@/components/dashboard/Modal";
+import * as loadingAnimation from "../../public/statics/animations/loading.json";
 
 const ServiceLoad = dynamic(() => import("@/components/dashboard/ServiceLoad"), {
   ssr: false,
 });
+
+const LoadingAnimation = dynamic(() => import("@/components/dashboard/LoadingAnimation"), {
+  ssr: false,
+});
+
+const loadingAnimationOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: loadingAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 const open_sans = Open_Sans({ subsets: ["latin"] });
 
@@ -47,6 +62,7 @@ const SendScreen = () => {
 
   const [user, setUser] = useState<User>();
   const [requestLoading, setRequestLoading] = useState<boolean>(false);
+  const [statusIsLoading, setStatusIsLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [serverStatus, setServerStatus] = useState<any>(null);
   const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
@@ -84,7 +100,7 @@ const SendScreen = () => {
   }, [tab]);
 
   useEffect(() => {
-    // getting user profile from the backend and saving them to redux store
+    setStatusIsLoading(true);
 
     instance
       .get(requests.profile, headerConfig)
@@ -97,7 +113,7 @@ const SendScreen = () => {
       .get(requests.serverStatus, headerConfig)
       .then((response) => {
         setServerStatus(response.data);
-        console.log("STATUS", response.data);
+        setStatusIsLoading(false);
       })
       .catch((error) => {});
 
@@ -203,7 +219,7 @@ const SendScreen = () => {
         <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>
           <h3>Important Announcement: Official Telegram Account Update.</h3>
           <p>
-           We regret to inform you that our official Telegram account (@npocto9) has been unexpectedly deleted.
+            We regret to inform you that our official Telegram account (@npocto9) has been unexpectedly deleted.
             <br />
             <br />
             New Support Telegram Account: <a href="https://t.me/npocto97">@npocto97</a>. <br />
@@ -237,54 +253,44 @@ const SendScreen = () => {
               Bulk SMS
             </BulkButton>
           </NavigationBar>
-          <InformationBox>
-            {
-              <p>
-                {(username !== "glotraff" && username !== "PHOEN11X") && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
-                <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
-              </p>
-            }
-          </InformationBox>
-
-          {(username !== "glotraff" && username !== "PHOEN11X") && <InformationBox style={{ background: "yellow", color: "black" }}>
-            {
-              <p>
-                <b>Attention: All unupgraded accounts will be deleted soon.</b>
-              </p>
-            }
-          </InformationBox>}
-          {/* {(username !== "glotraff" && username !== "PHOEN11X") && <InformationBox style={{ background: "yellow", color: "black" }}>
-            {
-              <p>
-                <b>Exciting news! We&apos;ve shifted to a Bit Daily Maintenance System for ongoing system improvements, reducing downtime. Your experience matters. Thanks for your support! Note: Daily maintenance times will be regularly updated.</b>
-              </p>
-            }
-          </InformationBox>} */}
-          {userProfile?.alert && (
-            <InformationBox style={{ background: "red", color: "black" }}>
+          <article style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
+            <InformationBox>
               {
                 <p>
-                  <b>{userProfile?.alert_information}</b>
+                  {username !== "glotraff" && username !== "PHOEN11X" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
+                  <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
                 </p>
               }
             </InformationBox>
-          )}
-          {/* <InformationBox style={{ background: "red", color: "black" }}>
-            {
-              <p>
-                <b>Attention: New country route rolling in contribute to the high server load, it&apos;s completing soon. Thanks.</b>
-              </p>
-            }
-          </InformationBox> */}
+            {username !== "glotraff" && username !== "PHOEN11X" && (
+              <InformationBox style={{ background: "#ffcc4c", color: "black" }}>
+                {
+                  <p>
+                    <b>Attention: All unupgraded accounts will be deleted soon.</b>
+                  </p>
+                }
+              </InformationBox>
+            )}
+
+            {userProfile?.alert && (
+              <InformationBox style={{ background: "red", color: "black" }}>
+                {
+                  <p>
+                    <b>{userProfile?.alert_information}</b>
+                  </p>
+                }
+              </InformationBox>
+            )}
+          </article>
           <IntroductionFrame>
-            <ServiceLoad status={serverStatus?.status} />
-            <div style={{ color: "#a8acb4" }}>
+            {statusIsLoading ? <LoadingAnimation /> : <ServiceLoad status={serverStatus?.status} />}
+            {/* <div style={{ color: "#a8acb4" }}>
               <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send SMS</p>
               <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
                 <li>
                   Bulk SMS phone number should be <b>without country code (+1)</b>
                 </li>
-                {(username === "glotraff" || username === "PHOEN11X") ? (
+                {username === "glotraff" || username === "PHOEN11X" ? (
                   <li>
                     Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
                   </li>
@@ -294,7 +300,7 @@ const SendScreen = () => {
                   </li>
                 )}
               </ul>
-            </div>
+            </div> */}
           </IntroductionFrame>
           <Body>
             {tab === "single" ? (
@@ -393,7 +399,7 @@ const NavigationBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 70px;
+  height: 73px;
   margin-bottom: 1rem;
 `;
 const NavButton = styled.button`
@@ -404,6 +410,8 @@ const NavButton = styled.button`
   border: none;
   padding: 5px;
   cursor: pointer;
+  width: 260px;
+  height: 100%;
   font-family: ${open_sans.style.fontFamily};
   padding: 1rem 3rem 1rem 3rem;
 
@@ -424,13 +432,15 @@ const SingleButton = styled(NavButton)<ButtonProps>`
   background-color: ${({ active }) => active === "single" && "#2c303997"};
 `;
 const Body = styled.div`
-  /* border: 1px solid red; */
+  border-bottom: 1px solid #d4ebfe30;
+  border-top: 1px solid #d4ebfe30;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   padding: 2em 1rem 0rem 1rem;
   height: 30%;
   min-height: 280px;
+  padding: 1.2em 1rem 1.2rem 1rem;
 
   & div {
     display: flex;
@@ -446,7 +456,7 @@ const Body = styled.div`
       font-family: ${open_sans.style.fontFamily};
       font-size: 1rem;
       padding: 1em;
-      width: 100%;
+      width: 120%;
       border-radius: 8px;
       /* transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
       /* transition: outline 0.8s linear; */
@@ -501,17 +511,17 @@ const Body = styled.div`
 
   & textarea:first-child {
     height: 100%;
-    width: 40%;
+    width: 48.8%;
   }
   & textarea:last-child {
-    height: 45%;
+    height: 100%;
     width: 50%;
   }
 `;
 const Bottom = styled.div`
   /* border: 1px solid blue; */
   display: flex;
-  padding: 0px 30px 20px 30px;
+  padding: 20px 30px 20px 30px;
   align-items: center;
   justify-content: flex-end;
   gap: 50px;
@@ -551,10 +561,9 @@ export const SendButton = styled.button<SendButtonProps>`
 `;
 export const InformationBox = styled.div`
   background-color: #1d1f29;
-  border-top: 1px solid #414651;
-  border-bottom: 1px solid #414651;
+  border-top: 1px solid #2c3039;
+  border-bottom: 1px solid #2c3039;
   padding: 0.5rem 2rem 0.5rem 2rem;
-  margin-bottom: 0.3rem;
   display: flex;
   align-items: center;
   gap: 0.2rem;
@@ -565,7 +574,7 @@ export const InformationBox = styled.div`
 const IntroductionFrame = styled.div`
   display: flex;
   /* gap: 1rem; */
-  border: 1px solid #d4ebfe30;
+  /* border-bottom: 1px solid #d4ebfe30; */
   border-radius: 8px;
   padding: 1.5rem 2rem 1.5rem 2rem;
   margin-top: 1rem;

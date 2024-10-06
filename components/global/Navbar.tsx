@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 import { userActions } from "@/redux_store/store";
 import ProfileAvatar from "@/public/statics/images/profileAvatar";
@@ -11,7 +12,7 @@ import { MdOutlineFeedback, MdLogout } from "react-icons/md";
 import { CiWallet, CiHeadphones } from "react-icons/ci";
 import instance from "@/axios";
 import requests from "@/requests";
-import { BsEmojiSunglasses, BsSend, BsClockHistory } from "react-icons/bs";
+import { BsEmojiSunglassesFill, BsSend, BsClockHistory } from "react-icons/bs";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import { GoReport } from "react-icons/go";
 import { GiChewedSkull } from "react-icons/gi";
@@ -21,6 +22,10 @@ import { PiShieldCheck } from "react-icons/pi";
 import { BsSendArrowUp } from "react-icons/bs";
 // import { TbLogs } from "react-icons/tb";
 
+const LoadingAnimation = dynamic(() => import("@/components/dashboard/LoadingAnimation"), {
+  ssr: false,
+});
+
 const Navbar = () => {
   type Profile = {
     wallet_balance: number;
@@ -29,6 +34,7 @@ const Navbar = () => {
   };
 
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [profileIsLoading, setIsLoadingProfile] = useState<boolean>(true);
   const sendButton = useRef<HTMLAnchorElement>(null);
   const fundWalletButton = useRef<HTMLAnchorElement>(null);
   const historyButton = useRef<HTMLAnchorElement>(null);
@@ -64,10 +70,13 @@ const Navbar = () => {
   const pathname = router.asPath.split("/")[2];
 
   console.log(profile);
+  console.log(userInformation);
 
   useEffect(() => {
+    setIsLoadingProfile(true);
     instance.get(requests.profile, headerConfig).then((response) => {
       setProfile(response.data);
+      setIsLoadingProfile(false);
       dispatch(userActions.saveProfile(JSON.stringify(response.data)));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,50 +91,61 @@ const Navbar = () => {
 
   return (
     <Mainframe>
-      <Logo style={{ color: "#fff", marginTop: "2rem", marginLeft: "40px", fontSize: "20px", fontWeight: 600 }}>просто</Logo>
+      <Logo style={{ color: "#fff", fontSize: "18px", fontWeight: 600, padding: "1.5rem 0rem 1.5rem 1.5rem" }}>просто</Logo>
       <Up>
-        {(username !== "glotraff" && username !== "PHOEN11X") && <div>{verified ? <GiChewedSkull color="#fff" size={42} /> : <BsEmojiSunglasses color="#fff" size={40} />}</div>}
-        {(username === "glotraff" || username === "PHOEN11X") && (
-          <div>
-            <FaGhost color="#fff" size={42} />
-          </div>
-        )}
         <div>
+          {username !== "glotraff" && username !== "PHOEN11X" && <div>{verified ? <GiChewedSkull color="#fff" size={33.6} /> : <BsEmojiSunglassesFill color="#fff" size={34} />}</div>}
+          {(username === "glotraff" || username === "PHOEN11X") && (
+            <div>
+              <FaGhost color="#fff" size={33.6} />
+            </div>
+          )}
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
               @{username}
-              {verified && <VscVerifiedFilled size={18} color={(username === "glotraff" || username === "PHOEN11X") ? "#FFD700" : "#009DD2"} />}
+              {verified && <VscVerifiedFilled size={18} color={username === "glotraff" || username === "PHOEN11X" ? "#FFD700" : "#009DD2"} />}
             </Username>
           )}
-          <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>
+        </div>
+        <div>
+          {profileIsLoading ? <LoadingAnimation /> : <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>}
           {!verified && <UpgradeButton href={"../dashboard/upgrade"}>Upgrade</UpgradeButton>}
         </div>
       </Up>
       <Middle>
-        <NavButton href="../dashboard" ref={sendButton}>
-          <span>
-            <BsSendArrowUp color={"#fbfbfb"} size={16} />
-          </span>{" "}
-          <p>Send</p>
-        </NavButton>
-        <NavButton href="../dashboard/fund-wallet" ref={fundWalletButton}>
-          <span>
-            <CiWallet color={"#fbfbfb"} size={19} />
-          </span>{" "}
-          <p>Fund wallet</p>
-        </NavButton>
-        <NavButton href="../dashboard/history" ref={historyButton}>
-          <span>
-            <BsClockHistory color={"#fbfbfb"} size={16} />{" "}
-          </span>
-          <p>History</p>
-        </NavButton>
-        <NavButton href="../dashboard/upgrade" ref={contactUsButton}>
-          <span>
-            <PiShieldCheck color={"#fbfbfb"} size={20} />
-          </span>{" "}
-          <p>Membership</p>
-        </NavButton>
+        <section>
+          <p style={{ color: "white", fontSize: "12px", fontWeight: 600, marginBottom: "0.6rem" }}>GENERAL</p>
+          <NavButton href="../dashboard" ref={sendButton}>
+            <span>
+              <BsSendArrowUp color={"#fbfbfb"} size={16} />
+            </span>{" "}
+            <p>Send</p>
+          </NavButton>
+          <NavButton href="../dashboard/history" ref={historyButton}>
+            <span>
+              <BsClockHistory color={"#fbfbfb"} size={16} />{" "}
+            </span>
+            <p>History</p>
+          </NavButton>
+        </section>
+        <section>
+          <p style={{ color: "white", fontSize: "12px", fontWeight: 600, marginBottom: "0.6rem" }}>BILLING</p>
+          <NavButton href="../dashboard/fund-wallet" ref={fundWalletButton}>
+            <span>
+              <CiWallet color={"#fbfbfb"} size={19} />
+            </span>{" "}
+            <p>Fund wallet</p>
+          </NavButton>
+          <NavButton href="../dashboard/upgrade" ref={contactUsButton}>
+            <span>
+              <PiShieldCheck color={"#fbfbfb"} size={20} />
+            </span>{" "}
+            <p>Membership</p>
+          </NavButton>
+        </section>
+      </Middle>
+      <Bottom>
+        <p style={{ color: "white", fontSize: "12px", fontWeight: 600, marginBottom: "0.6rem" }}>OTHERS</p>
         <NavButton href="../dashboard/improvement" ref={contactUsButton}>
           <span>
             <GoReport color={"#fbfbfb"} size={18} />
@@ -138,8 +158,6 @@ const Navbar = () => {
           </span>{" "}
           <p>Contact us</p>
         </NavButton>
-      </Middle>
-      <Bottom>
         <SignOutButton onClick={logoutHandler}>
           <MdLogout color={"#fbfbfb"} size={18} /> <p>Sign Out</p>
         </SignOutButton>
@@ -160,6 +178,7 @@ const Mainframe = styled.div`
   /* border: 1px solid yellow; */
   border-right: 1px solid #2c3039;
   background-color: #05050a;
+  overflow-y: auto;
 
   @media (min-width: 1200px) {
     width: 234px;
@@ -167,11 +186,26 @@ const Mainframe = styled.div`
   @media (max-width: 700px) {
     width: 100px;
   }
+
+  &::-webkit-scrollbar {
+    width: 3px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ffffff98;
+    /* outline: 1px solid slategrey; */
+  }
 `;
 const Logo = styled.p`
+  border-bottom: 1px solid var(--simple-dark-blue);
+
   @media (max-width: 700px) {
-    margin: 20px !important;
-    font-size: 16px !important;
+    padding: 2rem 0rem 1rem 40px;
+    font-size: 14px !important;
   }
 `;
 const Username = styled.span`
@@ -185,12 +219,14 @@ const Username = styled.span`
 `;
 const Up = styled.div`
   /* border: 1px solid blue; */
-  height: 40%;
+  height: 210px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 
   & img {
     /* border: 1px solid tomato; */
@@ -201,12 +237,19 @@ const Up = styled.div`
       width: 60px;
     }
   }
-  & div:nth-child(2) {
+  & > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.24rem;
+  }
+  & > div:nth-child(2) {
     /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 0.6rem;
 
     & p:first-child {
       color: white;
@@ -227,31 +270,38 @@ const Up = styled.div`
 `;
 const Middle = styled.div`
   /* border: 1px solid yellow; */
-  height: 45%;
-  min-height: 200px;
+  border-bottom: 1px solid var(--simple-dark-blue);
+  height: 286.86px;
+  /* min-height: 200px; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.2rem;
-  padding: 20px 20px 20px 40px;
+  gap: 1.6rem;
+  padding: 1.5rem 0rem 1.5rem 1.5rem;
+  padding-right: 0.8rem;
+
+  & > section {
+    width: 100%;
+  }
 `;
 const Bottom = styled.div`
   /* border: 1px solid green; */
-  height: 20%;
+  height: 166.6px;
   padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding: 1.5rem 0.8rem 1.5rem 1.5rem;
+  gap: 0.4rem;
 `;
 const NavButton = styled(Link)`
   text-decoration: none;
   color: #a8acb4;
-  font-size: 0.88rem;
+  font-size: 0.704rem;
   font-weight: 400;
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-between; */
   gap: 0.7rem;
   cursor: pointer;
 
@@ -279,14 +329,18 @@ const NavButton = styled(Link)`
 const SignOutButton = styled.button`
   text-decoration: none;
   color: #a8acb4;
-  font-size: 0.88rem;
+  font-size: 0.704rem;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  gap: 0.7rem;
   cursor: pointer;
   background: none;
   border: none;
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 
   &:hover {
     color: rgb(255, 255, 255, 0.4);

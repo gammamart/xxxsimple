@@ -37,6 +37,7 @@ const overloadedAnimationOptions = {
   },
 };
 
+
 const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
   const status_color: any = {
     LL: "#50e3c2",
@@ -64,17 +65,26 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
         <section>
           <div>
             {statusAnimation[status]}
-            <div style={{ display: "flex", flexDirection: "column", gap: '6px' }}>
-              <div style={{display: 'flex', gap: '0.2rem'}}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <div style={{ display: "flex", gap: "0.2rem" }}>
                 <GrServerCluster size={18} color={`${status_color[status]}`} />
                 <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`#ff3e3d`} />
+              </div>
+              <div style={{ display: "flex", gap: "0.2rem" }}>
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`#50e3c2`} />
                 <GrServerCluster size={18} color={`${status_color[status]}`} />
                 <GrServerCluster size={18} color={`${status_color[status]}`} />
               </div>
-              <div style={{display: 'flex', gap: '0.2rem'}}>
+              <div style={{ display: "flex", gap: "0.2rem" }}>
                 <GrServerCluster size={18} color={`${status_color[status]}`} />
                 <GrServerCluster size={18} color={`${status_color[status]}`} />
                 <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`#50e3c2`} />
                 <GrServerCluster size={18} color={`${status_color[status]}`} />
               </div>
             </div>

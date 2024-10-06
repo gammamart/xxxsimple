@@ -43,12 +43,12 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   color: #a8acb4;
   background-color: #282934;
-  padding: 25px;
+  padding: 1.5rem;
   border-radius: 8px;
   position: relative;
-  min-width: 400px;
-  max-width: 600px;
-  height: 255px;
+  /* min-width: 400px; */
+  /* max-width: 600px; */
+  /* height: 255px; */
   font-size: 14px;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@ const ModalContent = styled.div`
   justify-content: center;
 
   & > button:last-child {
-    height: 100px;
+    width: 100px;
     cursor: pointer;
 
     &:hover {

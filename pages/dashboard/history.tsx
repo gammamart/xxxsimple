@@ -14,7 +14,9 @@ import requests from "@/requests";
 const HistoryCard = dynamic(() => import("@/components/dashboard/HistoryCard"), {
   ssr: false,
 });
-
+const LoadingAnimation = dynamic(() => import("@/components/dashboard/LoadingAnimation"), {
+  ssr: false,
+});
 const HistoryScreen = () => {
   interface User {
     refresh: string;
@@ -34,6 +36,7 @@ const HistoryScreen = () => {
 
   const [user, setUser] = useState<User>();
   const [history, setHistory] = useState<[]>();
+  const [isLoadingHistory, setIsLoadingHistory] = useState<boolean>(true);
 
   const headerConfig = {
     headers: { Authorization: `Bearer ${user?.token}` },
@@ -47,9 +50,11 @@ const HistoryScreen = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoadingHistory(true);
     instance
       .get(requests.history, headerConfig)
       .then((response) => {
+        setIsLoadingHistory(false);
         setHistory(response.data);
       })
       .catch((err) => {});
@@ -106,9 +111,15 @@ const HistoryScreen = () => {
             </TableHead>
           </Up>
           <Bottom>
-            {history?.map((job: History) => (
-              <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} failure_message={job.failure_message} date={job.created_at} />
-            ))}
+            {isLoadingHistory ? (
+              <LoadingAnimation />
+            ) : (
+              <section>
+                {history?.map((job: History) => (
+                  <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} failure_message={job.failure_message} date={job.created_at} />
+                ))}
+              </section>
+            )}
           </Bottom>
         </Frame>
       </Mainframe>
@@ -143,7 +154,7 @@ const Mainframe = styled.div`
 
 const Frame = styled.div`
   /* border: 1px solid tomato; */
-  border-left: 1px solid rgb(255, 255, 255, 0.34);
+  /* border-left: 1px solid rgb(255, 255, 255, 0.34); */
   height: 100%;
   width: 100%;
   min-width: 300px;
