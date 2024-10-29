@@ -20,7 +20,7 @@ const FundWallet = () => {
   }
 
   const router = useRouter();
-  const usdtWallet = "TWyBksSTjNM7EEab2XgNie7jYKriXYKWmK";
+  const usdtWallet = "TVNCgSGjh93ekd5wMnQX7dxcsXrLRXuVM6";
   const authenticate = useAuthentication();
   const [user, setUser] = useState<User>();
   const [walletReveal, setWalletReveal] = useState(false);
@@ -112,7 +112,7 @@ const FundWallet = () => {
                   <p style={{ color: "#a8acb4", marginTop: "0.7rem", fontSize: "12px" }}>Click to copy</p>
                   <USDTWalletAddressBox
                     onClick={() => {
-                      navigator.clipboard.writeText(usdtWallet);
+                      navigator.clipboard.writeText(walletAddress);
                       toast.success("Wallet address copied");
                     }}
                   >
