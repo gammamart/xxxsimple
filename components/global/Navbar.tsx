@@ -94,8 +94,8 @@ const Navbar = () => {
       <Logo style={{ color: "#fff", fontSize: "18px", fontWeight: 600, padding: "1.5rem 0rem 1.5rem 1.5rem" }}>просто</Logo>
       <Up>
         <div>
-          {username !== "glotraff" && username !== "PHOEN11X" && <div>{verified ? <GiChewedSkull color="#fff" size={33.6} /> : <BsEmojiSunglassesFill color="#fff" size={34} />}</div>}
-          {(username === "glotraff" || username === "PHOEN11X") && (
+          {username !== "glotraff" && username !== "PHOEN11X" && username !== "wowjustwow" && <div>{verified ? <GiChewedSkull color="#fff" size={33.6} /> : <BsEmojiSunglassesFill color="#fff" size={34} />}</div>}
+          {(username === "glotraff" || username === "PHOEN11X" || username === "wowjustwow") && (
             <div>
               <FaGhost color="#fff" size={33.6} />
             </div>

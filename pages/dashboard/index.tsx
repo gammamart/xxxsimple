@@ -257,12 +257,12 @@ const SendScreen = () => {
             <InformationBox>
               {
                 <p>
-                  {username !== "glotraff" && username !== "PHOEN11X" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
+                  {username !== "glotraff" && username !== "PHOEN11X" && username !== "wowjustwow" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
                   <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
                 </p>
               }
             </InformationBox>
-            {username !== "glotraff" && username !== "PHOEN11X" && (
+            {username !== "glotraff" && username !== "PHOEN11X" && username !== "wowjustwow" &&  (
               <InformationBox style={{ background: "#ffcc4c", color: "black" }}>
                 {
                   <p>
