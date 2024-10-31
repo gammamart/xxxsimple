@@ -33,7 +33,7 @@ const Login = () => {
 
   function onChange() {
     setCaptchaIsDone(true);
-    console.log("changed");
+    // console.log("changed");
   }
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
@@ -54,7 +54,7 @@ const Login = () => {
             localStorage.setItem("user", JSON.stringify(response.data));
             router.push("/dashboard");
           }
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch(() => {
           setError("Incorrect Credentials");

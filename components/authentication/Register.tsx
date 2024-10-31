@@ -44,7 +44,7 @@ const Register = () => {
 
   function onChange() {
     setCaptchaIsDone(true);
-    console.log("changed");
+    // console.log("changed");
   }
 
   // useEffect(() => {
@@ -72,7 +72,7 @@ const Register = () => {
           } else {
             setError("Invalid OTP");
           }
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((err) => {
           setError(err.response.data.message);

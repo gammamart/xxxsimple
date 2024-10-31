@@ -106,7 +106,7 @@ const SendScreen = () => {
       .get(requests.profile, headerConfig)
       .then((response) => {
         dispatch(userActions.saveProfile(JSON.stringify(response.data)));
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {});
     instance
@@ -169,7 +169,7 @@ const SendScreen = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           if (err.response.status === 402) {
             toast.error("Insufficient Balance, fund your account!", { id: notification });
           }
@@ -183,9 +183,9 @@ const SendScreen = () => {
       instance
         .post(requests.bulkSingleSMS, { lead: phoneNumberList, message: message.current?.value, cType: "c2b" }, headerConfig)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (true) {
-            console.log(response.data);
+            // console.log(response.data);
             setPhoneNumberList("");
             if (message.current) {
               message.current.value = "";
@@ -197,7 +197,7 @@ const SendScreen = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           if (err.response.status === 402) {
             toast.error("Insufficient Balance, fund your account!", { id: notification });
           }

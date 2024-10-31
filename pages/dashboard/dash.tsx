@@ -10,7 +10,7 @@ import Head from "next/head";
 const DashboardScreen = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(useSelector((state: any) => state.userSlice.user));
-  console.log(user?.token);
+  // console.log(user?.token);
 
   useEffect(() => {
     const headerConfig = {

@@ -69,8 +69,8 @@ const Navbar = () => {
   // const pathname = new URL(window.location.href).pathname.split("/")[2];
   const pathname = router.asPath.split("/")[2];
 
-  console.log(profile);
-  console.log(userInformation);
+  // console.log(profile);
+  // console.log(userInformation);
 
   useEffect(() => {
     setIsLoadingProfile(true);
@@ -103,7 +103,7 @@ const Navbar = () => {
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
               @{username}
-              {verified && <VscVerifiedFilled size={18} color={username === "glotraff" || username === "PHOEN11X" ? "#FFD700" : "#009DD2"} />}
+              {verified && <VscVerifiedFilled size={18} color={username === "glotraff" || username === "PHOEN11X" || username === "wowjustwow" ? "#FFD700" : "#009DD2"} />}
             </Username>
           )}
         </div>

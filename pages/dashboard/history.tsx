@@ -61,7 +61,7 @@ const HistoryScreen = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  console.log(history);
+  // console.log(history);
 
   return (
     <>

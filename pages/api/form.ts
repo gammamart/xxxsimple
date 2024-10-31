@@ -43,7 +43,7 @@ export default async function handler(
       });
     }
   } catch (error) {
-    console.log("ERRRRROr", error);
+    // console.log("ERRRRROr", error);
     res.json({
       status: "error",
       message: "Something went wrong, please try again!!!",
