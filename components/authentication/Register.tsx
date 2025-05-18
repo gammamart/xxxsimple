@@ -87,7 +87,7 @@ const Register = () => {
 
       const captcha: string | undefined = user_captcha_value.current?.value;
 
-      if (true) {
+      if (captchaIsDone) {
         getIn(username, email, password);
       } else {
         alert("Captcha Does Not Match");
