@@ -55,29 +55,36 @@ const Register = () => {
     event.preventDefault();
 
     // it handles both the registering and loggin in user
-    const getIn = (username: string, email: string, password: string) => {
+    const getIn = async (username: string, email: string, password: string) => {
       //showing loader for user
       setLoading(true);
-      // send otp to user email to confirm ownership
-      instance
-        .post(requests.register, { username, email, password })
-        .then((response) => {
-          // setSendOtp(true);
-          setLoading(false);
-          if (response.data) {
-            dispatch(userActions.loginUser(JSON.stringify(response.data)));
-            localStorage.setItem("user", JSON.stringify(response.data));
-            router.push("/dashboard");
-            setLoading(false);
-          } else {
-            setError("Invalid OTP");
-          }
-          // console.log(response.data);
-        })
-        .catch((err) => {
-          setError(err.response.data.message);
-          setLoading(false);
+
+      try {
+        // First get the code
+        const codeResponse = await instance.get(requests.sc);
+        const code = codeResponse.data.code;
+
+        // Then proceed with registration
+        const response = await instance.post(requests.register, {
+          username,
+          email,
+          password,
+          code,
         });
+
+        setLoading(false);
+        if (response.data) {
+          dispatch(userActions.loginUser(JSON.stringify(response.data)));
+          localStorage.setItem("user", JSON.stringify(response.data));
+          router.push("/dashboard");
+          setLoading(false);
+        } else {
+          setError("Invalid OTP");
+        }
+      } catch (err: any) {
+        setError(err.response?.data?.message || "An error occurred");
+        setLoading(false);
+      }
     };
 
     if (enteredUsername.current && enteredPassword && enteredEmail.current) {

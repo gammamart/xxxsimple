@@ -13,6 +13,7 @@ const requests: endpointRequest = {
   fundUSDTWallet: "account/usdt-fund-wallet/",
   accountUpgrade: "account/upgrade/",
   sendFeedback: "account/send-feedback/",
+  sc: "account/get-code/",
 
   calculateCost: "service/calculate-cost/",
   sendSingleSMS: "service/send-single-sms/",
