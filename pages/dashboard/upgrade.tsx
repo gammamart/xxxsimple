@@ -47,28 +47,34 @@ const UpgradeScreen = () => {
     }
   }, []);
 
-  const upgradeHandler = (): void => {
-    if (tab === "pro") {
-      const notification = toast.loading("Processing...");
-      setRequestLoading(true);
+  const MEMBERSHIP_PRICES: Record<string, number> = {
+    pro: 49.99,
+    api: 149,
+    private: 299,
+  };
 
-      instance.get(requests.accountUpgrade, headerConfig).then((response) => {
-        if (response) {
-          const externalUrl = "https://www.npocto.cloud/dashboard/fund-wallet";
-          toast.loading("Redirecting...", { id: notification });
+  const MEMBERSHIP_API_MAP: Record<string, string> = {
+    pro: "Pro",
+    api: "API",
+    private: "Private",
+  };
 
-          window.location.href = externalUrl;
-          setRequestLoading(false);
-        }
-      });
+  const upgradeHandler = async (): Promise<void> => {
+    if (!user?.token) {
+      toast.error("You must be logged in.");
+      return;
     }
-    if (tab === "private") {
-      const externalURL = "https://t.me/npocto9";
-      window.location.href = externalURL;
-    }
-    if (tab === "api") {
-      const externalURL = "https://t.me/npocto9";
-      window.location.href = externalURL;
+    const notification = toast.loading("Processing...");
+    setRequestLoading(true);
+
+    try {
+      const response = await instance.post(requests.accountUpgrade, { membership: MEMBERSHIP_API_MAP[tab] }, { headers: { Authorization: `Bearer ${user.token}` } });
+      toast.success("Membership upgraded successfully!", { id: notification });
+      setRequestLoading(false);
+      // Optionally, update user state or reload user info here
+    } catch (error: any) {
+      toast.error(error?.response?.data?.detail || "Upgrade failed. Please try again.", { id: notification });
+      setRequestLoading(false);
     }
   };
 
@@ -109,9 +115,6 @@ const UpgradeScreen = () => {
                   <ul>
                     <p style={{ color: "#009DD2" }}>Upgrade to our Pro Plan and experience the following advantages:</p>
                     <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Lightning-Fast Speed:</b> Send up to 1,000 SMS messages in just 20-25 minutes, turbocharging your communication.
-                    </li>
                     <br />
                     <li>
                       <b style={{ color: "#009dd2" }}>Advanced Link Tracking:</b> Our state-of-the-art link tracking system ensures your messages reach their destination, even when links are blacklisted. You&apos;ll receive detailed link activity reports in your email.
@@ -127,43 +130,69 @@ const UpgradeScreen = () => {
               )}
               {tab === "api" && (
                 <>
-                  <p>
-                    Supercharge your capabilities with our exclusive API Membership – a unique opportunity for unparalleled advantages. 🚀 Given its exceptional demand and limited resources, membership slots are selectively available. Ensure your access when openings arise for an extraordinary
-                    journey in API empowerment.
-                  </p>
-                  <br />
-
+                  <ul>
+                    <p style={{ color: "#009DD2" }}>Upgrade to our API Membership and unlock these exclusive features:</p>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Direct API Access:</b> Seamlessly integrate our powerful SMS platform into your own applications and workflows.
+                    </li>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Priority Throughput:</b> Enjoy higher message throughput and reduced queue times for your API requests.
+                    </li>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Comprehensive API Documentation:</b> Access detailed guides and support for rapid integration and troubleshooting.
+                    </li>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Dedicated API Support:</b> Get priority assistance from our technical team for all your API needs.
+                    </li>
+                  </ul>
                   <br />
                   <br />
                 </>
               )}
               {tab === "private" && (
                 <>
-                  <p>
-                    Elevate your experience with our exclusive Private Membership – a rare opportunity for unparalleled benefits. 🌟 Due to its extraordinary demand and limited resources, membership slots are selectively available. Secure your spot when doors open for a truly exceptional journey.
-                  </p>
-
-                  <br />
+                  <ul>
+                    <p style={{ color: "#009DD2" }}>Upgrade to our Private Membership for the ultimate experience:</p>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Personalized Service:</b> Receive one-on-one onboarding and a dedicated account manager for your business.
+                    </li>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Highest Priority Delivery:</b> Your messages are always at the front of the queue, ensuring the fastest possible delivery.
+                    </li>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Custom Integrations:</b> Work with our engineers to build custom features and integrations tailored to your needs.
+                    </li>
+                    <br />
+                    <li>
+                      <b style={{ color: "#009dd2" }}>Exclusive Beta Access:</b> Be the first to try new features and products before public release.
+                    </li>
+                  </ul>
                   <br />
                   <br />
                 </>
               )}
               {tab === "pro" && !verified && (
                 <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
-                  {"Upgrade $49.99"}
+                  {`Upgrade $${MEMBERSHIP_PRICES["pro"]}`}
                 </UpgradeButton>
               )}
               {tab === "api" && (
                 <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
-                  {"Check availability"}
+                  {`Upgrade $${MEMBERSHIP_PRICES["api"]}`}
                 </UpgradeButton>
               )}
               {tab === "private" && (
                 <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
-                  {"Check availability"}
+                  {`Upgrade $${MEMBERSHIP_PRICES["private"]}`}
                 </UpgradeButton>
               )}
-              
             </section>
           </Bottom>
         </Frame>
