@@ -70,6 +70,7 @@ const UpgradeScreen = () => {
     try {
       const response = await instance.post(requests.accountUpgrade, { membership: MEMBERSHIP_API_MAP[tab] }, { headers: { Authorization: `Bearer ${user.token}` } });
       toast.success("Membership upgraded successfully!", { id: notification });
+      toast.success("Please relogin to complete the upgrade process.", { id: notification, duration: 10000 });
       setRequestLoading(false);
       // Optionally, update user state or reload user info here
     } catch (error: any) {

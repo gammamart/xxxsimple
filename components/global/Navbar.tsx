@@ -50,6 +50,7 @@ const Navbar = () => {
   const username: string = userInformation && JSON.parse(userInformation).username;
   const token: string = userInformation && JSON.parse(userInformation).token;
   const verified: boolean = userInformation && JSON.parse(userInformation).verified;
+  const membership: string = userInformation ? JSON.parse(userInformation).membership || "Free" : "Free";
 
   const headerConfig = {
     headers: { Authorization: `Bearer ${token}` },
@@ -94,8 +95,8 @@ const Navbar = () => {
       <Logo style={{ color: "#fff", fontSize: "18px", fontWeight: 600, padding: "1.5rem 0rem 1.5rem 1.5rem" }}>просто</Logo>
       <Up>
         <div>
-          {username !== "glotraff" && username !== "PHOEN11X" && username !== "wowjustwow" && <div>{verified ? <GiChewedSkull color="#fff" size={33.6} /> : <BsEmojiSunglassesFill color="#fff" size={34} />}</div>}
-          {(username === "glotraff" || username === "PHOEN11X" || username === "wowjustwow") && (
+          {membership !== "Private" && <div>{verified ? <GiChewedSkull color="#fff" size={33.6} /> : <BsEmojiSunglassesFill color="#fff" size={34} />}</div>}
+          {membership === "Private" && (
             <div>
               <FaGhost color="#fff" size={33.6} />
             </div>
@@ -103,7 +104,7 @@ const Navbar = () => {
           {username && (
             <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
               @{username}
-              {verified && <VscVerifiedFilled size={18} color={username === "glotraff" || username === "PHOEN11X" || username === "wowjustwow" ? "#FFD700" : "#009DD2"} />}
+              {verified && <VscVerifiedFilled size={18} color={membership === "Private" ? "#FFD700" : "#009DD2"} />}
             </Username>
           )}
         </div>

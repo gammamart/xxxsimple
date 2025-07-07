@@ -37,8 +37,13 @@ const overloadedAnimationOptions = {
   },
 };
 
-
 const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
+  const userInformation: string | null = typeof localStorage !== "undefined" ? localStorage.getItem("user") : null;
+  const membership: string = userInformation ? JSON.parse(userInformation).membership || "Free" : "Free";
+
+  // If membership is Private, force status to LL
+  const effectiveStatus = membership === "Private" ? "LL" : status;
+
   const status_color: any = {
     LL: "#50e3c2",
     ML: "#ffcc4c",
@@ -64,32 +69,32 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
         <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Status</p>
         <section>
           <div>
-            {statusAnimation[status]}
+            {statusAnimation[effectiveStatus]}
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
               <div style={{ display: "flex", gap: "0.2rem" }}>
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
                 <GrServerCluster size={18} color={`#ff3e3d`} />
               </div>
               <div style={{ display: "flex", gap: "0.2rem" }}>
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
                 <GrServerCluster size={18} color={`#50e3c2`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
               </div>
               <div style={{ display: "flex", gap: "0.2rem" }}>
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
                 <GrServerCluster size={18} color={`#50e3c2`} />
-                <GrServerCluster size={18} color={`${status_color[status]}`} />
+                <GrServerCluster size={18} color={`${status_color[effectiveStatus]}`} />
               </div>
             </div>
           </div>
-          <p style={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}>{status_text[status]}</p>
+          <p style={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}>{status_text[effectiveStatus]}</p>
         </section>
         {/* <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Forecasted relief: 59min</p> */}
       </section>

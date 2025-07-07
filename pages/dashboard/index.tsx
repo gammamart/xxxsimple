@@ -76,6 +76,7 @@ const SendScreen = () => {
   const [singlePhoneNumber, setSinglePhoneNumber] = useState("");
   const senderName = useRef<HTMLInputElement | null>(null);
   const message = useRef<HTMLTextAreaElement | null>(null);
+  const membership: string = userInformation ? JSON.parse(userInformation).membership || "Free" : "Free";
 
   const headerConfig = {
     headers: { Authorization: `Bearer ${token}` },
@@ -257,12 +258,12 @@ const SendScreen = () => {
             <InformationBox>
               {
                 <p>
-                  {username !== "glotraff" && username !== "PHOEN11X" && username !== "wowjustwow" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
+                  {membership !== "Private" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
                   <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
                 </p>
               }
             </InformationBox>
-            {username !== "glotraff" && username !== "PHOEN11X" && username !== "wowjustwow" &&  (
+            {membership !== "Private" && (
               <InformationBox style={{ background: "#ffcc4c", color: "black" }}>
                 {
                   <p>
@@ -290,7 +291,7 @@ const SendScreen = () => {
                 <li>
                   Bulk SMS phone number should be <b>without country code (+1)</b>
                 </li>
-                {username === "glotraff" || username === "PHOEN11X" ? (
+                {userProfile?.membership === "Private" ? (
                   <li>
                     Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
                   </li>
