@@ -2,26 +2,26 @@ export const staticWallet: any = [
   {
     name: "BTC",
     type: "BTC",
-    address: "bc1q6lkgksre2zlz2aww66zpdyqg0az934razp0vp2",
+    address: "bc1qtl8g8zt9r8zm98def8mymzc0qan24zh70267tk",
   },
   {
     name: "ETH",
     type: "ETH",
-    address: "0x57aaE6eD965D75538Dc36A6D25876544167de85D",
+    address: "0x05004bBc924F8bb5fd7Df22461B3F8cB17938830",
   },
   {
     name: "LTC",
     type: "LTC",
-    address: "ltc1q8j8le358vx8eunxhy3gvdnc7mxyxlrw067kzwc",
+    address: "ltc1qm82x2dmh27dlkpmnn329nxvagglnp002uyunvt",
   },
   {
     name: "USDT(TRC20)",
     type: "trc20",
-    address: "TVNCgSGjh93ekd5wMnQX7dxcsXrLRXuVM6",
+    address: "TQcb4ocwmyMM21hxy6SnuRfT438ib4PSoK",
   },
   {
     name: "USDT(ERC20)",
     type: "USDT(ERC20)",
-    address: "0x57aaE6eD965D75538Dc36A6D25876544167de85D",
+    address: "0x05004bBc924F8bb5fd7Df22461B3F8cB17938830",
   },
 ];
