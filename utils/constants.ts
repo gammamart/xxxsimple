@@ -2,7 +2,7 @@ export const staticWallet: any = [
   {
     name: "BTC",
     type: "BTC",
-    address: "bc1qhl6qw00eex252fer4ww23u9vhn39y2s4vhkryc",
+    address: "bc1q56xtg2qrhfcgnd9h28nr2zlul2uw6fs6j03kyh",
   },
   {
     name: "XMR",
@@ -12,21 +12,21 @@ export const staticWallet: any = [
   {
     name: "ETH",
     type: "ETH",
-    address: "0x011963243871e27EF2861604166a5A576916BB46",
+    address: "0x750913ca5845d8275c4199907c113E8da68C8183",
   },
   {
     name: "LTC",
     type: "LTC",
-    address: "ltc1qnskqkv00kv20mcvw9u9zu33judt6lrvt5rcgaq",
+    address: "ltc1qwgnssgympr0dstex7yh4dn7d7aaj7gwxsw7g58",
   },
   {
     name: "USDT(TRC20)",
     type: "trc20",
-    address: "TL8xnNAGk5agAFr7SdxGToe125HuQV5tuU",
+    address: "TT2hMfiYbfrDcjiS46zvW53tQEBFfz8bVx",
   },
   {
     name: "USDT(ERC20)",
     type: "USDT(ERC20)",
-    address: "0x011963243871e27EF2861604166a5A576916BB46",
+    address: "0x750913ca5845d8275c4199907c113E8da68C8183",
   },
 ];
