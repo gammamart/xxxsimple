@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import instance from "@/axios";
 import requests from "@/requests";
 import { Open_Sans } from "next/font/google";
+import NavigationBar from "@/components/home/NavigationBar";
 
 const open_sans = Open_Sans({ subsets: ["latin"] });
 
@@ -56,23 +57,24 @@ const ImprovementScreen = () => {
       <Head>
         <title>просто</title>
       </Head>
+      <NavigationBar />
       <Mainframe>
-        <Navbar />
-        <nav></nav>
-
-        <Frame>
-          <Up>
-            <h6>Tell us what we can do better.</h6>
-          </Up>
-          <Bottom>
-            <section>
-              <textarea ref={message} placeholder="Tell us what we can do better..."></textarea>
-              <SendFeedbackMessageButton onClick={feedbackSendHandler} disabled={requestLoading}>
-                <p>Send Feedback</p>
-              </SendFeedbackMessageButton>
-            </section>
-          </Bottom>
-        </Frame>
+        <Shell>
+          <Navbar />
+          <Frame>
+            <Up>
+              <h6>Tell us what we can do better.</h6>
+            </Up>
+            <Bottom>
+              <section>
+                <textarea ref={message} placeholder="Tell us what we can do better..."></textarea>
+                <SendFeedbackMessageButton onClick={feedbackSendHandler} disabled={requestLoading}>
+                  <p>Send Feedback</p>
+                </SendFeedbackMessageButton>
+              </section>
+            </Bottom>
+          </Frame>
+        </Shell>
       </Mainframe>{" "}
       <Toaster
         position="top-left"
@@ -101,67 +103,67 @@ interface UpgradeButtonProps {
 }
 
 const Mainframe = styled.div`
-  height: 100vh;
-  /* max-height: 900px; */
-  min-height: 650px;
   display: flex;
-  min-width: 1000px;
-
-  & > nav {
-    /* border: 1px solid red; */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-    height: 100%;
-    max-height: 900px;
-
-    @media (min-width: 1200px) {
-      width: 280px;
-    }
-    @media (max-width: 700px) {
-      width: 100px;
-    }
-  }
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
+  background-attachment: fixed;
+`;
+const Shell = styled.div`
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  flex-direction: row;
+  min-height: 520px;
+  background: linear-gradient(180deg, #f8f7f3 0%, #efede6 100%);
+  border: 1px solid #c5c3bb;
+  box-shadow: 0 2px 0 #fff inset, 0 1px 0 #bab6ad inset, 0 8px 18px rgba(0, 0, 0, 0.35);
+  margin-top: 6px;
 `;
 
 const Frame = styled.div`
-  /* border: 1px solid tomato; */
-  height: 100%;
-  border-left: 1px solid rgb(255, 255, 255, 0.34);
-  min-width: 300px;
-  width: 100%;
+  flex: 1;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 30px;
-  padding-right: 30px;
+  gap: 0;
+  overflow: hidden;
+`;
+const Up = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px 30px 20px 20px;
+  background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
+  border: 1px solid #c5c1b7;
+  box-shadow: 0 1px 0 #fff inset;
+  margin: 12px 20px;
+  border-radius: 2px;
+  min-height: 100px;
 
   & h6 {
     font-size: 18px;
-    color: #fcfdffef;
+    color: #1e2c45;
+    font-weight: 700;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    margin: 0;
   }
 `;
-const Up = styled.div`
-  /* border: 1px solid aqua; */
-  height: 140px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px;
-`;
 const Bottom = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2em;
-  height: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 30px;
-  color: white;
+  flex: 1;
+  padding: 20px 30px 20px 20px;
+  background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
+  border: 1px solid #c5c1b7;
+  box-shadow: 0 1px 0 #fff inset;
+  margin: 12px 20px;
+  border-radius: 2px;
+  min-height: 400px;
+  color: #2c2c2c;
 
   & > section {
     max-width: 800px;
@@ -174,7 +176,7 @@ const Bottom = styled.div`
     width: 100%;
   }
   & a {
-    color: var(--simple-blue);
+    color: #b89a45;
     display: flex;
     align-items: center;
     gap: 0.4em;
@@ -182,62 +184,65 @@ const Bottom = styled.div`
     text-decoration: none;
 
     & span {
-      color: #fff;
-      border-bottom: 1px solid var(--simple-blue);
+      color: #2c2c2c;
+      border-bottom: 1px solid #b89a45;
       padding: 0.5em;
       font-size: 18px;
     }
 
     &:hover {
-      color: rgba(255, 255, 255, 0.5) !important;
+      color: #8e6e29 !important;
     }
   }
 
   & textarea {
-    border-radius: 15px;
-    background: #1d1f29;
-    border: 1px solid #414651;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #ffffff 0%, #f1efe8 100%);
+    border: 1px solid #bdb9ad;
+    box-shadow: 0 1px 0 #fff inset;
     resize: none;
-    color: white;
-    font-family: ${open_sans.style.fontFamily};
-    font-size: 1rem;
+    color: #2c2c2c;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
     padding: 1em;
     height: 250px;
     width: 100%;
 
     &::placeholder {
-      font-family: ${open_sans.style.fontFamily};
-      font-size: 1rem;
-      color: #afb3bd;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      color: #6b6b6b;
     }
 
     &:focus {
-      outline: 2px solid #41465178;
+      outline: 2px solid #b89a45;
+      outline-offset: 1px;
     }
   }
 `;
 
 const SendFeedbackMessageButton = styled.button<UpgradeButtonProps>`
-  background-color: white;
-  background-color: ${(props) => (props.disabled ? "#ffffff50" : "#fff")};
-  color: #000;
+  background: ${(props) => (props.disabled ? "linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%)" : "linear-gradient(180deg, #e9c86f 0%, #b7923a 55%, #8e6e29 100%)")};
+  border: 1px solid ${(props) => (props.disabled ? "#d5d1c7" : "#7a6126")};
+  color: ${(props) => (props.disabled ? "#6b6b6b" : "#1f1a0f")};
   height: 40px;
   width: 400px;
-  border: none;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition: background-color 0.1s linear;
-  font-weight: 500;
-  font-family: ${open_sans.style.fontFamily};
+  border-radius: 2px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  font-weight: 600;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  box-shadow: ${(props) => (props.disabled ? "0 1px 0 #fff inset" : "0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0,0,0,0.25)")};
 
   &:hover {
-    background-color: #ffffff50;
+    filter: ${(props) => (props.disabled ? "none" : "brightness(1.05)")};
   }
 
   & > p {
-    font-family: ${open_sans.style.fontFamily};
-    font-weight: 500;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 0;
   }
 `;
 //pusher

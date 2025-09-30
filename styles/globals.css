@@ -1,6 +1,6 @@
 :root {
   --simple: #05050a;
-  --simple-blue: #009DD2;
+  --simple-blue: #009dd2;
   --simple-dark-blue: #2c3039;
 }
 
@@ -11,5 +11,7 @@
 }
 
 body {
-  background-color: var(--simple);
+  background-color: #c9ced6;
+  background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
+  background-attachment: fixed;
 }

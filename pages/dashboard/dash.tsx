@@ -6,6 +6,7 @@ import instance from "@/axios";
 import Navbar from "@/components/global/Navbar";
 import requests from "@/requests";
 import Head from "next/head";
+import NavigationBar from "@/components/home/NavigationBar";
 
 const DashboardScreen = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const Mainframe = styled.div`
   /* max-height: 900px; */
   min-height: 650px;
   display: flex;
+  border: 1px solid red;
 `;
 const NavigationFrame = styled.div`
   /* border-right: 1px solid rgb(255, 255, 255, 0.34);

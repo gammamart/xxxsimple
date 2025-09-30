@@ -91,280 +91,237 @@ const Navbar = () => {
   }, [pathname]);
 
   return (
-    <Mainframe>
-      <Logo style={{ color: "#fff", fontSize: "18px", fontWeight: 600, padding: "1.5rem 0rem 1.5rem 1.5rem" }}>просто</Logo>
-      <Up>
+    <Mainframe className="vintage-sidemenu">
+      <h3>Dashboard Menu</h3>
+      <UserInfo>
         <div>
-          {membership !== "Private" && <div>{verified ? <GiChewedSkull color="#fff" size={33.6} /> : <BsEmojiSunglassesFill color="#fff" size={34} />}</div>}
-          {membership === "Private" && (
-            <div>
-              <FaGhost color="#fff" size={33.6} />
-            </div>
-          )}
-          {username && (
-            <Username style={{ fontSize: "14px", color: "#fff", fontWeight: 600 }}>
-              @{username}
-              {verified && <VscVerifiedFilled size={18} color={membership === "Private" ? "#FFD700" : "#009DD2"} />}
-            </Username>
-          )}
-        </div>
-        <div>
-          {profileIsLoading ? <LoadingAnimation /> : <p style={{ fontSize: "20px", color: "#fff", fontWeight: 600 }}>${profile?.wallet_balance.toFixed(2)}</p>}
+          <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            {membership !== "Private" && <div style={{marginTop: "4px"}}>{verified ? <GiChewedSkull color="#2c2c2c" size={18} /> : <BsEmojiSunglassesFill color="#2c2c2c" size={18} />}</div>}
+            {membership === "Private" && (
+              <div style={{marginTop: "4px"}}>
+                <FaGhost color="#2c2c2c" size={18} />
+              </div>
+            )}
+            {username && (
+              <Username>
+                @{username}
+                {verified && <VscVerifiedFilled size={14} color={membership === "Private" ? "#FFD700" : "#009DD2"} />}
+              </Username>
+            )}
+          </span>
           {!verified && <UpgradeButton href={"../dashboard/upgrade"}>Upgrade</UpgradeButton>}
         </div>
-      </Up>
-      <Middle>
-        <section>
-          <p style={{ color: "white", fontSize: "12px", fontWeight: 600, marginBottom: "0.6rem" }}>GENERAL</p>
-          <NavButton href="../dashboard" ref={sendButton}>
-            <span>
-              <BsSendArrowUp color={"#fbfbfb"} size={16} />
-            </span>{" "}
-            <p>Send</p>
-          </NavButton>
-          <NavButton href="../dashboard/history" ref={historyButton}>
-            <span>
-              <BsClockHistory color={"#fbfbfb"} size={16} />{" "}
-            </span>
-            <p>History</p>
-          </NavButton>
-        </section>
-        <section>
-          <p style={{ color: "white", fontSize: "12px", fontWeight: 600, marginBottom: "0.6rem" }}>BILLING</p>
-          <NavButton href="../dashboard/fund-wallet" ref={fundWalletButton}>
-            <span>
-              <CiWallet color={"#fbfbfb"} size={19} />
-            </span>{" "}
-            <p>Fund wallet</p>
-          </NavButton>
-          <NavButton href="../dashboard/upgrade" ref={contactUsButton}>
-            <span>
-              <PiShieldCheck color={"#fbfbfb"} size={20} />
-            </span>{" "}
-            <p>Membership</p>
-          </NavButton>
-        </section>
-      </Middle>
-      <Bottom>
-        <p style={{ color: "white", fontSize: "12px", fontWeight: 600, marginBottom: "0.6rem" }}>OTHERS</p>
+        <div>{profileIsLoading ? <LoadingAnimation /> : <Balance>${profile?.wallet_balance.toFixed(2)}</Balance>}</div>
+      </UserInfo>
+      <Section>
+        <SectionTitle>GENERAL</SectionTitle>
+        <NavButton href="../dashboard" ref={sendButton}>
+          <span>
+            <BsSendArrowUp color={"#2c2c2c"} size={16} />
+          </span>{" "}
+          <p>Send</p>
+        </NavButton>
+        <NavButton href="../dashboard/history" ref={historyButton}>
+          <span>
+            <BsClockHistory color={"#2c2c2c"} size={16} />{" "}
+          </span>
+          <p>History</p>
+        </NavButton>
+      </Section>
+      <Section>
+        <SectionTitle>BILLING</SectionTitle>
+        <NavButton href="../dashboard/fund-wallet" ref={fundWalletButton}>
+          <span>
+            <CiWallet color={"#2c2c2c"} size={19} />
+          </span>{" "}
+          <p>Fund wallet</p>
+        </NavButton>
+        <NavButton href="../dashboard/upgrade" ref={contactUsButton}>
+          <span>
+            <PiShieldCheck color={"#2c2c2c"} size={20} />
+          </span>{" "}
+          <p>Membership</p>
+        </NavButton>
+      </Section>
+      <Section>
+        <SectionTitle>OTHERS</SectionTitle>
         <NavButton href="../dashboard/improvement" ref={contactUsButton}>
           <span>
-            <GoReport color={"#fbfbfb"} size={18} />
+            <GoReport color={"#2c2c2c"} size={18} />
           </span>{" "}
           <p>Feedback</p>
         </NavButton>
         <NavButton href="../dashboard/contact" ref={contactUsButton}>
           <span>
-            <CiHeadphones color={"#fbfbfb"} size={18} />
+            <CiHeadphones color={"#2c2c2c"} size={18} />
           </span>{" "}
           <p>Contact us</p>
         </NavButton>
         <SignOutButton onClick={logoutHandler}>
-          <MdLogout color={"#fbfbfb"} size={18} /> <p>Sign Out</p>
+          <MdLogout color={"#2c2c2c"} size={18} /> <p>Sign Out</p>
         </SignOutButton>
-      </Bottom>
+      </Section>
     </Mainframe>
   );
 };
 
 const Mainframe = styled.div`
-  height: 100%;
-  /* width: 100%; */
+  width: 300px;
+  padding: 12px;
+  border-right: 1px solid #bdb9ad;
   display: flex;
   flex-direction: column;
-  width: 234px;
-  height: 100%;
-  max-height: 900px;
-  position: fixed;
-  /* border: 1px solid yellow; */
-  border-right: 1px solid #2c3039;
-  background-color: #05050a;
-  overflow-y: auto;
+  gap: 8px;
+  background: linear-gradient(180deg, #f4f2ea 0%, #e7e4da 100%);
 
-  @media (min-width: 1200px) {
-    width: 234px;
-  }
-  @media (max-width: 700px) {
-    width: 100px;
-  }
-
-  &::-webkit-scrollbar {
-    width: 3px !important;
-  }
-
-  &::-webkit-scrollbar-track {
-    /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #ffffff98;
-    /* outline: 1px solid slategrey; */
+  & h3 {
+    margin: -12px -12px 8px -12px;
+    padding: 10px 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #213a60;
+    background: linear-gradient(180deg, #dcd8cc 0%, #cfcabf 100%);
+    border-bottom: 1px solid #b7b2a6;
   }
 `;
-const Logo = styled.p`
-  border-bottom: 1px solid var(--simple-dark-blue);
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%);
+  border: 1px solid #d5d1c7;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 #fff inset;
+  margin-bottom: 8px;
 
-  @media (max-width: 700px) {
-    padding: 2rem 0rem 1rem 40px;
-    font-size: 14px !important;
+  & > div:first-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  & > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
   }
 `;
+
 const Username = styled.span`
   display: flex;
   align-items: center;
   gap: 4px;
-
-  @media (max-width: 700px) {
-    font-size: 12px !important;
-  }
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #2c2c2c;
+  font-weight: 600;
 `;
-const Up = styled.div`
-  /* border: 1px solid blue; */
-  height: 210px;
+
+const Balance = styled.p`
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #1e2c45;
+  font-weight: 600;
+`;
+
+const Section = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-
-  & img {
-    /* border: 1px solid tomato; */
-    height: 120px;
-    width: 120px;
-    @media (max-width: 700px) {
-      height: 60px;
-      width: 60px;
-    }
-  }
-  & > div:first-child {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.24rem;
-  }
-  & > div:nth-child(2) {
-    /* border: 1px solid blue; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-
-    & p:first-child {
-      color: white;
-      font-size: 1.3rem;
-      @media (max-width: 700px) {
-        font-size: 2vw;
-      }
-    }
-    & p:nth-child(2) {
-      color: white;
-      font-size: 2rem;
-      font-weight: bold;
-      @media (max-width: 700px) {
-        font-size: 1.1rem;
-      }
-    }
-  }
+  gap: 8px;
+  margin-bottom: 12px;
 `;
-const Middle = styled.div`
-  /* border: 1px solid yellow; */
-  border-bottom: 1px solid var(--simple-dark-blue);
-  height: 286.86px;
-  /* min-height: 200px; */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.6rem;
-  padding: 1.5rem 0rem 1.5rem 1.5rem;
-  padding-right: 0.8rem;
 
-  & > section {
-    width: 100%;
-  }
-`;
-const Bottom = styled.div`
-  /* border: 1px solid green; */
-  height: 166.6px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.5rem 0.8rem 1.5rem 1.5rem;
-  gap: 0.4rem;
+const SectionTitle = styled.p`
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #213a60;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 `;
 const NavButton = styled(Link)`
+  display: block;
+  padding: 10px 12px;
+  color: #2c2c2c;
   text-decoration: none;
-  color: #a8acb4;
-  font-size: 0.704rem;
-  font-weight: 400;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%);
+  border: 1px solid #d5d1c7;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 #fff inset;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 0.7rem;
+  gap: 8px;
   cursor: pointer;
 
-  padding-right: 8px;
-  padding-left: 8px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  height: 36px;
-  border-radius: 6px;
-  width: 100%;
-
   &:focus {
-    background-color: #2c3039;
+    background: linear-gradient(180deg, #edeae1 0%, #e5e1d7 100%);
     outline: none;
   }
   &:hover {
-    background-color: #2c303997;
+    background: linear-gradient(180deg, #edeae1 0%, #e5e1d7 100%);
+    text-decoration: underline;
   }
   & p {
-    @media (max-width: 700px) {
-      display: none;
-    }
+    margin: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #2c2c2c;
   }
 `;
+
 const SignOutButton = styled.button`
+  display: block;
+  padding: 10px 12px;
+  color: #2c2c2c;
   text-decoration: none;
-  color: #a8acb4;
-  font-size: 0.704rem;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%);
+  border: 1px solid #d5d1c7;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 #fff inset;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 0.7rem;
+  gap: 8px;
   cursor: pointer;
-  background: none;
-  border: none;
-  padding-right: 8px;
-  padding-left: 8px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  width: 100%;
 
   &:hover {
-    color: rgb(255, 255, 255, 0.4);
+    background: linear-gradient(180deg, #edeae1 0%, #e5e1d7 100%);
+    text-decoration: underline;
   }
   & p {
-    @media (max-width: 700px) {
-      display: none;
-    }
+    margin: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #2c2c2c;
   }
 `;
 
 const UpgradeButton = styled(Link)`
   text-decoration: none;
-  border: 1.4px solid #009ed2;
-  padding: 0.5em 1em 0.5em 1em;
-  font-size: 14px;
-  color: #009dd2;
-  border-radius: 0.4rem;
+  border: 1px solid #b89a45;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #1e2c45;
+  border-radius: 2px;
   font-weight: 500;
-  transition: background-color 0.4s linear;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg, #e9c86f 0%, #b7923a 55%, #8e6e29 100%);
+  box-shadow: 0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0, 0, 0, 0.25);
+  transition: filter 0.2s linear;
 
   &:hover {
-    background-color: #009ed249;
+    filter: brightness(1.05);
+    text-decoration: none;
   }
 `;
 

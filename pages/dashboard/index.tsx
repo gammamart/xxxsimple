@@ -1,4 +1,5 @@
 import Navbar from "@/components/global/Navbar";
+import NavigationBar from "@/components/home/NavigationBar";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -87,7 +88,7 @@ const SendScreen = () => {
       const user: string | null = localStorage.getItem("user");
       user && setUser(JSON.parse(user));
     }
-    toast.success("New Users now have free funds in their accounts to test the SMS service. Send a single test SMS to proceed.");
+    // toast.success("New Users now have free funds in their accounts to test the SMS service. Send a single test SMS to proceed.");
 
     const inputElement = document.getElementById("multiline-input") as HTMLTextAreaElement;
     if (inputElement) {
@@ -216,8 +217,9 @@ const SendScreen = () => {
       <Head>
         <title>просто</title>
       </Head>
+      <NavigationBar />
       <Mainframe>
-        <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>
+        {/* <Modal isOpen={isFirstLoad} onRequestClose={() => setIsFirstLoad(false)}>
           <h3>Important Announcement: Official Telegram Account Update.</h3>
           <p>
             We regret to inform you that our official Telegram account (@npocto9) has been unexpectedly deleted.
@@ -232,99 +234,88 @@ const SendScreen = () => {
           <button onClick={() => setIsFirstLoad(false)} style={{ width: "100px", alignSelf: "flex-end" }}>
             Close
           </button>
-        </Modal>
-        <Navbar />
-        <nav></nav>
-        <Frame>
-          <NavigationBar>
-            <SingleButton ref={singleButton} onClick={() => setTab("single")} active={tab}>
-              Single SMS
-            </SingleButton>
-            <BulkButton
-              ref={bulkButton}
-              onClick={() => {
-                if (verified) {
-                  setTab("bulk");
-                } else {
-                  toast.error("Not available for free user.");
-                }
-              }}
-              active={tab}
-            >
-              Bulk SMS
-            </BulkButton>
-          </NavigationBar>
-          <article style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
-            <InformationBox>
-              {
-                <p>
-                  {membership !== "Private" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
-                  <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
-                </p>
-              }
-            </InformationBox>
-            {membership !== "Private" && (
-              <InformationBox style={{ background: "#ffcc4c", color: "black" }}>
+        </Modal> */}
+        <Shell>
+          <Navbar />
+          <Frame>
+            <TabBar className="vintage-tabs">
+              <TabButton className={`vintage-tab ${tab === "single" ? "active" : ""}`} ref={singleButton} onClick={() => setTab("single")}>
+                Single SMS
+              </TabButton>
+              <TabButton
+                className={`vintage-tab ${tab === "bulk" ? "active" : ""}`}
+                ref={bulkButton}
+                onClick={() => {
+                  if (verified) {
+                    setTab("bulk");
+                  } else {
+                    toast.error("Not available for free user.");
+                  }
+                }}
+              >
+                Bulk SMS
+              </TabButton>
+            </TabBar>
+            <article style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
+              <InformationBox>
                 {
                   <p>
-                    <b>Attention: All unupgraded accounts will be deleted soon.</b>
+                    {membership !== "Private" && <b style={{ color: "#009DD2" }}>COST: $0.02/SMS. &nbsp;</b>}
+                    <strong>Send SMS reliably to all carriers, including AT&T, Verizon, T-Mobile, Vodafone etc.</strong>
                   </p>
                 }
               </InformationBox>
-            )}
+              {membership !== "Private" && (
+                <InformationBox
+                  style={{
+                    background: "linear-gradient(180deg, #e9c86f 0%, #b7923a 55%, #8e6e29 100%)",
+                    border: "1px solid #b89a45",
+                    boxShadow: "0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0,0,0,0.15)",
+                    color: "#1f1a0f",
+                  }}
+                >
+                  {
+                    <p>
+                      <b>Attention: All unupgraded accounts will be deleted soon.</b>
+                    </p>
+                  }
+                </InformationBox>
+              )}
 
-            {userProfile?.alert && (
-              <InformationBox style={{ background: "red", color: "black" }}>
-                {
-                  <p>
-                    <b>{userProfile?.alert_information}</b>
-                  </p>
-                }
-              </InformationBox>
-            )}
-          </article>
-          <IntroductionFrame>
-            {statusIsLoading ? <LoadingAnimation /> : <ServiceLoad status={serverStatus?.status} />}
-            {/* <div style={{ color: "#a8acb4" }}>
-              <p style={{ color: "#fff", fontSize: "18px", fontWeight: 600 }}>Send SMS</p>
-              <ul style={{ marginTop: "1rem", fontSize: "14px", marginLeft: "0.6rem" }}>
-                <li>
-                  Bulk SMS phone number should be <b>without country code (+1)</b>
-                </li>
-                {userProfile?.membership === "Private" ? (
-                  <li>
-                    Maximum number of phone number that can be loaded once is <strong>{"50,000"}</strong>
-                  </li>
-                ) : (
-                  <li>
-                    Maximum number of phone number that can be loaded once is <strong>{verified ? "10,000" : "1,000"}</strong>
-                  </li>
-                )}
-              </ul>
-            </div> */}
-          </IntroductionFrame>
-          <Body>
-            {tab === "single" ? (
-              <>
-                <div>
-                  <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (2232271673)" maxLength={15} required />
-                </div>
-              </>
-            ) : (
-              <textarea id="multiline-input" onChange={(e) => setPhoneNumberList(e.target.value)} value={phoneNumberList} required></textarea>
-            )}
-            <textarea ref={message} placeholder="Message..." required></textarea>
-          </Body>
-          <Bottom>
-            <Cost>
-              <p>Cost of sending: ${cost}</p>
-            </Cost>
-            <SendButton disabled={requestLoading} onClick={sendHandler}>
-              <p>Send</p>
-              <IoMdSend size={20} />
-            </SendButton>
-          </Bottom>
-        </Frame>
+              {userProfile?.alert && (
+                <InformationBox style={{ background: "red", color: "black" }}>
+                  {
+                    <p>
+                      <b>{userProfile?.alert_information}</b>
+                    </p>
+                  }
+                </InformationBox>
+              )}
+            </article>
+            <IntroductionFrame>{statusIsLoading ? <LoadingAnimation /> : <ServiceLoad status={serverStatus?.status} />}</IntroductionFrame>
+            <Body>
+              {tab === "single" ? (
+                <>
+                  <div>
+                    <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (2232271673)" maxLength={15} required />
+                  </div>
+                </>
+              ) : (
+                <textarea id="multiline-input" onChange={(e) => setPhoneNumberList(e.target.value)} value={phoneNumberList} required></textarea>
+              )}
+              <textarea ref={message} placeholder="Message..." required></textarea>
+            </Body>
+            <Bottom>
+              <Cost>
+                <p>Cost of sending: ${cost}</p>
+              </Cost>
+              <SendButton disabled={requestLoading} onClick={sendHandler}>
+                <p>Send</p>
+                <IoMdSend size={20} />
+              </SendButton>
+            </Bottom>
+          </Frame>
+        </Shell>
       </Mainframe>
       <Toaster
         position="top-right"
@@ -357,188 +348,156 @@ interface SendButtonProps {
 }
 
 const Mainframe = styled.div`
-  height: 100vh;
-  position: relative;
-  /* max-height: 900px; */
-  min-height: 650px;
-  display: flex;
-  min-width: 1000px;
-  /* position: relative; */
-  /* width: 70%; */
-  /* border: 1px solid red; */
-
-  & > nav {
-    /* border: 1px solid red; */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-    height: 100%;
-    max-height: 900px;
-
-    @media (min-width: 1200px) {
-      width: 280px;
-    }
-    @media (max-width: 700px) {
-      width: 100px;
-    }
-  }
-`;
-
-const Frame = styled.div`
-  /* border: 1px solid tomato; */
-  width: 100%;
-  height: 100%;
-  min-width: 670px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-self: flex-end;
-`;
-const NavigationBar = styled.div`
-  /* border: 1px solid aqua; */
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 73px;
-  margin-bottom: 1rem;
-`;
-const NavButton = styled.button`
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #676f80;
-  background: none;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  width: 260px;
-  height: 100%;
-  font-family: ${open_sans.style.fontFamily};
-  padding: 1rem 3rem 1rem 3rem;
-
-  &:focus {
-    color: #a8acb4;
-    outline: none;
-  }
-  &:hover {
-    background-color: #2c303997;
-  }
-`;
-const BulkButton = styled(NavButton)<ButtonProps>`
-  color: ${({ active }) => active === "bulk" && "#a8acb4"};
-  background-color: ${({ active }) => active === "bulk" && "#2c303997"};
-`;
-const SingleButton = styled(NavButton)<ButtonProps>`
-  color: ${({ active }) => active === "single" && "#a8acb4"};
-  background-color: ${({ active }) => active === "single" && "#2c303997"};
-`;
-const Body = styled.div`
-  border-bottom: 1px solid #d4ebfe30;
-  border-top: 1px solid #d4ebfe30;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 2em 1rem 0rem 1rem;
-  height: 30%;
-  min-height: 280px;
-  padding: 1.2em 1rem 1.2rem 1rem;
-
-  & div {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    gap: 2em;
-
-    & input {
-      background: #1d1f29;
-      border: 1px solid #414651;
-      resize: none;
-      color: white;
-      font-family: ${open_sans.style.fontFamily};
-      font-size: 1rem;
-      padding: 1em;
-      width: 120%;
-      border-radius: 8px;
-      /* transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
-      /* transition: outline 0.8s linear; */
-
-      &::placeholder {
-        font-family: ${open_sans.style.fontFamily};
-        font-size: 14px;
-        color: #afb3bd;
-      }
-
-      &:focus {
-        outline: 2px solid #41465178;
-        outline-offset: 2px;
-      }
-    }
-  }
-
-  & textarea {
-    border-radius: 8px;
-    background: #1d1f29;
-    border: 1px solid #414651;
-    resize: none;
-    color: white;
-    font-family: ${open_sans.style.fontFamily};
-    font-size: 1rem;
-    padding: 1em;
-
-    &::placeholder {
-      font-family: ${open_sans.style.fontFamily};
-      font-size: 14px;
-      color: #afb3bd;
-    }
-
-    &:focus {
-      outline: 2px solid #41465178;
-    }
-
-    ::-webkit-scrollbar {
-      width: 6px; /* Set the width of the scrollbar track */
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: #88888873; /* Set the color of the scroll knob */
-      border-radius: 3px; /* Set the border radius of the knob */
-    }
-
-    ::-webkit-scrollbar-track {
-      background-color: #f1f1f138; /* Set the color of the scrollbar track */
-      border-radius: 3px; /* Set the border radius of the track */
-    }
-  }
-
-  & textarea:first-child {
-    height: 100%;
-    width: 48.8%;
-  }
-  & textarea:last-child {
-    height: 100%;
-    width: 50%;
-  }
-`;
-const Bottom = styled.div`
-  /* border: 1px solid blue; */
-  display: flex;
-  padding: 20px 30px 20px 30px;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 50px;
-`;
-const Cost = styled.div`
-  height: 40px;
-  padding: 20px;
-  border: 3px solid var(--simple-dark-blue);
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--simple-blue);
-  font-size: 16px;
-  font-weight: 500;
-  font-family: ${open_sans.style.fontFamily};
+  background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
+  background-attachment: fixed;
+`;
+
+const Frame = styled.div`
+  width: 100%;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Shell = styled.div`
+  width: 100%;
+  max-width: 1180px;
+  // margin: 16px auto;
+  display: flex;
+  flex-direction: row;
+  min-height: 520px;
+  background: linear-gradient(180deg, #f8f7f3 0%, #efede6 100%);
+  border: 1px solid #c5c3bb;
+  box-shadow: 0 2px 0 #fff inset, 0 1px 0 #bab6ad inset, 0 8px 18px rgba(0, 0, 0, 0.35);
+  margin-top: 6px;
+`;
+
+const TabBar = styled.div`
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+  border-bottom: 1px solid #bdb9ad;
+  padding: 8px 16px 0 16px;
+  margin-bottom: 12px;
+`;
+const TabButton = styled.button`
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #2c2c2c;
+  cursor: pointer;
+  padding: 8px 14px;
+  border: 1px solid #bdb9ad;
+  border-bottom: none;
+  background: linear-gradient(180deg, #ffffff 0%, #e6e3da 100%);
+  box-shadow: 0 1px 0 #fff inset;
+
+  &.active {
+    background: linear-gradient(180deg, #f7f5ee 0%, #ebe8de 100%);
+    font-weight: 600;
+  }
+`;
+const Body = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  gap: 12px;
+  min-height: 170px;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    gap: 12px;
+
+    & input {
+      background: linear-gradient(180deg, #ffffff 0%, #f1efe8 100%);
+      border: 1px solid #bdb9ad;
+      box-shadow: 0 1px 0 #fff inset;
+      border-radius: 2px;
+      color: #2c2c2c;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      padding: 12px;
+      width: 100%;
+
+      &::placeholder {
+        color: #6b6b6b;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+      }
+
+      &:focus {
+        outline: 2px solid #b89a45;
+        outline-offset: 1px;
+      }
+    }
+  }
+
+  & > textarea {
+    width: 48%;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #ffffff 0%, #f1efe8 100%);
+    border: 1px solid #bdb9ad;
+    box-shadow: 0 1px 0 #fff inset;
+    resize: none;
+    color: #2c2c2c;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 12px;
+    height: 100%;
+
+    &::placeholder {
+      color: #6b6b6b;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+
+    &:focus {
+      outline: 2px solid #b89a45;
+      outline-offset: 1px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #bdb9ad;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #f1efe8;
+      border-radius: 3px;
+    }
+  }
+`;
+const Bottom = styled.div`
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  border-top: 1px solid #bdb9ad;
+`;
+const Cost = styled.div`
+  height: 40px;
+  padding: 12px 20px;
+  border: 1px solid #b89a45;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e2c45;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%);
+  box-shadow: 0 1px 0 #fff inset;
 `;
 export const SendButton = styled.button<SendButtonProps>`
   height: 40px;
@@ -546,41 +505,48 @@ export const SendButton = styled.button<SendButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-end;
-  gap: 0.5em;
-  background-color: ${(props) => (props.disabled ? "#ffffff44" : "#fff")};
-  border: none;
-  color: #000;
-  border-radius: 8px;
-  font-weight: 500;
-  font-family: ${open_sans.style.fontFamily};
+  gap: 8px;
+  background: ${(props) => (props.disabled ? "linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%)" : "linear-gradient(180deg, #e9c86f 0%, #b7923a 55%, #8e6e29 100%)")};
+  border: 1px solid ${(props) => (props.disabled ? "#d5d1c7" : "#7a6126")};
+  color: ${(props) => (props.disabled ? "#6b6b6b" : "#1f1a0f")};
+  border-radius: 2px;
+  font-weight: 600;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  box-shadow: ${(props) => (props.disabled ? "0 1px 0 #fff inset" : "0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0,0,0,0.25)")};
+
+  &:hover {
+    filter: ${(props) => (props.disabled ? "none" : "brightness(1.05)")};
+  }
 
   & p {
-    font-size: 16px;
+    font-size: 12px;
+    margin: 0;
   }
 `;
 export const InformationBox = styled.div`
-  background-color: #1d1f29;
-  border-top: 1px solid #2c3039;
-  border-bottom: 1px solid #2c3039;
-  padding: 0.5rem 2rem 0.5rem 2rem;
+  background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
+  border: 1px solid #c5c1b7;
+  box-shadow: 0 1px 0 #fff inset;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
-  gap: 0.2rem;
-  color: #afb3bd;
+  gap: 8px;
+  color: #2c2c2c;
   font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
 `;
 
 const IntroductionFrame = styled.div`
   display: flex;
-  /* gap: 1rem; */
-  /* border-bottom: 1px solid #d4ebfe30; */
-  border-radius: 8px;
-  padding: 1.5rem 2rem 1.5rem 2rem;
-  margin-top: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  border-radius: 2px;
+  padding: 20px;
+  margin: 12px 20px;
+  min-height: 188px;
+  background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
+  border: 1px solid #c5c1b7;
+  box-shadow: 0 1px 0 #fff inset;
 `;
 
 export default SendScreen;

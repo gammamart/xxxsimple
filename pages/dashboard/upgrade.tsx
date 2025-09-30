@@ -10,6 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import instance from "@/axios";
 import requests from "@/requests";
 import { Open_Sans } from "next/font/google";
+import NavigationBar from "@/components/home/NavigationBar";
 
 const open_sans = Open_Sans({ subsets: ["latin"] });
 
@@ -84,119 +85,120 @@ const UpgradeScreen = () => {
       <Head>
         <title>просто</title>
       </Head>
+      <NavigationBar />
       <Mainframe>
-        <Navbar />
-        <nav></nav>
-
-        <Frame>
-          <NavigationBar>
-            <ProButton ref={proButton} onClick={() => setTab("pro")} active={tab}>
-              Pro Membership
-            </ProButton>
-            <APIButton ref={apiButton} onClick={() => setTab("api")} active={tab}>
-              API Membership
-            </APIButton>
-            <PrivateButton ref={privateButton} onClick={() => setTab("private")} active={tab}>
-              Private Membership
-            </PrivateButton>
-          </NavigationBar>
-          <Up>
-            {tab === "pro" && <h6>Pro.</h6>}
-            {tab === "api" && <h6>API.</h6>}
-            {tab === "private" && <h6>Private.</h6>}
-          </Up>
-          <Bottom>
-            <section>
-              {tab === "pro" && (
-                <>
-                  {/* <p>
+        <Shell>
+          <Navbar />
+          <Frame>
+            <MiniNavigationBar>
+              <ProButton ref={proButton} onClick={() => setTab("pro")} active={tab}>
+                Pro Membership
+              </ProButton>
+              <APIButton ref={apiButton} onClick={() => setTab("api")} active={tab}>
+                API Membership
+              </APIButton>
+              <PrivateButton ref={privateButton} onClick={() => setTab("private")} active={tab}>
+                Private Membership
+              </PrivateButton>
+            </MiniNavigationBar>
+            <Up>
+              {tab === "pro" && <h6>Pro.</h6>}
+              {tab === "api" && <h6>API.</h6>}
+              {tab === "private" && <h6>Private.</h6>}
+            </Up>
+            <Bottom>
+              <section>
+                {tab === "pro" && (
+                  <>
+                    {/* <p>
                     We are thrilled to announce the release of our Pro Version to the wider public! Until now, our Pro features were exclusively available to a select few, ensuring top-notch quality. However, our robust infrastructure now allows us to extend these incredible benefits to everyone.
                   </p> */}
-                  <br />
-                  <ul>
-                    <p style={{ color: "#009DD2" }}>Upgrade to our Pro Plan and experience the following advantages:</p>
+                    <br />
+                    <ul>
+                      <p style={{ color: "#b89a45", fontWeight: "600" }}>Upgrade to our Pro Plan and experience the following advantages:</p>
+                      <br />
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Advanced Link Tracking:</b> Our state-of-the-art link tracking system ensures your messages reach their destination, even when links are blacklisted. You&apos;ll receive detailed link activity reports in your email.
+                      </li>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>End-to-End Message Encryption:</b> Protect your messages with the highest level of security and enjoy peace of mind knowing your conversations are shielded.
+                      </li>
+                    </ul>
                     <br />
                     <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Advanced Link Tracking:</b> Our state-of-the-art link tracking system ensures your messages reach their destination, even when links are blacklisted. You&apos;ll receive detailed link activity reports in your email.
-                    </li>
+                  </>
+                )}
+                {tab === "api" && (
+                  <>
+                    <ul>
+                      <p style={{ color: "#b89a45", fontWeight: "600" }}>Upgrade to our API Membership and unlock these exclusive features:</p>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Direct API Access:</b> Seamlessly integrate our powerful SMS platform into your own applications and workflows.
+                      </li>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Priority Throughput:</b> Enjoy higher message throughput and reduced queue times for your API requests.
+                      </li>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Comprehensive API Documentation:</b> Access detailed guides and support for rapid integration and troubleshooting.
+                      </li>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Dedicated API Support:</b> Get priority assistance from our technical team for all your API needs.
+                      </li>
+                    </ul>
                     <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>End-to-End Message Encryption:</b> Protect your messages with the highest level of security and enjoy peace of mind knowing your conversations are shielded.
-                    </li>
-                  </ul>
-                  <br />
-                  <br />
-                </>
-              )}
-              {tab === "api" && (
-                <>
-                  <ul>
-                    <p style={{ color: "#009DD2" }}>Upgrade to our API Membership and unlock these exclusive features:</p>
                     <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Direct API Access:</b> Seamlessly integrate our powerful SMS platform into your own applications and workflows.
-                    </li>
+                  </>
+                )}
+                {tab === "private" && (
+                  <>
+                    <ul>
+                      <p style={{ color: "#b89a45", fontWeight: "600" }}>Upgrade to our Private Membership for the ultimate experience:</p>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Personalized Service:</b> Receive one-on-one onboarding and a dedicated account manager for your business.
+                      </li>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Highest Priority Delivery:</b> Your messages are always at the front of the queue, ensuring the fastest possible delivery.
+                      </li>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Custom Integrations:</b> Work with our engineers to build custom features and integrations tailored to your needs.
+                      </li>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>Exclusive Beta Access:</b> Be the first to try new features and products before public release.
+                      </li>
+                    </ul>
                     <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Priority Throughput:</b> Enjoy higher message throughput and reduced queue times for your API requests.
-                    </li>
                     <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Comprehensive API Documentation:</b> Access detailed guides and support for rapid integration and troubleshooting.
-                    </li>
-                    <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Dedicated API Support:</b> Get priority assistance from our technical team for all your API needs.
-                    </li>
-                  </ul>
-                  <br />
-                  <br />
-                </>
-              )}
-              {tab === "private" && (
-                <>
-                  <ul>
-                    <p style={{ color: "#009DD2" }}>Upgrade to our Private Membership for the ultimate experience:</p>
-                    <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Personalized Service:</b> Receive one-on-one onboarding and a dedicated account manager for your business.
-                    </li>
-                    <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Highest Priority Delivery:</b> Your messages are always at the front of the queue, ensuring the fastest possible delivery.
-                    </li>
-                    <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Custom Integrations:</b> Work with our engineers to build custom features and integrations tailored to your needs.
-                    </li>
-                    <br />
-                    <li>
-                      <b style={{ color: "#009dd2" }}>Exclusive Beta Access:</b> Be the first to try new features and products before public release.
-                    </li>
-                  </ul>
-                  <br />
-                  <br />
-                </>
-              )}
-              {tab === "pro" && !verified && (
-                <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
-                  {`Upgrade $${MEMBERSHIP_PRICES["pro"]}`}
-                </UpgradeButton>
-              )}
-              {tab === "api" && (
-                <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
-                  {`Upgrade $${MEMBERSHIP_PRICES["api"]}`}
-                </UpgradeButton>
-              )}
-              {tab === "private" && (
-                <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
-                  {`Upgrade $${MEMBERSHIP_PRICES["private"]}`}
-                </UpgradeButton>
-              )}
-            </section>
-          </Bottom>
-        </Frame>
+                  </>
+                )}
+                {tab === "pro" && !verified && (
+                  <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
+                    {`Upgrade $${MEMBERSHIP_PRICES["pro"]}`}
+                  </UpgradeButton>
+                )}
+                {tab === "api" && (
+                  <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
+                    {`Upgrade $${MEMBERSHIP_PRICES["api"]}`}
+                  </UpgradeButton>
+                )}
+                {tab === "private" && (
+                  <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
+                    {`Upgrade $${MEMBERSHIP_PRICES["private"]}`}
+                  </UpgradeButton>
+                )}
+              </section>
+            </Bottom>
+          </Frame>
+        </Shell>
       </Mainframe>{" "}
       <Toaster
         position="top-left"
@@ -229,67 +231,67 @@ interface UpgradeButtonProps {
 }
 
 const Mainframe = styled.div`
-  height: 100vh;
-  /* max-height: 900px; */
-  min-height: 650px;
   display: flex;
-  min-width: 1000px;
-
-  & > nav {
-    /* border: 1px solid red; */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-    height: 100%;
-    max-height: 900px;
-
-    @media (min-width: 1200px) {
-      width: 280px;
-    }
-    @media (max-width: 700px) {
-      width: 100px;
-    }
-  }
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
+  background-attachment: fixed;
+`;
+const Shell = styled.div`
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  flex-direction: row;
+  min-height: 520px;
+  background: linear-gradient(180deg, #f8f7f3 0%, #efede6 100%);
+  border: 1px solid #c5c3bb;
+  box-shadow: 0 2px 0 #fff inset, 0 1px 0 #bab6ad inset, 0 8px 18px rgba(0, 0, 0, 0.35);
+  margin-top: 6px;
 `;
 
 const Frame = styled.div`
-  /* border: 1px solid tomato; */
-  height: 100%;
-  border-left: 1px solid rgb(255, 255, 255, 0.34);
-  min-width: 300px;
-  width: 100%;
+  flex: 1;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 30px;
-  padding-right: 30px;
+  gap: 0;
+  overflow: hidden;
+`;
+const Up = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px 30px 20px 20px;
+  background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
+  border: 1px solid #c5c1b7;
+  box-shadow: 0 1px 0 #fff inset;
+  margin: 12px 20px;
+  border-radius: 2px;
+  min-height: 100px;
 
   & h6 {
     font-size: 18px;
-    color: #fcfdffef;
+    color: #1e2c45;
+    font-weight: 700;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    margin: 0;
   }
 `;
-const Up = styled.div`
-  /* border: 1px solid aqua; */
-  height: 140px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px;
-`;
 const Bottom = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2em;
-  height: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 30px;
-  color: white;
+  flex: 1;
+  padding: 20px 30px 20px 20px;
+  background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
+  border: 1px solid #c5c1b7;
+  box-shadow: 0 1px 0 #fff inset;
+  margin: 12px 20px;
+  border-radius: 2px;
+  min-height: 400px;
+  color: #2c2c2c;
 
   & > section {
     max-width: 800px;
@@ -299,10 +301,11 @@ const Bottom = styled.div`
     flex-direction: column;
     gap: 1.5rem;
     line-height: 1.6;
-    font-size: 14px;
+    font-size: 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
   }
   & a {
-    color: var(--simple-blue);
+    color: #b89a45;
     display: flex;
     align-items: center;
     gap: 0.4em;
@@ -310,97 +313,109 @@ const Bottom = styled.div`
     text-decoration: none;
 
     & span {
-      color: #fff;
-      border-bottom: 1px solid var(--simple-blue);
+      color: #2c2c2c;
+      border-bottom: 1px solid #b89a45;
       padding: 0.5em;
       font-size: 18px;
     }
 
     &:hover {
-      color: rgba(255, 255, 255, 0.5) !important;
+      color: #8e6e29 !important;
     }
   }
 
   & textarea {
-    background: none;
-    border: 1px solid rgb(255, 255, 255, 0.7);
+    background: linear-gradient(180deg, #ffffff 0%, #f1efe8 100%);
+    border: 1px solid #bdb9ad;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 #fff inset;
     resize: none;
-    color: white;
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 1rem;
+    color: #2c2c2c;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
     padding: 1em;
     height: 250px;
     width: 500px;
 
     &::placeholder {
-      font-family: "Source Sans Pro", sans-serif;
-      font-size: 1rem;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      color: #6b6b6b;
     }
 
     &:focus {
-      outline: none;
+      outline: 2px solid #b89a45;
+      outline-offset: 1px;
     }
   }
 `;
 
 const UpgradeButton = styled.button<UpgradeButtonProps>`
-  background-color: #009dd2;
-  background-color: ${(props) => (props.disabled ? "#009ed24f" : "#009dd2")};
-  color: #fff;
+  background: ${(props) => (props.disabled ? "linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%)" : "linear-gradient(180deg, #e9c86f 0%, #b7923a 55%, #8e6e29 100%)")};
+  border: 1px solid ${(props) => (props.disabled ? "#d5d1c7" : "#7a6126")};
+  color: ${(props) => (props.disabled ? "#6b6b6b" : "#1f1a0f")};
   height: 40px;
   width: 400px;
-  border: none;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition: background-color 0.4s linear;
-  font-weight: 500;
-  font-family: ${open_sans.style.fontFamily};
+  border-radius: 2px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  font-weight: 600;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  box-shadow: ${(props) => (props.disabled ? "0 1px 0 #fff inset" : "0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0,0,0,0.25)")};
 
   &:hover {
-    background-color: #009ed24d;
+    filter: ${(props) => (props.disabled ? "none" : "brightness(1.05)")};
   }
 `;
-const NavigationBar = styled.div`
-  /* border: 1px solid aqua; */
+const MiniNavigationBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
   height: 70px;
-  margin-bottom: 1rem;
+  margin: 12px 20px;
+  background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
+  border: 1px solid #c5c1b7;
+  box-shadow: 0 1px 0 #fff inset;
+  border-radius: 2px;
 `;
 const NavButton = styled.button`
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #676f80;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2c2c2c;
   background: none;
   border: none;
-  padding: 5px;
+  padding: 1rem 2rem;
   cursor: pointer;
-  font-family: ${open_sans.style.fontFamily};
-  font-size: 14px;
-  font-weight: 600;
-  padding: 1rem 3rem 1rem 3rem;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  border-radius: 2px;
+  transition: all 0.2s ease;
 
   &:focus {
-    color: #a8acb4;
+    color: #1e2c45;
     outline: none;
   }
   &:hover {
-    background-color: #2c303997;
+    background: linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%);
+    color: #1e2c45;
   }
 `;
 const ProButton = styled(NavButton)<ButtonProps>`
-  color: ${({ active }) => active === "pro" && "#a8acb4"};
-  background-color: ${({ active }) => active === "pro" && "#2c303997"};
+  color: ${({ active }) => (active === "pro" ? "#1e2c45" : "#2c2c2c")};
+  background: ${({ active }) => (active === "pro" ? "linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%)" : "none")};
+  border: ${({ active }) => (active === "pro" ? "1px solid #b89a45" : "none")};
+  box-shadow: ${({ active }) => (active === "pro" ? "0 1px 0 #fff inset" : "none")};
 `;
 const APIButton = styled(NavButton)<ButtonProps>`
-  color: ${({ active }) => active === "api" && "#a8acb4"};
-  background-color: ${({ active }) => active === "api" && "#2c303997"};
+  color: ${({ active }) => (active === "api" ? "#1e2c45" : "#2c2c2c")};
+  background: ${({ active }) => (active === "api" ? "linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%)" : "none")};
+  border: ${({ active }) => (active === "api" ? "1px solid #b89a45" : "none")};
+  box-shadow: ${({ active }) => (active === "api" ? "0 1px 0 #fff inset" : "none")};
 `;
 const PrivateButton = styled(NavButton)<ButtonProps>`
-  color: ${({ active }) => active === "private" && "#a8acb4"};
-  background-color: ${({ active }) => active === "private" && "#2c303997"};
+  color: ${({ active }) => (active === "private" ? "#1e2c45" : "#2c2c2c")};
+  background: ${({ active }) => (active === "private" ? "linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%)" : "none")};
+  border: ${({ active }) => (active === "private" ? "1px solid #b89a45" : "none")};
+  box-shadow: ${({ active }) => (active === "private" ? "0 1px 0 #fff inset" : "none")};
 `;
 //pusher
 export default UpgradeScreen;

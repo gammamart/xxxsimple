@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,7 +12,8 @@ import requests from "../../requests";
 import { userActions } from "@/redux_store/store";
 import useAuthentication from "@/utils/hooks/useAuthentication";
 
-import ReCAPTCHA from "react-google-recaptcha";
+import dynamic from "next/dynamic";
+const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), { ssr: false });
 
 const key = "6Le3saIoAAAAAIG7n_zvmqk-xcHxSevNSDipyx-3";
 const open_sans = Open_Sans({ subsets: ["latin"] });
@@ -28,6 +29,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const [captchaIsDone, setCaptchaIsDone] = useState(false);
 
@@ -35,6 +37,10 @@ const Login = () => {
     setCaptchaIsDone(true);
     // console.log("changed");
   }
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,37 +88,60 @@ const Login = () => {
     <>
       {loading && <Loader></Loader>}
       <Mainframe>
-        {error && <span style={{ width: "auto", color: "#831f29", padding: "8px 30px 8px 30px", backgroundColor: "#f8d7d9", position: "absolute", right: "100px" }}>{error}</span>}
-        <Up>
-          <BackButton href={"/"}>
-            <BsArrowLeft size={28} color="white" />
-          </BackButton>
-        </Up>
-        <Bottom>
-          <form onSubmit={(event) => onSubmitHandler(event)} method="post">
-            <input type="text" ref={enteredEmail} placeholder="Username" />
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <input style={{ flex: 1 }} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Password" />
-              <span style={{ color: "var(--simple-blue)", cursor: "pointer" }} onClick={togglePasswordVisibility}>
-                {passwordVisible ? "Hide" : "Show"}
-              </span>
-            </div>
-            <ReCAPTCHA sitekey={key} onChange={onChange} />
-            <button type="submit">Get In</button>
-            <p style={{ color: "#ecedf0" }}>
-              Don&apos;t have an account?{" "}
-              <Link href="/register" style={{ color: "var(--simple-blue)" }}>
+        <Shell>
+          <SideMenu className="vintage-sidemenu">
+            <h3>Member Area</h3>
+            <Link href="/">Home</Link>
+            <Link href="/getIn" className="active">
+              Login
+            </Link>
+            <Link href="/register">Create Account</Link>
+            <Link href="/contact">Support</Link>
+          </SideMenu>
+          <Content>
+            <HeaderRow>
+              <h2>Secure Login</h2>
+            </HeaderRow>
+            <Tabs>
+              <Tab className="vintage-tab active">Login</Tab>
+              <TabLink href="/register" className="vintage-tab">
                 Register
-              </Link>
-            </p>
-            <p style={{ color: "#ecedf0" }}>
-              Having trouble logining in?{" "}
-              <Link href="/contact" style={{ color: "var(--simple-blue)" }}>
-                Contact us
-              </Link>
-            </p>
-          </form>
-        </Bottom>
+              </TabLink>
+            </Tabs>
+            {error && <ErrorBox>{error}</ErrorBox>}
+            <Panel className="vintage-panel">
+              <Form onSubmit={(event) => onSubmitHandler(event)} method="post">
+                <label>Username</label>
+                <Input type="text" ref={enteredEmail} placeholder="Enter your username" />
+                <label>Password</label>
+                <PasswordRow>
+                  <Input style={{ flex: 1 }} type={passwordVisible ? "text" : "password"} id="password" name="password" value={enteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} placeholder="Enter your password" />
+                  <Toggle onClick={togglePasswordVisibility}>{passwordVisible ? "Hide" : "Show"}</Toggle>
+                </PasswordRow>
+                <CaptchaRow>{isClient && <ReCAPTCHA sitekey={key} onChange={onChange} />}</CaptchaRow>
+                <Actions>
+                  <SubmitButton type="submit" className="vintage-button">
+                    Get In
+                  </SubmitButton>
+                </Actions>
+              </Form>
+            </Panel>
+            <Meta>
+              <p>
+                Don&apos;t have an account?{" "}
+                <Link href="/register" className="vintage-nav-link">
+                  Register
+                </Link>
+              </p>
+              <p>
+                Trouble logging in?{" "}
+                <Link href="/contact" className="vintage-nav-link">
+                  Contact us
+                </Link>
+              </p>
+            </Meta>
+          </Content>
+        </Shell>
       </Mainframe>
     </>
   );
@@ -120,66 +149,163 @@ const Login = () => {
 
 const Mainframe = styled.div`
   width: 100%;
-  height: 100%;
-  font-family: ${open_sans.style.fontFamily};
-`;
-const Up = styled.div`
-  height: 60px;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  justify-content: center;
+  background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
+  background-attachment: fixed;
 `;
-const Bottom = styled.div`
-  height: calc(100% - 60px);
+const Shell = styled.div`
+  width: 100%;
+  max-width: 880px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(180deg, #f8f7f3 0%, #efede6 100%);
+  border: 1px solid #c5c3bb;
+  box-shadow: 0 2px 0 #fff inset, 0 1px 0 #bab6ad inset, 0 8px 18px rgba(0, 0, 0, 0.35);
+  // border: 1px solid red;
+`;
+const SideMenu = styled.div`
+  width: 260px;
+  padding: 12px;
+  border-right: 1px solid #bdb9ad;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  & h3 {
+    margin: -12px -12px 8px -12px;
+    padding: 10px 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #213a60;
+    background: linear-gradient(180deg, #dcd8cc 0%, #cfcabf 100%);
+    border-bottom: 1px solid #b7b2a6;
+  }
+
+  & a {
+    display: block;
+    padding: 10px 12px;
+    color: #2c2c2c;
+    text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background: linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%);
+    border: 1px solid #d5d1c7;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 #fff inset;
+  }
+
+  & a:hover {
+    background: linear-gradient(180deg, #edeae1 0%, #e5e1d7 100%);
+    text-decoration: underline;
+  }
+
+  & a.active {
+    background: linear-gradient(180deg, #efece3 0%, #e4e0d6 100%);
+    border-color: #bdb9ad;
+    font-weight: 600;
+  }
+`;
+const Content = styled.div`
+  flex: 1;
   padding: 20px;
   display: flex;
   flex-direction: column;
+  gap: 14px;
+`;
+const HeaderRow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  padding: 8px 0 0 0;
 
-  & form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  & h2 {
+    font-family: "Times New Roman", Times, Georgia, "Book Antiqua", serif;
+    color: #1e2c45;
+    font-size: 22px;
+    text-align: center;
   }
+`;
+const Tabs = styled.div`
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  margin-top: 6px;
+`;
+const Tab = styled.div`
+  text-decoration: underline;
+`;
+const TabLink = styled(Link)`
+  text-decoration: underline;
+`;
+const Panel = styled.div``;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 520px;
+`;
+const Input = styled.input`
+  height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #2c2c2c;
+  background: linear-gradient(180deg, #ffffff 0%, #f1efe8 100%);
+  border: 1px solid #bdb9ad;
+  box-shadow: 0 1px 0 #fff inset;
+  border-radius: 2px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
 
-  & form input {
-    background-color: transparent;
-    border: 2px solid black;
-    height: 50px;
-    border-radius: 0;
-    color: white;
-    padding-left: 10px;
-    font-size: 16px;
-    background: #1d1f29;
-    border: 1px solid #414651;
-    font-family: ${open_sans.style.fontFamily};
-    border-radius: 15px;
-
-    &::placeholder {
-      font-family: ${open_sans.style.fontFamily};
-      font-size: 1rem;
-      color: #afb3bd;
-    }
-
-    &:focus {
-      outline: 2px solid #41465178;
-      outline-offset: 2px;
-      transition: outline 0.6s ease-out;
-    }
+  &::placeholder {
+    color: #6b6b6b;
   }
+`;
+const PasswordRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+const Toggle = styled.span`
+  color: #12325a;
+  cursor: pointer;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-decoration: underline;
+`;
+const CaptchaRow = styled.div`
+  margin-top: 8px;
+`;
+const Actions = styled.div`
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+`;
+const SubmitButton = styled.button`
+  border: none;
+  background: none;
+`;
+const Meta = styled.div`
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #2c2c2c;
 
-  & form button {
-    background-color: white;
-    color: black;
-    height: 38px;
-    border: none;
-    width: 100px;
-    font-size: 16px;
-    align-self: flex-end;
-    cursor: pointer;
-    border-radius: 8px;
-    font-family: ${open_sans.style.fontFamily};
-    font-weight: 600;
+  & p + p {
+    margin-top: 4px;
   }
+`;
+const ErrorBox = styled.div`
+  background: #f8d7d9;
+  border: 1px solid #d9959d;
+  color: #831f29;
+  padding: 8px 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
 `;
 
 const BackButton = styled(Link)`

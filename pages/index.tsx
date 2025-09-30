@@ -12,8 +12,8 @@ const HomeScreen = () => {
         <meta name="google" content="notranslate" />
         <title>просто</title>
       </Head>
+      <NavigationBar />
       <Mainframe>
-        <NavigationBar />
         <Body />
       </Mainframe>
     </>
@@ -21,19 +21,11 @@ const HomeScreen = () => {
 };
 
 const Mainframe = styled.div`
-  height: 100%;
-  overflow: hidden;
-  /* border: 1px solid tomato; */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-
-  @media (min-width: 1500px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  justify-content: center;
+  background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
+  background-attachment: fixed;
 `;
 
 export default HomeScreen;
