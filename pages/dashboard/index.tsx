@@ -353,6 +353,15 @@ const Mainframe = styled.div`
   justify-content: center;
   background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
   background-attachment: fixed;
+  width: 100%;
+  max-width: 100vw;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 const Frame = styled.div`
@@ -365,7 +374,6 @@ const Frame = styled.div`
 const Shell = styled.div`
   width: 100%;
   max-width: 1180px;
-  // margin: 16px auto;
   display: flex;
   flex-direction: row;
   min-height: 520px;
@@ -373,6 +381,13 @@ const Shell = styled.div`
   border: 1px solid #c5c3bb;
   box-shadow: 0 2px 0 #fff inset, 0 1px 0 #bab6ad inset, 0 8px 18px rgba(0, 0, 0, 0.35);
   margin-top: 6px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 4px;
+    min-height: auto;
+    max-width: 98%;
+  }
 `;
 
 const TabBar = styled.div`
@@ -536,6 +551,17 @@ export const InformationBox = styled.div`
   color: #2c2c2c;
   font-size: 12px;
   font-family: Verdana, Arial, Helvetica, sans-serif;
+  width: 100%;
+  max-width: 100vw;
+
+  @media (max-width: 768px) {
+    padding: 10px 16px;
+    font-size: 11px;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 const IntroductionFrame = styled.div`

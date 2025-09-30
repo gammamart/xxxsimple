@@ -35,10 +35,19 @@ const Shell = styled.div`
   width: 100%;
   max-width: 980px;
   margin: 40px auto;
+
+  @media (max-width: 768px) {
+    margin: 20px auto;
+    max-width: 95%;
+  }
 `;
 
 const Panel = styled.div`
   padding: 16px;
+
+  @media (max-width: 768px) {
+    padding: 12px;
+  }
 `;
 const Up = styled.div`
   padding: 10px 12px 12px 12px;
@@ -46,6 +55,14 @@ const Up = styled.div`
     font-size: 16px;
     color: #1e2c45;
     font-family: Verdana, Arial, Helvetica, sans-serif;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 13px;
+    }
   }
 `;
 const Bottom = styled.div`
@@ -67,6 +84,14 @@ const Bottom = styled.div`
       border-bottom: 1px solid #bdb9ad;
       padding: 0.25em 0.5em;
       font-size: 14px;
+
+      @media (max-width: 768px) {
+        font-size: 13px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 12px;
+      }
     }
 
     &:hover {

@@ -28,12 +28,22 @@ const Mainframe = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
   background-attachment: fixed;
   padding: 2rem;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    gap: 1rem;
+  }
 `;
 const Frame = styled.div`
   display: flex;
@@ -52,6 +62,18 @@ const Frame = styled.div`
   font-family: Verdana, Arial, Helvetica, sans-serif;
   line-height: 1.6;
   text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 24px;
+    gap: 1.2rem;
+    max-width: 95%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 16px;
+    gap: 1rem;
+    max-width: 98%;
+  }
 `;
 
 export default maintainace;

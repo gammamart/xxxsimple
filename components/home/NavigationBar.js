@@ -57,13 +57,24 @@ const TopBar = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
   width: 100%;
+  max-width: 100vw;
   background: linear-gradient(180deg, #1d3d6a 0%, #122a49 100%);
   border-top: 1px solid #2b507f;
   border-bottom: 1px solid #0b1b31;
   box-shadow: 0 1px 0 #274b79 inset, 0 -1px 0 #0a172a inset, 0 6px 14px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 768px) {
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 56px;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 const Logo = styled.p`
   color: #f5f2e7;
@@ -72,10 +83,22 @@ const Logo = styled.p`
   letter-spacing: 0.5px;
   font-family: "Times New Roman", Times, Georgia, "Book Antiqua", serif;
   text-shadow: 0 1px 0 #0a172a;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 const NavLinks = styled.nav`
   display: flex;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 4px;
+  }
 `;
 const StyledLink = styled(Link)`
   color: #e6eaf2;
@@ -88,6 +111,16 @@ const StyledLink = styled(Link)`
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset;
   border-radius: 2px;
 
+  @media (max-width: 768px) {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
   &:hover {
     color: #ffffff;
     text-decoration: underline;
@@ -99,15 +132,34 @@ const SubBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
   width: 100%;
+  max-width: 100vw;
   background: #004d1a;
   border-bottom: 1px solid #c6c2b6;
   color: rgb(0, 0, 0);
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
   margin-bottom: 0;
+
+  @media (max-width: 768px) {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 10px;
+    height: 24px;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  @media (max-width: 480px) {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 9px;
+    height: 22px;
+  }
 `;
 
 export default NavigationBar;

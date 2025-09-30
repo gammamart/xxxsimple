@@ -53,6 +53,13 @@ const Shell = styled.div`
   border: 1px solid #c5c3bb;
   box-shadow: 0 2px 0 #fff inset, 0 1px 0 #bab6ad inset, 0 8px 18px rgba(0, 0, 0, 0.35);
   margin-top: 6px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 4px;
+    min-height: auto;
+    max-width: 98%;
+  }
 `;
 
 const Frame = styled.div`

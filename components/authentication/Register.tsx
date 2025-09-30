@@ -196,6 +196,12 @@ const Shell = styled.div`
   background: linear-gradient(180deg, #f8f7f3 0%, #efede6 100%);
   border: 1px solid #c5c3bb;
   box-shadow: 0 2px 0 #fff inset, 0 1px 0 #bab6ad inset, 0 8px 18px rgba(0, 0, 0, 0.35);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin: 20px auto;
+    max-width: 95%;
+  }
 `;
 const SideMenu = styled.div`
   width: 260px;
@@ -204,6 +210,13 @@ const SideMenu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #bdb9ad;
+    padding: 8px;
+  }
 
   & h3 {
     margin: -12px -12px 8px -12px;
@@ -215,6 +228,12 @@ const SideMenu = styled.div`
     color: #213a60;
     background: linear-gradient(180deg, #dcd8cc 0%, #cfcabf 100%);
     border-bottom: 1px solid #b7b2a6;
+
+    @media (max-width: 768px) {
+      margin: -8px -8px 6px -8px;
+      padding: 8px;
+      font-size: 11px;
+    }
   }
 
   & a {
@@ -228,6 +247,11 @@ const SideMenu = styled.div`
     border: 1px solid #d5d1c7;
     border-radius: 2px;
     box-shadow: 0 1px 0 #fff inset;
+
+    @media (max-width: 768px) {
+      padding: 8px 10px;
+      font-size: 11px;
+    }
   }
 
   & a:hover {
@@ -247,6 +271,11 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    padding: 12px;
+    gap: 10px;
+  }
 `;
 const HeaderRow = styled.div`
   display: flex;
@@ -259,6 +288,14 @@ const HeaderRow = styled.div`
     color: #1e2c45;
     font-size: 22px;
     text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 18px;
+    }
   }
 `;
 const Tabs = styled.div`
@@ -280,11 +317,20 @@ const FormGrid = styled.form`
   align-items: center;
   max-width: 620px;
 
+  @media (max-width: 768px) {
+    max-width: 100%;
+    gap: 8px 12px;
+  }
+
   & > label {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 12px;
     color: #1e2c45;
     text-align: left;
+
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
   }
 `;
 const Input = styled.input`

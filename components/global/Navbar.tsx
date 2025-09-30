@@ -96,9 +96,9 @@ const Navbar = () => {
       <UserInfo>
         <div>
           <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-            {membership !== "Private" && <div style={{marginTop: "4px"}}>{verified ? <GiChewedSkull color="#2c2c2c" size={18} /> : <BsEmojiSunglassesFill color="#2c2c2c" size={18} />}</div>}
+            {membership !== "Private" && <div style={{ marginTop: "4px" }}>{verified ? <GiChewedSkull color="#2c2c2c" size={18} /> : <BsEmojiSunglassesFill color="#2c2c2c" size={18} />}</div>}
             {membership === "Private" && (
-              <div style={{marginTop: "4px"}}>
+              <div style={{ marginTop: "4px" }}>
                 <FaGhost color="#2c2c2c" size={18} />
               </div>
             )}
@@ -174,6 +174,15 @@ const Mainframe = styled.div`
   gap: 8px;
   background: linear-gradient(180deg, #f4f2ea 0%, #e7e4da 100%);
 
+  @media (max-width: 768px) {
+    width: 100vw;
+    max-width: 100vw;
+    border-right: none;
+    border-bottom: 1px solid #bdb9ad;
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
   & h3 {
     margin: -12px -12px 8px -12px;
     padding: 10px 12px;
@@ -184,6 +193,12 @@ const Mainframe = styled.div`
     color: #213a60;
     background: linear-gradient(180deg, #dcd8cc 0%, #cfcabf 100%);
     border-bottom: 1px solid #b7b2a6;
+
+    @media (max-width: 768px) {
+      margin: -8px -12px 6px -12px;
+      padding: 8px 12px;
+      font-size: 11px;
+    }
   }
 `;
 const UserInfo = styled.div`
@@ -197,18 +212,32 @@ const UserInfo = styled.div`
   box-shadow: 0 1px 0 #fff inset;
   margin-bottom: 8px;
 
+  @media (max-width: 768px) {
+    padding: 8px 10px;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
   & > div:first-child {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 8px;
+
+    @media (max-width: 768px) {
+      gap: 6px;
+    }
   }
   & > div:nth-child(2) {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
+
+    @media (max-width: 768px) {
+      gap: 6px;
+    }
   }
 `;
 
@@ -220,6 +249,11 @@ const Username = styled.span`
   font-size: 12px;
   color: #2c2c2c;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    gap: 3px;
+  }
 `;
 
 const Balance = styled.p`
@@ -227,6 +261,10 @@ const Balance = styled.p`
   font-size: 14px;
   color: #1e2c45;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const Section = styled.div`
@@ -234,6 +272,11 @@ const Section = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 12px;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
 `;
 
 const SectionTitle = styled.p`
@@ -244,6 +287,12 @@ const SectionTitle = styled.p`
   margin-bottom: 4px;
   text-transform: uppercase;
   letter-spacing: 0.4px;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    margin-bottom: 3px;
+    letter-spacing: 0.3px;
+  }
 `;
 const NavButton = styled(Link)`
   display: block;
@@ -261,6 +310,12 @@ const NavButton = styled(Link)`
   gap: 8px;
   cursor: pointer;
 
+  @media (max-width: 768px) {
+    padding: 8px 10px;
+    font-size: 11px;
+    gap: 6px;
+  }
+
   &:focus {
     background: linear-gradient(180deg, #edeae1 0%, #e5e1d7 100%);
     outline: none;
@@ -274,6 +329,10 @@ const NavButton = styled(Link)`
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 12px;
     color: #2c2c2c;
+
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
   }
 `;
 
@@ -294,6 +353,12 @@ const SignOutButton = styled.button`
   cursor: pointer;
   width: 100%;
 
+  @media (max-width: 768px) {
+    padding: 8px 10px;
+    font-size: 11px;
+    gap: 6px;
+  }
+
   &:hover {
     background: linear-gradient(180deg, #edeae1 0%, #e5e1d7 100%);
     text-decoration: underline;
@@ -303,6 +368,10 @@ const SignOutButton = styled.button`
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 12px;
     color: #2c2c2c;
+
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
   }
 `;
 
@@ -318,6 +387,11 @@ const UpgradeButton = styled(Link)`
   background: linear-gradient(180deg, #e9c86f 0%, #b7923a 55%, #8e6e29 100%);
   box-shadow: 0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0, 0, 0, 0.25);
   transition: filter 0.2s linear;
+
+  @media (max-width: 768px) {
+    padding: 2px 5px;
+    font-size: 11px;
+  }
 
   &:hover {
     filter: brightness(1.05);

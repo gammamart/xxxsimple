@@ -41,10 +41,15 @@ const DashboardScreen = () => {
 
 const Mainframe = styled.div`
   height: 100vh;
-  /* max-height: 900px; */
   min-height: 650px;
   display: flex;
   border: 1px solid red;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+  }
 `;
 const NavigationFrame = styled.div`
   /* border-right: 1px solid rgb(255, 255, 255, 0.34);

@@ -103,8 +103,13 @@ const Shell = styled.div`
   background: linear-gradient(180deg, #f8f7f3 0%, #efede6 100%);
   border: 1px solid #c5c3bb;
   box-shadow: 0 2px 0 #fff inset, 0 1px 0 #bab6ad inset, 0 8px 18px rgba(0, 0, 0, 0.35);
-  // border: 1px solid red;
   margin-top: 30px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 20px;
+    min-height: auto;
+  }
 `;
 const SideMenu = styled.div`
   width: 260px;
@@ -113,6 +118,13 @@ const SideMenu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #bdb9ad;
+    padding: 8px;
+  }
 
   & h3 {
     margin: -12px -12px 8px -12px; /* stretch header to menu edges */
@@ -124,6 +136,12 @@ const SideMenu = styled.div`
     color: #213a60;
     background: linear-gradient(180deg, #dcd8cc 0%, #cfcabf 100%);
     border-bottom: 1px solid #b7b2a6;
+
+    @media (max-width: 768px) {
+      margin: -8px -8px 6px -8px;
+      padding: 8px;
+      font-size: 11px;
+    }
   }
 
   & a {
@@ -137,6 +155,11 @@ const SideMenu = styled.div`
     border: 1px solid #d5d1c7;
     border-radius: 2px;
     box-shadow: 0 1px 0 #fff inset;
+
+    @media (max-width: 768px) {
+      padding: 8px 10px;
+      font-size: 11px;
+    }
   }
 
   & a:hover {
@@ -147,7 +170,10 @@ const SideMenu = styled.div`
 const MainArea = styled.div`
   flex: 1;
   padding: 16px;
-  
+
+  @media (max-width: 768px) {
+    padding: 12px;
+  }
 `;
 const Tabs = styled.div`
   display: flex;
@@ -167,6 +193,14 @@ const Headline = styled.h1`
   font-size: 28px;
   color: #1e2c45;
   margin-bottom: 6px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 20px;
+  }
 `;
 const Sub = styled.p`
   font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -178,6 +212,12 @@ const Actions = styled.div`
   gap: 18px;
   margin-top: 22px;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
 `;
 const ActionLink = styled(Link)`
   text-decoration: underline;
@@ -198,17 +238,41 @@ const RatesTable = styled.table`
   font-size: 12px;
   text-align: left;
 
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+  }
+
   & th {
     text-align: left;
     background: linear-gradient(180deg, #d9d5cb 0%, #c9c4b8 100%);
     color: #1f2f4b;
     padding: 10px;
     border: 1px solid #bdb9ad;
+
+    @media (max-width: 768px) {
+      padding: 8px 6px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 6px 4px;
+    }
   }
   & td {
     padding: 10px;
     border: 1px solid #d5d1c7;
     background: #fbfaf6;
+
+    @media (max-width: 768px) {
+      padding: 8px 6px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 6px 4px;
+    }
   }
   & tr:nth-child(even) td {
     background: #f2f0ea;
