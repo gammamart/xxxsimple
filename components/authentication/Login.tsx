@@ -329,6 +329,16 @@ const Actions = styled.div`
 const SubmitButton = styled.button`
   border: none;
   background: none;
+  display: block;
+  padding: 10px 12px;
+  color: #2c2c2c;
+  text-decoration: none;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%);
+  border: 1px solid #d5d1c7;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 #fff inset;
 `;
 const Meta = styled.div`
   font-family: Verdana, Arial, Helvetica, sans-serif;
