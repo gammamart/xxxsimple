@@ -173,6 +173,10 @@ const UpgradeScreen = () => {
                       </li>
                       <br />
                       <li>
+                        <b style={{ color: "#b89a45" }}>2-Way SMS Communication:</b> Receive and respond to SMS replies directly through our platform, enabling real-time conversations with your recipients.
+                      </li>
+                      <br />
+                      <li>
                         <b style={{ color: "#b89a45" }}>Exclusive Beta Access:</b> Be the first to try new features and products before public release.
                       </li>
                     </ul>
