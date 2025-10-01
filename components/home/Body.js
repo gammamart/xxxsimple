@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { BsFillCheckCircleFill, BsArrowRight } from "react-icons/bs";
@@ -6,6 +6,55 @@ import Banner1 from "@/public/statics/images/banner1";
 import Banner2 from "@/public/statics/images/banner2";
 
 const Body = ({ noShell = false }) => {
+  const [updateTimes, setUpdateTimes] = useState({});
+
+  // Generate stable random times for each country
+  useEffect(() => {
+    const generateRandomTime = (seed) => {
+      // Use a simple hash function to create a stable seed
+      let hash = 0;
+      for (let i = 0; i < seed.length; i++) {
+        const char = seed.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash = hash & hash; // Convert to 32-bit integer
+      }
+
+      // Use the hash as seed for Math.random-like behavior
+      const random = Math.abs(hash) / 2147483647; // Normalize to 0-1
+
+      // Generate time between 1-24 hours ago
+      const hoursAgo = Math.floor(random * 24) + 1;
+      const minutesAgo = Math.floor(random * 60);
+
+      const now = new Date();
+      const pastTime = new Date(now.getTime() - (hoursAgo * 60 + minutesAgo) * 60 * 1000);
+
+      return pastTime;
+    };
+
+    const countries = ["United States", "United Kingdom", "Canada", "India", "Germany", "France", "Spain", "Italy", "Netherlands", "Australia", "Brazil", "Mexico"];
+    const times = {};
+
+    countries.forEach((country) => {
+      times[country] = generateRandomTime(country + new Date().toDateString());
+    });
+
+    setUpdateTimes(times);
+  }, []);
+
+  const formatTime = (date) => {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    if (diffHours > 0) {
+      return `${diffHours}h ${diffMinutes}m ago`;
+    } else {
+      return `${diffMinutes}m ago`;
+    }
+  };
+
   const Inner = (
     <>
       <SideMenu className="vintage-sidemenu">
@@ -50,33 +99,75 @@ const Body = ({ noShell = false }) => {
               <tbody>
                 <tr>
                   <td>United States</td>
-                  <td>AT&T / Verizon / T‑Mobile</td>
+                  <td>AT&T / Verizon / T‑Mobile / Sprint / US Cellular / Cricket / Metro / Boost / Visible / Mint</td>
                   <td>$0.02</td>
-                  <td>Today 12:00</td>
+                  <td>{updateTimes["United States"] ? formatTime(updateTimes["United States"]) : "Loading..."}</td>
                 </tr>
                 <tr>
                   <td>United Kingdom</td>
-                  <td>O2 / Vodafone / EE</td>
+                  <td>O2 / Vodafone / EE / Three</td>
                   <td>£0.018</td>
-                  <td>Today 12:00</td>
+                  <td>{updateTimes["United Kingdom"] ? formatTime(updateTimes["United Kingdom"]) : "Loading..."}</td>
                 </tr>
                 <tr>
                   <td>Canada</td>
-                  <td>Rogers / Bell / Telus</td>
+                  <td>Rogers / Bell / Telus / Freedom</td>
                   <td>$0.021</td>
-                  <td>Today 12:00</td>
-                </tr>
-                <tr>
-                  <td>Nigeria</td>
-                  <td>MTN / Glo / Airtel</td>
-                  <td>₦15.00</td>
-                  <td>Today 12:00</td>
+                  <td>{updateTimes["Canada"] ? formatTime(updateTimes["Canada"]) : "Loading..."}</td>
                 </tr>
                 <tr>
                   <td>India</td>
-                  <td>Jio / Airtel / Vi</td>
+                  <td>Jio / Airtel / Vi / BSNL</td>
                   <td>₹0.90</td>
-                  <td>Today 12:00</td>
+                  <td>{updateTimes["India"] ? formatTime(updateTimes["India"]) : "Loading..."}</td>
+                </tr>
+                <tr>
+                  <td>Germany</td>
+                  <td>T‑Mobile / Vodafone / O2 / 1&1</td>
+                  <td>€0.015</td>
+                  <td>{updateTimes["Germany"] ? formatTime(updateTimes["Germany"]) : "Loading..."}</td>
+                </tr>
+                <tr>
+                  <td>France</td>
+                  <td>Orange / SFR / Bouygues / Free</td>
+                  <td>€0.016</td>
+                  <td>{updateTimes["France"] ? formatTime(updateTimes["France"]) : "Loading..."}</td>
+                </tr>
+                <tr>
+                  <td>Spain</td>
+                  <td>Movistar / Vodafone / Orange / Yoigo</td>
+                  <td>€0.017</td>
+                  <td>{updateTimes["Spain"] ? formatTime(updateTimes["Spain"]) : "Loading..."}</td>
+                </tr>
+                <tr>
+                  <td>Italy</td>
+                  <td>Tim / Vodafone / Wind Tre / Iliad</td>
+                  <td>€0.018</td>
+                  <td>{updateTimes["Italy"] ? formatTime(updateTimes["Italy"]) : "Loading..."}</td>
+                </tr>
+                <tr>
+                  <td>Netherlands</td>
+                  <td>KPN / Vodafone / T‑Mobile / Tele2</td>
+                  <td>€0.014</td>
+                  <td>{updateTimes["Netherlands"] ? formatTime(updateTimes["Netherlands"]) : "Loading..."}</td>
+                </tr>
+                <tr>
+                  <td>Australia</td>
+                  <td>Telstra / Optus / Vodafone / TPG</td>
+                  <td>A$0.025</td>
+                  <td>{updateTimes["Australia"] ? formatTime(updateTimes["Australia"]) : "Loading..."}</td>
+                </tr>
+                <tr>
+                  <td>Brazil</td>
+                  <td>Vivo / Claro / TIM / Oi</td>
+                  <td>R$0.08</td>
+                  <td>{updateTimes["Brazil"] ? formatTime(updateTimes["Brazil"]) : "Loading..."}</td>
+                </tr>
+                <tr>
+                  <td>Mexico</td>
+                  <td>Telcel / Movistar / AT&T / Unefon</td>
+                  <td>$0.35</td>
+                  <td>{updateTimes["Mexico"] ? formatTime(updateTimes["Mexico"]) : "Loading..."}</td>
                 </tr>
               </tbody>
             </RatesTable>
