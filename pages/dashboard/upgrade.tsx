@@ -180,7 +180,7 @@ const UpgradeScreen = () => {
                     <br />
                   </>
                 )}
-                {tab === "pro" && !verified && (
+                {tab === "pro" && (
                   <UpgradeButton onClick={upgradeHandler} disabled={requestLoading}>
                     {`Upgrade $${MEMBERSHIP_PRICES["pro"]}`}
                   </UpgradeButton>
