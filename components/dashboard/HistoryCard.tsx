@@ -45,15 +45,14 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
   const momentObject = moment(originalDate);
   const timeAgo = moment(originalDate).fromNow();
 
-
   // x2 time achieved by halving the value of the original time ago
-  const halfTimeAgo = momentObject.subtract(momentObject.diff(moment(), 'milliseconds') / 2).fromNow();
+  const halfTimeAgo = momentObject.subtract(momentObject.diff(moment(), "milliseconds") / 2).fromNow();
 
   const status_color: Record<string, string> = {
-    FAILED: "#ff0101a0",
-    COMPLETED: "#1aa14e87",
-    PREPARING: "#ffa20182",
-    SENDING: "#009ed28c",
+    FAILED: "#8e1b1b",
+    COMPLETED: "#4b8a3c",
+    PREPARING: "#b89a45",
+    SENDING: "#2c5a2c",
   };
 
   const status_animation: Record<string, any> = {
@@ -61,26 +60,25 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
     SENDING: <Lottie options={sendingAnimationOptions} width={85} height={100} />,
   };
 
-
   return (
     <Mainframe>
       <TableSmallBox>
-        <p style={{ fontSize: "14px", }}>{v4().slice(0,4)} </p>
+        <p style={{ fontSize: "14px", color: "#2c2c2c" }}>{v4().slice(0, 4)} </p>
       </TableSmallBox>
       <TableSmallBox>
         <p style={{ fontSize: "14px" }}>
           <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
         </p>
       </TableSmallBox>
-      <TableSmallBox style={{marginLeft: "1rem"}}>
-        <p style={{ fontSize: "14px", color: "#fff" }}>{job_type} </p>
+      <TableSmallBox style={{ marginLeft: "1rem" }}>
+        <p style={{ fontSize: "14px", color: "#2c2c2c" }}>{job_type} </p>
       </TableSmallBox>
       <TableSmallBox>
-        <p style={{ fontSize: "14px" }}>{halfTimeAgo} </p>
+        <p style={{ fontSize: "14px", color: "#2c2c2c" }}>{halfTimeAgo} </p>
       </TableSmallBox>
 
       <TableSmallBox>
-        <p style={{ fontSize: "10px", color: "#fff", width: "150px" }}>{failure_message === "UNNAMED" ? "No message" : failure_message}</p>
+        <p style={{ fontSize: "10px", color: "#2c2c2c", width: "150px" }}>{failure_message === "UNNAMED" ? "No message" : failure_message}</p>
       </TableSmallBox>
     </Mainframe>
   );
@@ -91,7 +89,7 @@ type StatusProps = {
 };
 
 const Mainframe = styled.tr`
-  border-bottom: 1px solid #d4e4fe31;
+  border-bottom: 1px solid #c5c1b7;
   width: 100% !important;
   padding-right: 20px;
   padding-left: 20px;
@@ -100,16 +98,26 @@ const Mainframe = styled.tr`
   flex-direction: row;
   height: 2.5rem !important;
   align-items: center;
-  /* justify-content: space-between; */
   font-size: 18px;
-  color: #fff;
-  /* flex: 1; */
-  /* height: 50px; */
+  color: #2c2c2c;
+  background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
+  border-radius: 2px;
+  margin-bottom: 4px;
+  box-shadow: 0 1px 0 #fff inset;
+
+  @media (max-width: 768px) {
+    padding-right: 16px;
+    padding-left: 16px;
+    padding-bottom: 16px;
+    height: 2.2rem !important;
+  }
 
   & p {
-    color: #ffffffa6;
+    color: #2c2c2c;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: 500;
   }
 `;
 

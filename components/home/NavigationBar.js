@@ -23,7 +23,10 @@ const NavigationBar = () => {
   return (
     <>
       <TopBar>
-        <Logo>просто</Logo>
+        <Logo>
+          просто
+          <VersionText>v3.0.1</VersionText>
+        </Logo>
         <NavLinks>
           <StyledLink href="/">Home</StyledLink>
           {(isHome || !isLoggedIn) && <StyledLink href="/getIn">Login</StyledLink>}
@@ -83,9 +86,32 @@ const Logo = styled.p`
   letter-spacing: 0.5px;
   font-family: "Times New Roman", Times, Georgia, "Book Antiqua", serif;
   text-shadow: 0 1px 0 #0a172a;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  line-height: 1;
 
   @media (max-width: 768px) {
     font-size: 20px;
+  }
+`;
+
+const VersionText = styled.span`
+  color: #b8c5d1;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  text-shadow: 0 1px 0 #0a172a;
+  margin-top: 2px;
+  opacity: 0.8;
+  align-self: flex-end;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+    margin-top: 1px;
   }
 `;
 const NavLinks = styled.nav`

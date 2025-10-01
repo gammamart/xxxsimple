@@ -83,14 +83,42 @@ const ImprovementScreen = () => {
         containerClassName=""
         containerStyle={{}}
         toastOptions={{
-          // Define default options
-          className: "",
-          duration: 3000,
+          duration: 4000,
           style: {
-            background: "#2F2E41",
-            color: "#fff",
-            boxShadow: "none",
+            background: "linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%)",
+            color: "#2c2c2c",
+            border: "1px solid #d5d1c7",
+            borderRadius: "2px",
+            boxShadow: "0 1px 0 #fff inset, 0 2px 0 #b7b2a6, 0 6px 12px rgba(0, 0, 0, 0.25)",
+            fontFamily: "Verdana, Arial, Helvetica, sans-serif",
             fontSize: "12px",
+            fontWeight: "500",
+          },
+          success: {
+            duration: 3000,
+            style: {
+              background: "linear-gradient(180deg, #f0f8f0 0%, #e0f0e0 100%)",
+              color: "#2c5a2c",
+              border: "1px solid #4b8a3c",
+              borderRadius: "2px",
+              boxShadow: "0 1px 0 #fff inset, 0 2px 0 #3a6b2e, 0 6px 12px rgba(0, 0, 0, 0.25)",
+              fontFamily: "Verdana, Arial, Helvetica, sans-serif",
+              fontSize: "12px",
+              fontWeight: "500",
+            },
+          },
+          error: {
+            duration: 4000,
+            style: {
+              background: "linear-gradient(180deg, #f8f0f0 0%, #f0e0e0 100%)",
+              color: "#8e1b1b",
+              border: "1px solid #c44d4d",
+              borderRadius: "2px",
+              boxShadow: "0 1px 0 #fff inset, 0 2px 0 #a03a3a, 0 6px 12px rgba(0, 0, 0, 0.25)",
+              fontFamily: "Verdana, Arial, Helvetica, sans-serif",
+              fontSize: "12px",
+              fontWeight: "500",
+            },
           },
         }}
       />
