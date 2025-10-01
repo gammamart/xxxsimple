@@ -37,6 +37,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
 
   const [captchaIsDone, setCaptchaIsDone] = useState(false);
 
@@ -76,6 +77,7 @@ const Register = () => {
           email,
           password,
           code,
+          marketing_opt_in: marketingOptIn,
         });
 
         setLoading(false);
@@ -153,6 +155,15 @@ const Register = () => {
 
                 <label>Verification</label>
                 <CaptchaRow>{isClient && <ReCAPTCHA sitekey={key} onChange={onChange} />}</CaptchaRow>
+
+                <label></label>
+                <OptInRow>
+                  <CheckboxContainer>
+                    <CheckboxInput type="checkbox" id="marketing-opt-in" checked={marketingOptIn} onChange={(e) => setMarketingOptIn(e.target.checked)} />
+                    <CheckboxLabel htmlFor="marketing-opt-in">I would like to receive marketing messages and updates via email</CheckboxLabel>
+                  </CheckboxContainer>
+                  <OptInNote>By checking this box, you consent to receive promotional emails, service updates, and marketing communications from us. You can unsubscribe at any time.</OptInNote>
+                </OptInRow>
 
                 <div></div>
                 <Actions>
@@ -362,6 +373,50 @@ const Toggle = styled.span`
 `;
 const CaptchaRow = styled.div`
   margin-top: 8px;
+`;
+const OptInRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+`;
+const CheckboxInput = styled.input`
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: #213a60;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+`;
+const CheckboxLabel = styled.label`
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #1e2c45;
+  cursor: pointer;
+  line-height: 1.4;
+  user-select: none;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+`;
+const OptInNote = styled.div`
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #6b6b6b;
+  line-height: 1.4;
+  margin-left: 24px;
+  font-style: italic;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    margin-left: 20px;
+  }
 `;
 const Actions = styled.div`
   margin-top: 12px;
