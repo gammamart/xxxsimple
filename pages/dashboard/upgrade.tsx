@@ -264,7 +264,6 @@ const Mainframe = styled.div`
   justify-content: center;
   background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
   background-attachment: fixed;
-  min-height: 100vh;
   padding: 0;
 
   @media (max-width: 768px) {
