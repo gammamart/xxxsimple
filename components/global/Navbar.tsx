@@ -114,7 +114,7 @@ const Navbar = () => {
             <MembershipText membership={membership}>{membership}</MembershipText>
           </MembershipBadge>
         </div>
-        <div>{profileIsLoading ? <LoadingAnimation /> : <Balance>${profile?.wallet_balance.toFixed(2)}</Balance>}</div>
+        <div style={{ alignSelf: "center" }}>{profileIsLoading ? <LoadingAnimation /> : <Balance>${profile?.wallet_balance.toFixed(2)}</Balance>}</div>
       </UserInfo>
       <Section>
         <SectionTitle>GENERAL</SectionTitle>
