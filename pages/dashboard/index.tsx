@@ -423,6 +423,16 @@ const TabBar = styled.div`
   border-bottom: 1px solid #bdb9ad;
   padding: 8px 16px 0 16px;
   margin-bottom: 12px;
+
+  @media (max-width: 768px) {
+    padding: 6px 12px 0 12px;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px 8px 0 8px;
+    margin-bottom: 8px;
+  }
 `;
 const TabButton = styled.button`
   font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -434,6 +444,16 @@ const TabButton = styled.button`
   border-bottom: none;
   background: linear-gradient(180deg, #ffffff 0%, #e6e3da 100%);
   box-shadow: 0 1px 0 #fff inset;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
 
   &.active {
     background: linear-gradient(180deg, #f7f5ee 0%, #ebe8de 100%);
@@ -448,11 +468,32 @@ const Body = styled.div`
   gap: 12px;
   min-height: 170px;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    min-height: auto;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+    gap: 12px;
+  }
+
   & > div {
     display: flex;
     flex-direction: column;
     width: 48%;
     gap: 12px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      gap: 10px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 8px;
+    }
 
     & input {
       background: linear-gradient(180deg, #ffffff 0%, #f1efe8 100%);
@@ -465,10 +506,28 @@ const Body = styled.div`
       padding: 12px;
       width: 100%;
 
+      @media (max-width: 768px) {
+        font-size: 13px;
+        padding: 10px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 12px;
+        padding: 8px;
+      }
+
       &::placeholder {
         color: #6b6b6b;
         font-family: Verdana, Arial, Helvetica, sans-serif;
         font-size: 14px;
+
+        @media (max-width: 768px) {
+          font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 12px;
+        }
       }
 
       &:focus {
@@ -490,11 +549,33 @@ const Body = styled.div`
     font-size: 14px;
     padding: 12px;
     height: 100%;
+    min-height: 120px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      font-size: 13px;
+      padding: 10px;
+      min-height: 100px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 12px;
+      padding: 8px;
+      min-height: 80px;
+    }
 
     &::placeholder {
       color: #6b6b6b;
       font-family: Verdana, Arial, Helvetica, sans-serif;
       font-size: 14px;
+
+      @media (max-width: 768px) {
+        font-size: 13px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 12px;
+      }
     }
 
     &:focus {
@@ -504,6 +585,10 @@ const Body = styled.div`
 
     ::-webkit-scrollbar {
       width: 6px;
+
+      @media (max-width: 480px) {
+        width: 4px;
+      }
     }
 
     ::-webkit-scrollbar-thumb {
@@ -524,6 +609,18 @@ const Bottom = styled.div`
   justify-content: flex-end;
   gap: 20px;
   border-top: 1px solid #bdb9ad;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    gap: 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+    gap: 12px;
+  }
 `;
 const Cost = styled.div`
   height: 40px;
@@ -539,6 +636,18 @@ const Cost = styled.div`
   font-family: Verdana, Arial, Helvetica, sans-serif;
   background: linear-gradient(180deg, #f7f5ef 0%, #ece9df 100%);
   box-shadow: 0 1px 0 #fff inset;
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 10px 16px;
+    font-size: 13px;
+    min-height: 40px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
 `;
 export const SendButton = styled.button<SendButtonProps>`
   height: 40px;
@@ -557,6 +666,19 @@ export const SendButton = styled.button<SendButtonProps>`
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   box-shadow: ${(props) => (props.disabled ? "0 1px 0 #fff inset" : "0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0,0,0,0.25)")};
 
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 44px;
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  @media (max-width: 480px) {
+    height: 40px;
+    font-size: 12px;
+    gap: 8px;
+  }
+
   &:hover {
     filter: ${(props) => (props.disabled ? "none" : "brightness(1.05)")};
   }
@@ -564,6 +686,14 @@ export const SendButton = styled.button<SendButtonProps>`
   & p {
     font-size: 12px;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 12px;
+    }
   }
 `;
 export const InformationBox = styled.div`
@@ -599,6 +729,18 @@ const IntroductionFrame = styled.div`
   background: linear-gradient(180deg, #fbfaf6 0%, #f0eee7 100%);
   border: 1px solid #c5c1b7;
   box-shadow: 0 1px 0 #fff inset;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    margin: 10px 16px;
+    min-height: 160px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+    margin: 8px 12px;
+    min-height: 140px;
+  }
 `;
 
 export default SendScreen;
