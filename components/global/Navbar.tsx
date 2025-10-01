@@ -96,12 +96,6 @@ const Navbar = () => {
       <UserInfo>
         <div>
           <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-            {membership !== "Private" && <div style={{ marginTop: "4px" }}>{verified ? <GiChewedSkull color="#2c2c2c" size={18} /> : <BsEmojiSunglassesFill color="#2c2c2c" size={18} />}</div>}
-            {membership === "Private" && (
-              <div style={{ marginTop: "4px" }}>
-                <FaGhost color="#2c2c2c" size={18} />
-              </div>
-            )}
             {username && (
               <Username>
                 @{username}
@@ -110,6 +104,15 @@ const Navbar = () => {
             )}
           </span>
           {!verified && <UpgradeButton href={"../dashboard/upgrade"}>Upgrade</UpgradeButton>}
+        </div>
+        <div>
+          <MembershipBadge membership={membership}>
+            <MembershipIcon>
+              {membership !== "Private" && (verified ? <GiChewedSkull color="#2c2c2c" size={16} /> : <BsEmojiSunglassesFill color="#2c2c2c" size={16} />)}
+              {membership === "Private" && <FaGhost color="#2c2c2c" size={16} />}
+            </MembershipIcon>
+            <MembershipText membership={membership}>{membership}</MembershipText>
+          </MembershipBadge>
         </div>
         <div>{profileIsLoading ? <LoadingAnimation /> : <Balance>${profile?.wallet_balance.toFixed(2)}</Balance>}</div>
       </UserInfo>
@@ -397,6 +400,78 @@ const UpgradeButton = styled(Link)`
     filter: brightness(1.05);
     text-decoration: none;
   }
+`;
+
+type MembershipBadgeProps = {
+  membership: string;
+};
+
+const MembershipBadge = styled.div<MembershipBadgeProps>`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 3px;
+  border: 1px solid
+    ${({ membership }) => {
+      switch (membership) {
+        case "Private":
+          return "#8B4513";
+        case "Pro":
+          return "#4B0082";
+        case "API":
+          return "#006400";
+        default:
+          return "#708090";
+      }
+    }};
+  background: ${({ membership }) => {
+    switch (membership) {
+      case "Private":
+        return "linear-gradient(180deg, #DAA520 0%, #B8860B 50%, #8B4513 100%)";
+      case "Pro":
+        return "linear-gradient(180deg, #9370DB 0%, #8A2BE2 50%, #4B0082 100%)";
+      case "API":
+        return "linear-gradient(180deg, #32CD32 0%, #228B22 50%, #006400 100%)";
+      default:
+        return "linear-gradient(180deg, #F5F5F5 0%, #D3D3D3 50%, #708090 100%)";
+    }
+  }};
+  box-shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  @media (max-width: 768px) {
+    padding: 4px 8px;
+    font-size: 10px;
+    gap: 4px;
+  }
+`;
+
+const MembershipIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MembershipText = styled.span<MembershipBadgeProps>`
+  color: ${({ membership }) => {
+    switch (membership) {
+      case "Private":
+        return "#FFF8DC";
+      case "Pro":
+        return "#FFFFFF";
+      case "API":
+        return "#FFFFFF";
+      default:
+        return "#2F4F4F";
+    }
+  }};
+  font-weight: 700;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 `;
 
 export default Navbar;
