@@ -70,7 +70,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
           <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
         </StatusText>
       </TableSmallBox>
-      <TableSmallBox style={{ marginLeft: "1rem" }}>
+      <TableSmallBox>
         <TypeText>{job_type}</TypeText>
       </TableSmallBox>
       <TableSmallBox>
@@ -90,12 +90,9 @@ type StatusProps = {
 const Mainframe = styled.tr`
   border-bottom: 1px solid #c5c1b7;
   width: 100% !important;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
+  padding: 12px 20px;
   display: flex;
   flex-direction: row;
-  height: 2.5rem !important;
   align-items: center;
   font-size: 18px;
   color: #2c2c2c;
@@ -104,21 +101,20 @@ const Mainframe = styled.tr`
   margin-bottom: 4px;
   box-shadow: 0 1px 0 #fff inset;
   min-width: 600px;
+  gap: 8px;
 
   @media (max-width: 768px) {
-    padding-right: 16px;
-    padding-left: 16px;
-    padding-bottom: 16px;
-    height: 2.2rem !important;
+    padding: 10px 16px;
     min-width: 500px;
+    gap: 6px;
   }
 
   @media (max-width: 480px) {
-    padding-right: 12px;
-    padding-left: 12px;
-    padding-bottom: 12px;
-    height: 2rem !important;
+    padding: 8px 12px;
     min-width: 450px;
+    gap: 4px;
+    flex-wrap: wrap;
+    min-height: auto;
   }
 
   & p {
@@ -127,6 +123,8 @@ const Mainframe = styled.tr`
     text-overflow: ellipsis;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
 
     @media (max-width: 768px) {
       font-size: 13px;
@@ -142,75 +140,105 @@ const Status = styled.span<StatusProps>`
   color: ${({ status }) => status};
 `;
 const TableSmallBox = styled.span`
-  /* border: 1px solid red; */
   flex: 1;
-  /* display: flex; */
+  display: flex;
+  align-items: center;
+  min-width: 0;
+
+  @media (max-width: 480px) {
+    flex: 0 0 auto;
+    min-width: 80px;
+
+    &:nth-child(1) {
+      min-width: 60px;
+    } /* ID */
+    &:nth-child(2) {
+      min-width: 80px;
+    } /* Status */
+    &:nth-child(3) {
+      min-width: 70px;
+    } /* Type */
+    &:nth-child(4) {
+      min-width: 90px;
+    } /* Time */
+    &:nth-child(5) {
+      min-width: 100px;
+    } /* Message */
+  }
 `;
 
 const IdText = styled.p`
   font-size: 14px;
   color: #2c2c2c;
+  font-weight: 600;
 
   @media (max-width: 768px) {
     font-size: 13px;
   }
 
   @media (max-width: 480px) {
-    font-size: 12px;
+    font-size: 11px;
   }
 `;
 
 const StatusText = styled.p`
   font-size: 14px;
+  font-weight: 600;
 
   @media (max-width: 768px) {
     font-size: 13px;
   }
 
   @media (max-width: 480px) {
-    font-size: 12px;
+    font-size: 11px;
   }
 `;
 
 const TypeText = styled.p`
   font-size: 14px;
   color: #2c2c2c;
+  font-weight: 500;
 
   @media (max-width: 768px) {
     font-size: 13px;
   }
 
   @media (max-width: 480px) {
-    font-size: 12px;
+    font-size: 11px;
   }
 `;
 
 const TimeText = styled.p`
   font-size: 14px;
   color: #2c2c2c;
+  font-weight: 500;
 
   @media (max-width: 768px) {
     font-size: 13px;
   }
 
   @media (max-width: 480px) {
-    font-size: 12px;
+    font-size: 11px;
   }
 `;
 
 const MessageText = styled.p`
-  font-size: 10px;
+  font-size: 12px;
   color: #2c2c2c;
-  width: 150px;
+  font-weight: 400;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @media (max-width: 768px) {
-    font-size: 9px;
-    width: 120px;
+    font-size: 11px;
+    max-width: 120px;
   }
 
   @media (max-width: 480px) {
-    font-size: 8px;
-    width: 100px;
+    font-size: 10px;
+    max-width: 100px;
   }
 `;
 

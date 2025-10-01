@@ -141,7 +141,7 @@ const FundWallet = () => {
                           }
                         }}
                       >
-                        <p>{walletAddress?.slice(0, 34) + "..."}</p>
+                        <p>{walletAddress?.slice(0, 26) + "..."}</p>
                       </USDTWalletAddressBox>
                     </WalletSection>
                     <PaymentStatusContainer>
