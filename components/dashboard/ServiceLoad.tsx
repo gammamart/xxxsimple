@@ -77,31 +77,27 @@ const ServiceLoad: React.FC<ServiceLoadProps> = ({ status }) => {
   }, [effectiveStatus]);
 
   const renderRow = (rowIndex: number) => (
-    <div key={rowIndex} style={{ display: "flex", gap: "0.2rem" }}>
+    <ServerRow key={rowIndex}>
       {Array.from({ length: NODES_PER_ROW }).map((_, colIndex) => {
         const globalIndex = rowIndex * NODES_PER_ROW + colIndex;
         const color = greenIndices.has(globalIndex) ? GREEN_COLOR : status_color[effectiveStatus];
         return <GrServerCluster key={globalIndex} size={18} color={color} />;
       })}
-    </div>
+    </ServerRow>
   );
 
   return (
     <Mainframe>
-      <p style={{ display: "flex", alignItems: "center", gap: "4px", color: "#1e2c45", fontSize: "14px", fontWeight: 700, fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>
-        Server Status: <p style={{ color: "#2c2c2c", fontSize: "12px", fontWeight: 600, fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>{status_text[effectiveStatus]}</p>
-      </p>
-      <section>
-        {/* <p style={{ color: "#213a60", fontSize: "12px", fontWeight: 600, fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>Status</p> */}
-        <p></p>
-        <section>
-          <div>
-            {statusAnimation[effectiveStatus]}
-            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>{Array.from({ length: ROWS }).map((_, row) => renderRow(row))}</div>
-          </div>
-        </section>
-        {/* <p style={{ color: "#a1a1a1", fontSize: "14px", fontWeight: 500 }}>Forecasted relief: 59min</p> */}
-      </section>
+      <StatusHeader>
+        <StatusLabel>Server Status:</StatusLabel>
+        <StatusText>{status_text[effectiveStatus]}</StatusText>
+      </StatusHeader>
+      <StatusSection>
+        <StatusContent>
+          <AnimationContainer>{statusAnimation[effectiveStatus]}</AnimationContainer>
+          <ServerGrid>{Array.from({ length: ROWS }).map((_, row) => renderRow(row))}</ServerGrid>
+        </StatusContent>
+      </StatusSection>
     </Mainframe>
   );
 };
@@ -117,23 +113,134 @@ const Mainframe = styled.div`
   box-shadow: 0 1px 0 #fff inset;
   padding: 12px 16px;
 
-  & > section {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
+  @media (max-width: 768px) {
+    padding: 10px 12px;
+    gap: 10px;
+    min-height: 120px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px 10px;
     gap: 8px;
+    min-height: 100px;
+  }
+`;
 
-    & > section {
-      display: flex;
-      gap: 10px;
-      align-items: center;
+const StatusHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
 
-      & > div {
-        display: flex;
-        gap: 4px;
-        align-items: center;
-      }
-    }
+  @media (max-width: 768px) {
+    gap: 3px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+`;
+
+const StatusLabel = styled.p`
+  color: #1e2c45;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+`;
+
+const StatusText = styled.p`
+  color: #2c2c2c;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+  }
+`;
+
+const StatusSection = styled.section`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 4px;
+  }
+`;
+
+const StatusContent = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 6px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const AnimationContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 480px) {
+    align-self: center;
+  }
+`;
+
+const ServerGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  @media (max-width: 768px) {
+    gap: 4px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 3px;
+  }
+`;
+
+const ServerRow = styled.div`
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 0.15rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.1rem;
+    justify-content: center;
   }
 `;
 
