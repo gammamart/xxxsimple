@@ -109,7 +109,7 @@ const Navbar = () => {
           <MembershipBadge membership={membership}>
             <MembershipIcon>
               {membership !== "Private" && (verified ? <GiChewedSkull color="#2c2c2c" size={16} /> : <BsEmojiSunglassesFill color="#2c2c2c" size={16} />)}
-              {membership === "Private" && <FaGhost color="#2c2c2c" size={16} />}
+              {membership === "Private" && <FaGhost color="#1A0F0A" size={16} style={{ filter: "drop-shadow(0 1px 2px rgba(255, 215, 0, 0.8))" }} />}
             </MembershipIcon>
             <MembershipText membership={membership}>{membership}</MembershipText>
           </MembershipBadge>
@@ -416,7 +416,7 @@ const MembershipBadge = styled.div<MembershipBadgeProps>`
     ${({ membership }) => {
       switch (membership) {
         case "Private":
-          return "#8B4513";
+          return "#2F1B14";
         case "Pro":
           return "#4B0082";
         case "API":
@@ -428,7 +428,7 @@ const MembershipBadge = styled.div<MembershipBadgeProps>`
   background: ${({ membership }) => {
     switch (membership) {
       case "Private":
-        return "linear-gradient(180deg, #DAA520 0%, #B8860B 50%, #8B4513 100%)";
+        return "linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #DAA520 50%, #B8860B 75%, #8B4513 100%)";
       case "Pro":
         return "linear-gradient(180deg, #9370DB 0%, #8A2BE2 50%, #4B0082 100%)";
       case "API":
@@ -437,7 +437,14 @@ const MembershipBadge = styled.div<MembershipBadgeProps>`
         return "linear-gradient(180deg, #F5F5F5 0%, #D3D3D3 50%, #708090 100%)";
     }
   }};
-  box-shadow: 0 1px 0 #fff inset, 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ membership }) => {
+    switch (membership) {
+      case "Private":
+        return "0 2px 0 #FFD700 inset, 0 1px 0 #8B4513 inset, 0 3px 6px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 215, 0, 0.4)";
+      default:
+        return "0 1px 0 #fff inset, 0 1px 2px rgba(0, 0, 0, 0.1)";
+    }
+  }};
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -461,7 +468,7 @@ const MembershipText = styled.span<MembershipBadgeProps>`
   color: ${({ membership }) => {
     switch (membership) {
       case "Private":
-        return "#FFF8DC";
+        return "#1A0F0A";
       case "Pro":
         return "#FFFFFF";
       case "API":
@@ -471,7 +478,22 @@ const MembershipText = styled.span<MembershipBadgeProps>`
     }
   }};
   font-weight: 700;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  text-shadow: ${({ membership }) => {
+    switch (membership) {
+      case "Private":
+        return "0 1px 0 #FFD700, 0 2px 2px rgba(0, 0, 0, 0.5), 0 0 4px rgba(255, 215, 0, 0.6)";
+      default:
+        return "0 1px 1px rgba(0, 0, 0, 0.3)";
+    }
+  }};
+  letter-spacing: ${({ membership }) => {
+    switch (membership) {
+      case "Private":
+        return "0.8px";
+      default:
+        return "0.5px";
+    }
+  }};
 `;
 
 export default Navbar;
