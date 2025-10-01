@@ -264,6 +264,16 @@ const Mainframe = styled.div`
   justify-content: center;
   background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
   background-attachment: fixed;
+  min-height: 100vh;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    padding: 0 8px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 4px;
+  }
 `;
 const Shell = styled.div`
   width: 100%;
@@ -291,6 +301,14 @@ const Frame = styled.div`
   flex-direction: column;
   gap: 0;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 6px;
+  }
 `;
 const Up = styled.div`
   display: flex;
@@ -304,12 +322,32 @@ const Up = styled.div`
   border-radius: 2px;
   min-height: 100px;
 
+  @media (max-width: 768px) {
+    padding: 15px 20px;
+    margin: 8px 10px;
+    min-height: 80px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px 15px;
+    margin: 6px 8px;
+    min-height: 70px;
+  }
+
   & h6 {
     font-size: 18px;
     color: #1e2c45;
     font-weight: 700;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
   }
 `;
 const Bottom = styled.div`
@@ -328,6 +366,20 @@ const Bottom = styled.div`
   min-height: 400px;
   color: #2c2c2c;
 
+  @media (max-width: 768px) {
+    padding: 15px 20px;
+    margin: 8px 10px;
+    min-height: 300px;
+    gap: 1.5em;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px 15px;
+    margin: 6px 8px;
+    min-height: 250px;
+    gap: 1em;
+  }
+
   & > section {
     max-width: 800px;
     display: flex;
@@ -338,6 +390,18 @@ const Bottom = styled.div`
     line-height: 1.6;
     font-size: 12px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
+
+    @media (max-width: 768px) {
+      gap: 1.2rem;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      gap: 1rem;
+      font-size: 10px;
+      line-height: 1.4;
+    }
   }
   & a {
     color: #b89a45;
@@ -359,6 +423,38 @@ const Bottom = styled.div`
     }
   }
 
+  & ul {
+    @media (max-width: 768px) {
+      padding-left: 20px;
+    }
+
+    @media (max-width: 480px) {
+      padding-left: 15px;
+    }
+
+    & li {
+      @media (max-width: 768px) {
+        margin-bottom: 12px;
+      }
+
+      @media (max-width: 480px) {
+        margin-bottom: 10px;
+      }
+    }
+
+    & p {
+      @media (max-width: 768px) {
+        font-size: 11px;
+        margin-bottom: 8px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 10px;
+        margin-bottom: 6px;
+      }
+    }
+  }
+
   & textarea {
     background: linear-gradient(180deg, #ffffff 0%, #f1efe8 100%);
     border: 1px solid #bdb9ad;
@@ -372,10 +468,31 @@ const Bottom = styled.div`
     height: 250px;
     width: 500px;
 
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 400px;
+      height: 200px;
+      font-size: 11px;
+    }
+
+    @media (max-width: 480px) {
+      max-width: 300px;
+      height: 180px;
+      font-size: 10px;
+    }
+
     &::placeholder {
       font-family: Verdana, Arial, Helvetica, sans-serif;
       font-size: 12px;
       color: #6b6b6b;
+
+      @media (max-width: 768px) {
+        font-size: 11px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 10px;
+      }
     }
 
     &:focus {
@@ -398,6 +515,19 @@ const UpgradeButton = styled.button<UpgradeButtonProps>`
   font-size: 12px;
   box-shadow: ${(props) => (props.disabled ? "0 1px 0 #fff inset" : "0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0,0,0,0.25)")};
 
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 350px;
+    height: 45px;
+    font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 280px;
+    height: 42px;
+    font-size: 10px;
+  }
+
   &:hover {
     filter: ${(props) => (props.disabled ? "none" : "brightness(1.05)")};
   }
@@ -412,6 +542,20 @@ const MiniNavigationBar = styled.div`
   border: 1px solid #c5c1b7;
   box-shadow: 0 1px 0 #fff inset;
   border-radius: 2px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+    margin: 8px 10px;
+    gap: 8px;
+    padding: 12px 8px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 6px 8px;
+    padding: 8px 4px;
+    gap: 6px;
+  }
 `;
 const NavButton = styled.button`
   font-size: 12px;
@@ -424,6 +568,19 @@ const NavButton = styled.button`
   font-family: Verdana, Arial, Helvetica, sans-serif;
   border-radius: 2px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    padding: 0.8rem 1.5rem;
+    font-size: 11px;
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.6rem 1rem;
+    font-size: 10px;
+  }
 
   &:focus {
     color: #1e2c45;

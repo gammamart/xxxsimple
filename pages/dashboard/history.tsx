@@ -76,41 +76,43 @@ const HistoryScreen = () => {
           <Frame>
             <Up>
               <h6>Ongoing and past messages.</h6>
-              <section style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-                <span style={{ color: "#2c2c2c", display: "flex", fontSize: "12px", fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>
-                  <p style={{ color: "#b89a45", fontWeight: "600" }}>PREPARING:&nbsp;</p>
-                  {"System sorting leads according to their carrier."}
-                </span>
-                <span style={{ color: "#2c2c2c", display: "flex", fontSize: "12px", fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>
-                  <p style={{ color: "#4b8a3c", fontWeight: "600" }}>SENDING:&nbsp;</p>
-                  {"Sending started"}
-                </span>
-                <span style={{ color: "#2c2c2c", display: "flex", fontSize: "12px", fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>
-                  <p style={{ color: "#4b8a3c", fontWeight: "600" }}>COMPLETED:&nbsp;</p>
-                  {"Sending/Dispatching completed."}
-                </span>
-                <span style={{ color: "#2c2c2c", display: "flex", fontSize: "12px", fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>
-                  <p style={{ color: "#8e1b1b", fontWeight: "600" }}>FAILED:&nbsp;</p>
-                  {"Sending Failed. For more information you can check status message or contact support."}
-                </span>
-              </section>
-              <TableHead>
-                <TableSmallBox>
-                  <p>Id</p>
-                </TableSmallBox>
-                <TableSmallBox>
-                  <p>Status</p>
-                </TableSmallBox>
-                <TableSmallBox>
-                  <p>Type</p>
-                </TableSmallBox>
-                <TableSmallBox>
-                  <p>Created</p>
-                </TableSmallBox>
-                <TableSmallBox>
-                  <p>Status message</p>
-                </TableSmallBox>
-              </TableHead>
+              <StatusLegend>
+                <StatusItem>
+                  <StatusLabel color="#b89a45">PREPARING:</StatusLabel>
+                  <StatusDescription>System sorting leads according to their carrier.</StatusDescription>
+                </StatusItem>
+                <StatusItem>
+                  <StatusLabel color="#4b8a3c">SENDING:</StatusLabel>
+                  <StatusDescription>Sending started</StatusDescription>
+                </StatusItem>
+                <StatusItem>
+                  <StatusLabel color="#4b8a3c">COMPLETED:</StatusLabel>
+                  <StatusDescription>Sending/Dispatching completed.</StatusDescription>
+                </StatusItem>
+                <StatusItem>
+                  <StatusLabel color="#8e1b1b">FAILED:</StatusLabel>
+                  <StatusDescription>Sending Failed. For more information you can check status message or contact support.</StatusDescription>
+                </StatusItem>
+              </StatusLegend>
+              <TableContainer>
+                <TableHead>
+                  <TableSmallBox>
+                    <p>Id</p>
+                  </TableSmallBox>
+                  <TableSmallBox>
+                    <p>Status</p>
+                  </TableSmallBox>
+                  <TableSmallBox>
+                    <p>Type</p>
+                  </TableSmallBox>
+                  <TableSmallBox>
+                    <p>Created</p>
+                  </TableSmallBox>
+                  <TableSmallBox>
+                    <p>Status message</p>
+                  </TableSmallBox>
+                </TableHead>
+              </TableContainer>
             </Up>
             <Bottom>
               {isLoadingHistory ? (
@@ -118,11 +120,13 @@ const HistoryScreen = () => {
                   <LoadingAnimation />
                 </div>
               ) : (
-                <section>
-                  {history?.map((job: History) => (
-                    <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} failure_message={job.failure_message} date={job.created_at} />
-                  ))}
-                </section>
+                <TableContainer>
+                  <section>
+                    {history?.map((job: History) => (
+                      <HistoryCard key={job.id} id={job.id} status={job.status} job_type={job.job_type} failure_message={job.failure_message} date={job.created_at} />
+                    ))}
+                  </section>
+                </TableContainer>
               )}
             </Bottom>
           </Frame>
@@ -278,6 +282,13 @@ const TableHead = styled.div`
     margin-top: 1.2rem;
   }
 
+  @media (max-width: 480px) {
+    min-width: 450px;
+    height: 2rem;
+    padding: 0 10px;
+    margin-top: 1rem;
+  }
+
   & > span > p {
     font-weight: 600;
     font-size: 12px;
@@ -289,8 +300,96 @@ const TableHead = styled.div`
     @media (max-width: 768px) {
       font-size: 11px;
     }
+
+    @media (max-width: 480px) {
+      font-size: 10px;
+    }
   }
 `;
+const TableContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  @media (max-width: 768px) {
+    /* Custom scrollbar for mobile */
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: linear-gradient(180deg, #f1efe8 0%, #e6e3da 100%);
+      border-radius: 3px;
+      border: 1px solid #c5c1b7;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #b89a45 0%, #8e6e29 100%);
+      border-radius: 3px;
+      border: 1px solid #6b5a35;
+      box-shadow: 0 1px 0 #fff inset;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #c4a855 0%, #9e7e39 100%);
+    }
+  }
+
+  @media (max-width: 480px) {
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+  }
+`;
+
+const StatusLegend = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  @media (max-width: 768px) {
+    gap: 0.3rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.25rem;
+  }
+`;
+
+const StatusItem = styled.span`
+  color: #2c2c2c;
+  display: flex;
+  font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+  }
+`;
+
+const StatusLabel = styled.p<{ color: string }>`
+  color: ${({ color }) => color};
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.1rem;
+  }
+`;
+
+const StatusDescription = styled.span`
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
+`;
+
 const TableSmallBox = styled.span`
   flex: 1;
 `;

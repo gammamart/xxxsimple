@@ -103,42 +103,25 @@ const FundWallet = () => {
           <Navbar />
           <Frame>
             <Up>
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginTop: "4rem" }}>
+              <ContentContainer>
                 <h6>Fund wallet.</h6>
-                <div style={{ marginTop: "1rem", color: "#2c2c2c", fontSize: "12px", fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>
+                <InstructionsList>
                   <p>1. Make sure you are logged into your account.</p>
                   <p>2. Send to the wallet.</p>
                   <p>3. Automatically reflect in your account once it has been confirmed on our network.</p>
                   <p>4. You can refresh your account page to check your updated balance after sending the payment.</p>
-                </div>
-                <span>
-                  <label style={{ color: "#2c2c2c", fontSize: "12px", fontFamily: "Verdana, Arial, Helvetica, sans-serif", fontWeight: "600" }} htmlFor="currencySelect">
-                    Cryptocurrency:
-                  </label>
-                  <select
-                    id="currencySelect"
-                    onChange={handleCurrencyChange}
-                    value={selectedCurrency}
-                    style={{
-                      background: "linear-gradient(180deg, #ffffff 0%, #f1efe8 100%)",
-                      border: "1px solid #bdb9ad",
-                      borderRadius: "2px",
-                      color: "#2c2c2c",
-                      fontSize: "12px",
-                      fontFamily: "Verdana, Arial, Helvetica, sans-serif",
-                      padding: "8px 12px",
-                      boxShadow: "0 1px 0 #fff inset",
-                      marginLeft: "8px",
-                    }}
-                  >
+                </InstructionsList>
+                <CurrencySelector>
+                  <CurrencyLabel htmlFor="currencySelect">Cryptocurrency:</CurrencyLabel>
+                  <CurrencySelect id="currencySelect" onChange={handleCurrencyChange} value={selectedCurrency}>
                     <option value="">Select</option>
                     {staticWallet.map((wallet: any) => (
                       <option key={wallet.type} value={wallet.type}>
                         {wallet.name}
                       </option>
                     ))}
-                  </select>
-                </span>
+                  </CurrencySelect>
+                </CurrencySelector>
                 <AmountFrame>
                   <p>$</p>
                   <input ref={USDTAmount} type="number" placeholder="Amount" />
@@ -147,9 +130,9 @@ const FundWallet = () => {
                   Continue
                 </ContinueButton>
                 {walletReveal && (
-                  <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: "12px", marginBottom: "1rem" }}>
-                    <section>
-                      <p style={{ color: "#6b6b6b", marginTop: "0.7rem", fontSize: "12px", fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}>Click to copy</p>
+                  <WalletDisplayContainer>
+                    <WalletSection>
+                      <CopyText>Click to copy</CopyText>
                       <USDTWalletAddressBox
                         onClick={() => {
                           if (typeof window !== "undefined" && navigator.clipboard) {
@@ -160,17 +143,17 @@ const FundWallet = () => {
                       >
                         <p>{walletAddress?.slice(0, 34) + "..."}</p>
                       </USDTWalletAddressBox>
-                    </section>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", marginBottom: "1rem" }}>
-                      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                        <p style={{ color: "#2c2c2c", fontSize: "12px", fontFamily: "Verdana, Arial, Helvetica, sans-serif", fontWeight: "600", margin: 0 }}>Processing Payment</p>
-                        <p style={{ color: "#6b6b6b", fontSize: "10px", fontFamily: "Verdana, Arial, Helvetica, sans-serif", margin: 0 }}>Time remaining: {formatTime(timeLeft)}</p>
-                      </div>
+                    </WalletSection>
+                    <PaymentStatusContainer>
+                      <StatusTextContainer>
+                        <ProcessingText>Processing Payment</ProcessingText>
+                        <TimeText>Time remaining: {formatTime(timeLeft)}</TimeText>
+                      </StatusTextContainer>
                       <RotatingLoader />
-                    </div>
-                  </div>
+                    </PaymentStatusContainer>
+                  </WalletDisplayContainer>
                 )}
-              </div>
+              </ContentContainer>
             </Up>
           </Frame>
         </Shell>
@@ -235,6 +218,16 @@ const Mainframe = styled.div`
   justify-content: center;
   background: linear-gradient(180deg, #d9dde3 0%, #c9ced6 40%, #b6bcc6 100%);
   background-attachment: fixed;
+  min-height: 100vh;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    padding: 0 8px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 4px;
+  }
 `;
 const Shell = styled.div`
   width: 100%;
@@ -262,6 +255,14 @@ const Frame = styled.div`
   flex-direction: column;
   gap: 0;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 6px;
+  }
 `;
 const Up = styled.div`
   display: flex;
@@ -275,12 +276,32 @@ const Up = styled.div`
   border-radius: 2px;
   min-height: 400px;
 
+  @media (max-width: 768px) {
+    padding: 15px 20px;
+    margin: 8px 10px;
+    min-height: 350px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px 15px;
+    margin: 6px 8px;
+    min-height: 300px;
+  }
+
   & h6 {
     font-size: 18px;
     color: #1e2c45;
     font-weight: 700;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
   }
 `;
 const AmountFrame = styled.div`
@@ -295,11 +316,34 @@ const AmountFrame = styled.div`
   border-radius: 2px;
   box-shadow: 0 1px 0 #fff inset;
 
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 350px;
+    height: 45px;
+    padding: 0.8em;
+    gap: 0.8em;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 280px;
+    height: 42px;
+    padding: 0.6em;
+    gap: 0.6em;
+  }
+
   & p {
     font-size: 18px;
     font-weight: bold;
     color: #1e2c45;
     font-family: Verdana, Arial, Helvetica, sans-serif;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
   }
 
   & input {
@@ -311,6 +355,14 @@ const AmountFrame = styled.div`
     font-size: 18px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
 
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
+
     &:focus {
       outline: none;
     }
@@ -318,6 +370,14 @@ const AmountFrame = styled.div`
     &::placeholder {
       color: #6b6b6b;
       font-family: Verdana, Arial, Helvetica, sans-serif;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
     }
   }
 `;
@@ -344,6 +404,19 @@ const ContinueButton = styled.button<FundButtonProps>`
   font-family: Verdana, Arial, Helvetica, sans-serif;
   box-shadow: ${(props) => (props.disabled ? "0 1px 0 #fff inset" : "0 1px 0 #fff inset, 0 2px 0 #6b5a35, 0 6px 12px rgba(0,0,0,0.25)")};
 
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 350px;
+    height: 45px;
+    font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 280px;
+    height: 42px;
+    font-size: 10px;
+  }
+
   &:hover {
     filter: ${(props) => (props.disabled ? "none" : "brightness(1.05)")};
   }
@@ -351,6 +424,14 @@ const ContinueButton = styled.button<FundButtonProps>`
   & p {
     font-size: 12px;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 10px;
+    }
   }
 `;
 const USDTWalletAddressBox = styled.button`
@@ -368,6 +449,23 @@ const USDTWalletAddressBox = styled.button`
   font-size: 12px;
   font-weight: 600;
 
+  @media (max-width: 768px) {
+    height: 45px;
+    padding: 0 0.8rem;
+    font-size: 11px;
+    margin-top: 0.8rem;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  @media (max-width: 480px) {
+    height: 42px;
+    padding: 0 0.6rem;
+    font-size: 10px;
+    margin-top: 0.6rem;
+    max-width: 250px;
+  }
+
   &:hover {
     filter: brightness(1.05);
   }
@@ -375,6 +473,14 @@ const USDTWalletAddressBox = styled.button`
   & > p {
     font-size: 12px;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 11px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -386,6 +492,17 @@ const RotatingLoader = styled.div`
   border-radius: 50%;
   animation: spin 1s linear infinite;
 
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+    border-width: 2px;
+  }
+
+  @media (max-width: 480px) {
+    width: 20px;
+    height: 20px;
+  }
+
   @keyframes spin {
     0% {
       transform: rotate(0deg);
@@ -393,6 +510,216 @@ const RotatingLoader = styled.div`
     100% {
       transform: rotate(360deg);
     }
+  }
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 4rem;
+
+  @media (max-width: 768px) {
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+`;
+
+const InstructionsList = styled.div`
+  margin-top: 1rem;
+  color: #2c2c2c;
+  font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    margin-top: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+    margin-top: 0.6rem;
+  }
+
+  & p {
+    margin: 0.5rem 0;
+
+    @media (max-width: 768px) {
+      margin: 0.4rem 0;
+    }
+
+    @media (max-width: 480px) {
+      margin: 0.3rem 0;
+    }
+  }
+`;
+
+const CurrencySelector = styled.span`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    gap: 0.4rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.3rem;
+  }
+`;
+
+const CurrencyLabel = styled.label`
+  color: #2c2c2c;
+  font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+  }
+`;
+
+const CurrencySelect = styled.select`
+  background: linear-gradient(180deg, #ffffff 0%, #f1efe8 100%);
+  border: 1px solid #bdb9ad;
+  border-radius: 2px;
+  color: #2c2c2c;
+  font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  padding: 8px 12px;
+  box-shadow: 0 1px 0 #fff inset;
+  margin-left: 8px;
+  width: 200px;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    padding: 6px 10px;
+    margin-left: 0;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 5px 8px;
+    max-width: 250px;
+  }
+
+  &:focus {
+    outline: 2px solid #b89a45;
+    outline-offset: 1px;
+  }
+`;
+
+const WalletDisplayContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 480px) {
+    gap: 12px;
+  }
+`;
+
+const WalletSection = styled.section`
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const CopyText = styled.p`
+  color: #6b6b6b;
+  margin-top: 0.7rem;
+  font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+    margin-top: 0.4rem;
+  }
+`;
+
+const PaymentStatusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 8px;
+  }
+`;
+
+const StatusTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  @media (max-width: 768px) {
+    gap: 3px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 2px;
+  }
+`;
+
+const ProcessingText = styled.p`
+  color: #2c2c2c;
+  font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+  }
+`;
+
+const TimeText = styled.p`
+  color: #6b6b6b;
+  font-size: 10px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 8px;
   }
 `;
 

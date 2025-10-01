@@ -63,22 +63,21 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ id, status, job_type, failure
   return (
     <Mainframe>
       <TableSmallBox>
-        <p style={{ fontSize: "14px", color: "#2c2c2c" }}>{v4().slice(0, 4)} </p>
+        <IdText>{v4().slice(0, 4)}</IdText>
       </TableSmallBox>
       <TableSmallBox>
-        <p style={{ fontSize: "14px" }}>
+        <StatusText>
           <Status status={status_color[`${status.replace(" ", "_")}`]}>{status}</Status>
-        </p>
+        </StatusText>
       </TableSmallBox>
       <TableSmallBox style={{ marginLeft: "1rem" }}>
-        <p style={{ fontSize: "14px", color: "#2c2c2c" }}>{job_type} </p>
+        <TypeText>{job_type}</TypeText>
       </TableSmallBox>
       <TableSmallBox>
-        <p style={{ fontSize: "14px", color: "#2c2c2c" }}>{halfTimeAgo} </p>
+        <TimeText>{halfTimeAgo}</TimeText>
       </TableSmallBox>
-
       <TableSmallBox>
-        <p style={{ fontSize: "10px", color: "#2c2c2c", width: "150px" }}>{failure_message === "UNNAMED" ? "No message" : failure_message}</p>
+        <MessageText>{failure_message === "UNNAMED" ? "No message" : failure_message}</MessageText>
       </TableSmallBox>
     </Mainframe>
   );
@@ -104,12 +103,22 @@ const Mainframe = styled.tr`
   border-radius: 2px;
   margin-bottom: 4px;
   box-shadow: 0 1px 0 #fff inset;
+  min-width: 600px;
 
   @media (max-width: 768px) {
     padding-right: 16px;
     padding-left: 16px;
     padding-bottom: 16px;
     height: 2.2rem !important;
+    min-width: 500px;
+  }
+
+  @media (max-width: 480px) {
+    padding-right: 12px;
+    padding-left: 12px;
+    padding-bottom: 12px;
+    height: 2rem !important;
+    min-width: 450px;
   }
 
   & p {
@@ -118,6 +127,14 @@ const Mainframe = styled.tr`
     text-overflow: ellipsis;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-weight: 500;
+
+    @media (max-width: 768px) {
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -128,6 +145,73 @@ const TableSmallBox = styled.span`
   /* border: 1px solid red; */
   flex: 1;
   /* display: flex; */
+`;
+
+const IdText = styled.p`
+  font-size: 14px;
+  color: #2c2c2c;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+`;
+
+const StatusText = styled.p`
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+`;
+
+const TypeText = styled.p`
+  font-size: 14px;
+  color: #2c2c2c;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+`;
+
+const TimeText = styled.p`
+  font-size: 14px;
+  color: #2c2c2c;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+`;
+
+const MessageText = styled.p`
+  font-size: 10px;
+  color: #2c2c2c;
+  width: 150px;
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+    width: 120px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 8px;
+    width: 100px;
+  }
 `;
 
 export default HistoryCard;
