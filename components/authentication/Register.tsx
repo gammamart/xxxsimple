@@ -436,6 +436,7 @@ const SubmitButton = styled.button`
   border: 1px solid #d5d1c7;
   border-radius: 2px;
   box-shadow: 0 1px 0 #fff inset;
+cursor: pointer;
 `;
 const Meta = styled.div`
   font-family: Verdana, Arial, Helvetica, sans-serif;
