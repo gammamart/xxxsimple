@@ -179,6 +179,10 @@ const UpgradeScreen = () => {
                       <li>
                         <b style={{ color: "#b89a45" }}>Exclusive Beta Access:</b> Be the first to try new features and products before public release.
                       </li>
+                      <br />
+                      <li>
+                        <b style={{ color: "#b89a45" }}>High Volume Discounts:</b> Eligible for special pricing tiers and volume discounts for bulk messaging campaigns, making it cost-effective for large-scale operations.
+                      </li>
                     </ul>
                     <br />
                     <br />
