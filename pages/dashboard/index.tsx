@@ -91,7 +91,7 @@ const SendScreen = () => {
 
     const inputElement = document.getElementById("multiline-input") as HTMLTextAreaElement;
     if (inputElement) {
-      inputElement.placeholder = "Paste you leads here without +1 and seperated by line\n\n2335671894\n5194573298\n4195674390\n5672234589\n2335671894\n7782335635\n5672234589";
+      inputElement.placeholder = "Paste you leads here without +1 and seperated by line\n\n+12335671894\n+15194573298\n+14195674390\n+15672234589\n+12335671894\n+17782335635\n+15672234589";
     }
   }, [tab]);
 
@@ -295,7 +295,7 @@ const SendScreen = () => {
               {tab === "single" ? (
                 <>
                   <div>
-                    <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (2232271673)" maxLength={15} required />
+                    <input onChange={(e) => setSinglePhoneNumber(e.target.value)} value={singlePhoneNumber} type="tel" placeholder="Phone number (+12032271673)" maxLength={15} required />
                   </div>
                 </>
               ) : (
