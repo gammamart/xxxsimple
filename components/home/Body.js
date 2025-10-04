@@ -100,7 +100,7 @@ const Body = ({ noShell = false }) => {
                 <tr>
                   <td>United States</td>
                   <td>AT&T / Verizon / T‑Mobile / Sprint / US Cellular / Cricket / Metro / Boost / Visible / Mint</td>
-                  <td>$0.02</td>
+                  <td>$0.039</td>
                   <td>{updateTimes["United States"] ? formatTime(updateTimes["United States"]) : "Loading..."}</td>
                 </tr>
                 <tr>
@@ -112,7 +112,7 @@ const Body = ({ noShell = false }) => {
                 <tr>
                   <td>Canada</td>
                   <td>Rogers / Bell / Telus / Freedom</td>
-                  <td>$0.021</td>
+                  <td>$0.039</td>
                   <td>{updateTimes["Canada"] ? formatTime(updateTimes["Canada"]) : "Loading..."}</td>
                 </tr>
                 <tr>
